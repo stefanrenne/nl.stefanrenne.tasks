@@ -1,6 +1,8 @@
 'use strict';
 
 import Homey from 'homey';
+import {v4 as uuidv4} from 'uuid';
+import { Task } from './model/task';
 
 module.exports = class MyApp extends Homey.App {
 
@@ -129,14 +131,14 @@ module.exports = class MyApp extends Homey.App {
   }
 
   /** Storage */
-  getTasks(): {title: string; date: number; identifier: string | undefined;}[] {
+  getTasks(): Task[] {
     const result = this.homey.settings.get('tasks') ?? [];
     console.log("=== GET ===");
     console.log(result);
     return result
   }
 
-  setTasks(tasks: {title: string; date: number; identifier: string | undefined;}[]) {
+  setTasks(tasks: Task[]) {
     console.log("=== SET ===");
     console.log(tasks);
     this.homey.settings.set('tasks', tasks);
@@ -147,7 +149,7 @@ module.exports = class MyApp extends Homey.App {
     if (identifier !== undefined) {
       newResult = newResult.filter((item) => item.identifier !== identifier);
     }
-    newResult.push({title: title, date: new Date().getTime(), identifier: identifier});
+    newResult.push({title: title, date: new Date(), identifier: identifier ?? uuidv4()});
     this.setTasks(newResult);
   }
 

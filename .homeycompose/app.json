@@ -25,6 +25,10 @@
     "large": "/assets/images/large.png",
     "xlarge": "/assets/images/xlarge.png"
   },
+  "bugs": {
+    "url": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues"
+  },
+  "source": "https://github.com/stefanrenne/nl.stefanrenne.tasks",
   "contributors": {
     "developers": []
   }
