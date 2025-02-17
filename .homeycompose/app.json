@@ -1,7 +1,7 @@
 {
   "id": "nl.stefanrenne.tasks",
   "version": "1.0.0",
-  "compatibility": ">=5.0.0",
+  "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
     "local"
