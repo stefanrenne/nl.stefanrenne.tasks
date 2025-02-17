@@ -1,15 +1,15 @@
 {
-	"id": "delete_task",
+	"id": "contains_task",
 	"title": {
-		"en": "Delete Task"
+		"en": "Task exists"
 	},
 	"titleFormatted": {
-		"en": "Delete Task with [[identifier]]"
+		"en": "Task exists with [[identifier]]"
 	},
 	"args": [
 		{
 			"name": "identifier",
-			"required":true,
+			"required":false,
 			"type": "autocomplete",
 			"title": {
 				"en": "Identifier"

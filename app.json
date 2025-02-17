@@ -30,6 +30,31 @@
     "developers": []
   },
   "flow": {
+    "conditions": [
+      {
+        "id": "contains_task",
+        "title": {
+          "en": "Task exists"
+        },
+        "titleFormatted": {
+          "en": "Task exists with [[identifier]]"
+        },
+        "args": [
+          {
+            "name": "identifier",
+            "required": false,
+            "type": "autocomplete",
+            "title": {
+              "en": "Identifier"
+            },
+            "placeholder": {
+              "en": "Pick or type"
+            }
+          }
+        ],
+        "tokens": []
+      }
+    ],
     "actions": [
       {
         "id": "create_task",
@@ -77,12 +102,20 @@
         ]
       },
       {
+        "id": "delete_all",
+        "title": {
+          "en": "Delete all Tasks"
+        },
+        "args": [],
+        "tokens": []
+      },
+      {
         "id": "delete_task",
         "title": {
           "en": "Delete Task"
         },
         "titleFormatted": {
-          "en": "Delete Task for [[identifier]]"
+          "en": "Delete Task with [[identifier]]"
         },
         "args": [
           {

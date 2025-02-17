@@ -11,8 +11,10 @@ module.exports = class MyApp extends Homey.App {
    */
   async onInit() {
     await this.updateAllIdentifiers();
+    this.registerContainsTaskListeners();
     this.registerCreateTaskListeners();
     this.registerDeleteTaskListeners();
+    this.registerDeleteAllTasksListeners();
   }
 
   async getAllCards(): Promise<(Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[]> {
@@ -25,12 +27,15 @@ module.exports = class MyApp extends Homey.App {
             switch (flowTypeId) {
               case "actions":
                 allCards.push(this.homey.flow.getActionCard(flowcard.id))
-              // case "triggers":
-              //   allCards.push(this.homey.flow.getTriggerCard(flowcard.id))
-              // case "conditions":
-              //   allCards.push(this.homey.flow.getConditionCard(flowcard.id))
+                break;
+              case "triggers":
+                allCards.push(this.homey.flow.getTriggerCard(flowcard.id))
+                break;
+              case "conditions":
+                allCards.push(this.homey.flow.getConditionCard(flowcard.id))
+                break;
               default:
-                break
+                break;
             }
           }
         }
@@ -83,6 +88,15 @@ module.exports = class MyApp extends Homey.App {
   }
 
   /** TaskListeners */
+  registerContainsTaskListeners() {
+    const card = this.homey.flow.getConditionCard('contains_task')
+    this.registerAutocompleteListenerForCard(card, false)
+    card.registerRunListener((args) => {
+      const identifier: string = args.identifier.name;
+      return this.getTasks().some((element) => element.identifier === identifier);
+    });
+  }
+
   registerCreateTaskListeners() {
     const card = this.homey.flow.getActionCard('create_task')
     this.registerAutocompleteListenerForCard(card, true)
@@ -106,23 +120,39 @@ module.exports = class MyApp extends Homey.App {
     });
   }
 
+  registerDeleteAllTasksListeners() {
+    const card = this.homey.flow.getActionCard('delete_all')
+    card.registerRunListener((args) => {
+      this.setTasks([]);
+      return {};
+    });
+  }
+
   /** Storage */
-  fetch(): {title: string; date: number; identifier: string | undefined;}[] {
-    const result: {title: string; date: number; identifier: string | undefined;}[] = this.homey.settings.get('tasks') ?? [];
-    return result;
+  getTasks(): {title: string; date: number; identifier: string | undefined;}[] {
+    const result = this.homey.settings.get('tasks') ?? [];
+    console.log("=== GET ===");
+    console.log(result);
+    return result
+  }
+
+  setTasks(tasks: {title: string; date: number; identifier: string | undefined;}[]) {
+    console.log("=== SET ===");
+    console.log(tasks);
+    this.homey.settings.set('tasks', tasks);
   }
 
   store(title: string, identifier: string | undefined) {
-    let newResult = this.fetch()
+    let newResult = this.getTasks()
     if (identifier !== undefined) {
       newResult = newResult.filter((item) => item.identifier !== identifier);
     }
     newResult.push({title: title, date: new Date().getTime(), identifier: identifier});
-    this.homey.settings.set('tasks', newResult);
+    this.setTasks(newResult);
   }
 
   delete(identifier: string) {
-    let newResult = this.fetch().filter((item) => item.identifier !== identifier);
-    this.homey.settings.set('tasks', newResult);
+    let newResult = this.getTasks().filter((item) => item.identifier !== identifier);
+    this.setTasks(newResult);
   }
 }
