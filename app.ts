@@ -78,7 +78,7 @@ module.exports = class MyApp extends Homey.App {
       if (canRegisterNewIdentifier && query && query.length > 0 && !(results.length == 1 && results[0].name.toLowerCase() == query.toLowerCase())) {
         results.unshift({
           name: query,
-          description: 'Create new Identifier'
+          description: this.homey.__('newIdentifier')
         });
       }
       return results;
