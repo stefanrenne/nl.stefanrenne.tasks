@@ -11,12 +11,12 @@ module.exports = class MyApp extends Homey.App {
    */
   async onInit() {
     await this.updateAllIdentifiers();
-		await this.initializeidentifierAutocompleteListener();
+    await this.initializeidentifierAutocompleteListener();
     this.registerCreateTaskListener();
     this.registerDeleteTaskListener();
   }
 
-	async initializeidentifierAutocompleteListener() {
+  async initializeidentifierAutocompleteListener() {
     const allCards = await this.getAllCards()
     allCards.forEach(async card => {
       card.registerArgumentAutocompleteListener('identifier', async (query: string, args: any) => {
@@ -49,9 +49,9 @@ module.exports = class MyApp extends Homey.App {
   }
 
   async getAllCards(): Promise<(Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[]> {
-		let allCards: (Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[] = [];
+    let allCards: (Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[] = [];
     for (const flowTypeId in this.homey.manifest.flow) {
-			if (Object.hasOwnProperty.call(this.homey.manifest.flow, flowTypeId)) {
+      if (Object.hasOwnProperty.call(this.homey.manifest.flow, flowTypeId)) {
 				const flowType = this.homey.manifest.flow[flowTypeId];
 				for (const flowcard of flowType) {
           if (flowcard.args && flowcard.args.some((flow: any) => flow.name == 'identifier')) {
@@ -74,7 +74,6 @@ module.exports = class MyApp extends Homey.App {
 
   async updateAllIdentifiers() {
     const allCards = await this.getAllCards()
-
     const uniqueIdentifiers = await allCards.reduce(
       async (resultPromise, card) => {
         let result = await resultPromise;
