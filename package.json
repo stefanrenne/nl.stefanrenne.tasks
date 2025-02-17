@@ -12,5 +12,13 @@
   },
   "dependencies": {
     "uuid": "^11.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanrenne/nl.stefanrenne.tasks.git"
+  },
+  "author": "Stefan Renne",
+  "bugs": {
+    "url": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues"
   }
 }
