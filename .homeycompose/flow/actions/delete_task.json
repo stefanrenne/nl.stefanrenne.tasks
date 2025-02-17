@@ -1,0 +1,23 @@
+{
+	"id": "delete_task",
+	"title": {
+		"en": "Delete Task"
+	},
+	"titleFormatted": {
+		"en": "Delete Task for [[identifier]]"
+	},
+	"args": [
+		{
+			"name": "identifier",
+			"required":true,
+			"type": "autocomplete",
+			"title": {
+				"en": "Identifier"
+			},
+			"placeholder": {
+				"en": "Pick or type"
+			}
+		}
+	],
+	"tokens": []
+}

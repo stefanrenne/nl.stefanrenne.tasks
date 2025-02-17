@@ -11,41 +11,8 @@ module.exports = class MyApp extends Homey.App {
    */
   async onInit() {
     await this.updateAllIdentifiers();
-    await this.initializeidentifierAutocompleteListener();
-    this.registerCreateTaskListener();
-    this.registerDeleteTaskListener();
-  }
-
-  async initializeidentifierAutocompleteListener() {
-    const allCards = await this.getAllCards()
-    allCards.forEach(async card => {
-      card.registerArgumentAutocompleteListener('identifier', async (query: string, args: any) => {
-        let results = Array.from(this.allIdentifiers)
-        .filter((result) => {
-          return query.length == 0 || result.toLowerCase().includes(query.toLowerCase());
-        })
-        .sort()
-        .map(identifier => {
-          return {
-            name: identifier,
-            description: ''
-          }
-        });
-  
-        if (query && query.length > 0 && !(results.length == 1 && results[0].name.toLowerCase() == query.toLowerCase())) {
-          results.unshift({
-            name: query,
-            description: 'Create new Identifier'
-          });
-        }
-        return results;
-      });
-
-      await this.updateAllIdentifiers();
-      card.on('update', async () => {
-        await this.updateAllIdentifiers();
-      });
-    })
+    this.registerCreateTaskListeners();
+    this.registerDeleteTaskListeners();
   }
 
   async getAllCards(): Promise<(Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[]> {
@@ -86,9 +53,40 @@ module.exports = class MyApp extends Homey.App {
     this.allIdentifiers = uniqueIdentifiers
   }
 
+  /** Helpers */
+  registerAutocompleteListenerForCard(card: Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition, canRegisterNewIdentifier: boolean) {
+    card.registerArgumentAutocompleteListener('identifier', async (query: string, args: any) => {
+      let results = Array.from(this.allIdentifiers)
+      .filter((result) => {
+        return query.length == 0 || result.toLowerCase().includes(query.toLowerCase());
+      })
+      .sort()
+      .map(identifier => {
+        return {
+          name: identifier,
+          description: ''
+        }
+      });
+
+      if (canRegisterNewIdentifier && query && query.length > 0 && !(results.length == 1 && results[0].name.toLowerCase() == query.toLowerCase())) {
+        results.unshift({
+          name: query,
+          description: 'Create new Identifier'
+        });
+      }
+      return results;
+    });
+
+    card.on('update', async () => {
+      await this.updateAllIdentifiers();
+    });
+  }
+
   /** TaskListeners */
-  registerCreateTaskListener() {
-    this.homey.flow.getActionCard('create_task').registerRunListener((args) => {
+  registerCreateTaskListeners() {
+    const card = this.homey.flow.getActionCard('create_task')
+    this.registerAutocompleteListenerForCard(card, true)
+    card.registerRunListener((args) => {
       const title: string = args.title;
       const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined;
       this.store(title, identifier);
@@ -98,8 +96,10 @@ module.exports = class MyApp extends Homey.App {
     });
   }
 
-  registerDeleteTaskListener() {
-    this.homey.flow.getActionCard('delete_task').registerRunListener((args) => {
+  registerDeleteTaskListeners() {
+    const card = this.homey.flow.getActionCard('delete_task')
+    this.registerAutocompleteListenerForCard(card, false)
+    card.registerRunListener((args) => {
       const identifier: string = args.identifier.name;
       this.delete(identifier);
       return {};

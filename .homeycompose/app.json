@@ -1,0 +1,31 @@
+{
+  "id": "nl.stefanrenne.tasks",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Tasks"
+  },
+  "description": {
+    "en": "Let Homey Automate your todo list."
+  },
+  "category": [
+    "tools"
+  ],
+  "author": {
+    "name": "Stefan Renne",
+    "email": "srenne1@gmail.com"
+  },
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "contributors": {
+    "developers": []
+  }
+}

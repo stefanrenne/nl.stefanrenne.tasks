@@ -1,0 +1,45 @@
+{
+	"id": "create_task",
+	"title": {
+		"en": "Create Task"
+	},
+	"titleFormatted": {
+		"en": "Create Task with [[title]] for [[identifier]]"
+	},
+	"hint": {
+		"en": "Identifiers allow you to remove or overwride tasks using flows."
+	},
+	"args": [
+		{
+			"name": "title",
+			"required":true,
+			"title": {
+				"en": "Title"
+			},
+			"type": "text",
+			"placeholder": {
+				"en": "Type a Title"
+			}
+		},
+		{
+			"name": "identifier",
+			"required":false,
+			"type": "autocomplete",
+			"title": {
+				"en": "Identifier"
+			},
+			"placeholder": {
+				"en": "Pick or type"
+			}
+		}
+	],
+	"tokens": [
+		{
+			"name": "title",
+			"type": "string",
+			"title": {
+				"en": "Title"
+			}
+		}
+	]
+}
