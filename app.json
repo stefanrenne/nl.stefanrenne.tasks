@@ -1,0 +1,104 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "nl.stefanrenne.tasks",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Tasks"
+  },
+  "description": {
+    "en": "Let Homey Automate your todo list."
+  },
+  "category": [
+    "tools"
+  ],
+  "author": {
+    "name": "Stefan Renne",
+    "email": "srenne1@gmail.com"
+  },
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "contributors": {
+    "developers": []
+  },
+  "flow": {
+    "actions": [
+      {
+        "id": "create_task",
+        "title": {
+          "en": "Create Task"
+        },
+        "titleFormatted": {
+          "en": "Create Task with [[title]] for [[identifier]]"
+        },
+        "hint": {
+          "en": "Identifiers allow you to remove or overwride tasks using flows."
+        },
+        "args": [
+          {
+            "name": "title",
+            "required": true,
+            "title": {
+              "en": "Title"
+            },
+            "type": "text",
+            "placeholder": {
+              "en": "Type a Title"
+            }
+          },
+          {
+            "name": "identifier",
+            "required": false,
+            "type": "autocomplete",
+            "title": {
+              "en": "Identifier"
+            },
+            "placeholder": {
+              "en": "Pick or type"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": {
+              "en": "Title"
+            }
+          }
+        ]
+      },
+      {
+        "id": "delete_task",
+        "title": {
+          "en": "Delete Task"
+        },
+        "titleFormatted": {
+          "en": "Delete Task for [[identifier]]"
+        },
+        "args": [
+          {
+            "name": "identifier",
+            "required": true,
+            "type": "autocomplete",
+            "title": {
+              "en": "Identifier"
+            },
+            "placeholder": {
+              "en": "Pick or type"
+            }
+          }
+        ],
+        "tokens": []
+      }
+    ]
+  }
+}
