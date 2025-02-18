@@ -1,30 +1,88 @@
 <html>
   <head>
     <style>
-      /* Example of a custom CSS class. */
-      .custom-image-class {
-        margin: var(--homey-su-3) auto var(--homey-su-5);
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li.item {
+        border: var(--homey-line-light);
+        border-radius: var(--homey-border-radius-default);
+        background-color: var(--homey-color-mono-100);
+        padding: var(--homey-su-1) var(--homey-su-2) var(--homey-su-1);
+      }
+      li:not(:last-child) {
+        margin-bottom: var(--homey-su-2);
       }
     </style>
   </head>
 
-  <body class="homey-widget">
-    <!-- <img src="homey-logo.png" alt="Homey logo" class="custom-image-class" /> -->
-    <!-- <p class="homey-text-regular homey-text-align-center">Edit public/index.html and hit refresh.</p> -->
-
+  <body class="homey-widget-full">
+    <div id="container"></ul>
+  
     <script type="text/javascript">
+      const $container = document.getElementById('container');
       function onHomeyReady(Homey) {
-        Homey.ready();
+        function reload() {
+          Promise.resolve().then(async () => {
+            const feed = await Homey.api('GET', '/', {})
+            $container.innerHTML = '';
+            if (feed.length === 0) {
+              throw new Error('Geen open Taken 🎉.');
+            }
+            const $items = document.createElement('ul');
+            $container.appendChild($items);
 
-        // View the settings the user provided if your widget has settings.
-        console.log('Widget settings:', Homey.getSettings());
+            let height = 30;
+            for (const item of Object.values(feed)) {
+              if (height > 0) {
+                height += 8;
+              }
+              height += 45;
+              const $item = document.createElement('li');
+              $item.classList.add('item');
 
-        // Fetch something from your app.
-        Homey.api('GET', '/', {})
-          .then((result) => {
-            console.log(result);
+              $title = document.createElement('p');
+              $title.classList.add('homey-text-medium');
+              $title.innerHTML = item.title;
+              $item.appendChild($title);
+              
+              $body = document.createElement('p');
+              $body.classList.add('homey-text-small-light');
+              $body.innerHTML = 'todo';
+              $item.appendChild($body);
+
+              $item.addEventListener('click', async () => {
+                Homey.hapticFeedback();
+                await Homey.api('DELETE', '/' + item.identifier, {});
+                // Homey.popup(item.link);
+              });
+              
+              $items.appendChild($item);
+            }
+
+            Homey.setHeight(height);
           })
-          .catch(console.error);
+          .catch(err => {
+            const $item = document.createElement('li');
+
+            $title = document.createElement('p');
+            $title.classList.add('homey-text-regular');
+            $title.innerHTML = err.message;
+            $container.appendChild($title);
+            Homey.setHeight(20);
+          })
+          .finally();
+        }
+
+        Homey.on('didUpdateTasks', (event) => {
+          console.log(event);
+          reload();
+        });
+
+        Homey.ready();
+        reload();
       }
     </script>
   </body>

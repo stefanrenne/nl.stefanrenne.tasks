@@ -33,6 +33,7 @@
   "contributors": {
     "developers": []
   },
+  "brandColor": "#417505",
   "flow": {
     "conditions": [
       {

@@ -2,11 +2,12 @@
 
 import Homey from 'homey';
 import {v4 as uuidv4} from 'uuid';
-import { Task } from './model/task';
+import { Task, Store } from './lib/storage';
 
 module.exports = class MyApp extends Homey.App {
 
   allIdentifiers = new Set<string>();
+  store = new Store(this.homey);
 
   /**
    * onInit is called when the app is initialized.
@@ -95,7 +96,7 @@ module.exports = class MyApp extends Homey.App {
     this.registerAutocompleteListenerForCard(card, false)
     card.registerRunListener((args) => {
       const identifier: string = args.identifier.name;
-      return this.getTasks().some((element) => element.identifier === identifier);
+      return this.store.get().some((element) => element.identifier === identifier);
     });
   }
 
@@ -105,7 +106,7 @@ module.exports = class MyApp extends Homey.App {
     card.registerRunListener((args) => {
       const title: string = args.title;
       const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined;
-      this.store(title, identifier);
+      this.store.add(title, identifier);
       return {
         title
       };
@@ -117,7 +118,7 @@ module.exports = class MyApp extends Homey.App {
     this.registerAutocompleteListenerForCard(card, false)
     card.registerRunListener((args) => {
       const identifier: string = args.identifier.name;
-      this.delete(identifier);
+      this.store.delete(identifier);
       return {};
     });
   }
@@ -125,36 +126,8 @@ module.exports = class MyApp extends Homey.App {
   registerDeleteAllTasksListeners() {
     const card = this.homey.flow.getActionCard('delete_all')
     card.registerRunListener((args) => {
-      this.setTasks([]);
+      this.store.set([]);
       return {};
     });
-  }
-
-  /** Storage */
-  getTasks(): Task[] {
-    const result = this.homey.settings.get('tasks') ?? [];
-    console.log("=== GET ===");
-    console.log(result);
-    return result
-  }
-
-  setTasks(tasks: Task[]) {
-    console.log("=== SET ===");
-    console.log(tasks);
-    this.homey.settings.set('tasks', tasks);
-  }
-
-  store(title: string, identifier: string | undefined) {
-    let newResult = this.getTasks()
-    if (identifier !== undefined) {
-      newResult = newResult.filter((item) => item.identifier !== identifier);
-    }
-    newResult.push({title: title, date: new Date(), identifier: identifier ?? uuidv4()});
-    this.setTasks(newResult);
-  }
-
-  delete(identifier: string) {
-    let newResult = this.getTasks().filter((item) => item.identifier !== identifier);
-    this.setTasks(newResult);
   }
 }
