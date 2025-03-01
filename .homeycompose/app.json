@@ -32,5 +32,6 @@
   "contributors": {
     "developers": []
   },
-  "brandColor": "#61b841"
+  "brandColor": "#61b841",
+  "support": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues"
 }

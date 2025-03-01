@@ -29,12 +29,12 @@
   "bugs": {
     "url": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues"
   },
-  "support": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues",
   "source": "https://github.com/stefanrenne/nl.stefanrenne.tasks",
   "contributors": {
     "developers": []
   },
   "brandColor": "#61b841",
+  "support": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues",
   "flow": {
     "triggers": [
       {
