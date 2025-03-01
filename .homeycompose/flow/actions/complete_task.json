@@ -1,15 +1,15 @@
 {
-	"id": "contains_task",
+	"id": "complete_task",
 	"title": {
-		"en": "Task exists"
+		"en": "Complete Task"
 	},
 	"titleFormatted": {
-		"en": "Task exists with [[identifier]]"
+		"en": "Complete Task with [[identifier]]"
 	},
 	"args": [
 		{
 			"name": "identifier",
-			"required":false,
+			"required":true,
 			"type": "autocomplete",
 			"title": {
 				"en": "Identifier"

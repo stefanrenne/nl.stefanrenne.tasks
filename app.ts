@@ -6,18 +6,18 @@ import { Task, Store } from './lib/storage';
 
 module.exports = class MyApp extends Homey.App {
 
-  allIdentifiers = new Set<string>();
-  store = new Store(this.homey);
+  private allIdentifiers = new Set<string>();
+  private store = new Store(this.homey);
 
   /**
    * onInit is called when the app is initialized.
    */
   async onInit() {
     await this.updateAllIdentifiers();
-    this.registerContainsTaskListeners();
+    this.registerOpenTaskListeners();
     this.registerCreateTaskListeners();
-    this.registerDeleteTaskListeners();
-    this.registerDeleteAllTasksListeners();
+    this.registerCompleteTaskListeners();
+    this.registerCompleteAllTasksListeners();
   }
 
   async getAllCards(): Promise<(Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[]> {
@@ -91,8 +91,8 @@ module.exports = class MyApp extends Homey.App {
   }
 
   /** TaskListeners */
-  registerContainsTaskListeners() {
-    const card = this.homey.flow.getConditionCard('contains_task')
+  registerOpenTaskListeners() {
+    const card = this.homey.flow.getConditionCard('open_task')
     this.registerAutocompleteListenerForCard(card, false)
     card.registerRunListener((args) => {
       const identifier: string = args.identifier.name;
@@ -113,8 +113,8 @@ module.exports = class MyApp extends Homey.App {
     });
   }
 
-  registerDeleteTaskListeners() {
-    const card = this.homey.flow.getActionCard('delete_task')
+  registerCompleteTaskListeners() {
+    const card = this.homey.flow.getActionCard('complete_task')
     this.registerAutocompleteListenerForCard(card, false)
     card.registerRunListener((args) => {
       const identifier: string = args.identifier.name;
@@ -123,8 +123,8 @@ module.exports = class MyApp extends Homey.App {
     });
   }
 
-  registerDeleteAllTasksListeners() {
-    const card = this.homey.flow.getActionCard('delete_all')
+  registerCompleteAllTasksListeners() {
+    const card = this.homey.flow.getActionCard('complete_all')
     card.registerRunListener((args) => {
       this.store.set([]);
       return {};

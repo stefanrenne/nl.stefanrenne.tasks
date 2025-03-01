@@ -35,14 +35,39 @@
   },
   "brandColor": "#61b841",
   "flow": {
+    "triggers": [
+      {
+        "id": "on_complete",
+        "title": {
+          "en": "Task completed"
+        },
+        "args": [],
+        "tokens": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": {
+              "en": "Title"
+            }
+          },
+          {
+            "name": "identifier",
+            "type": "string",
+            "title": {
+              "en": "Identifier"
+            }
+          }
+        ]
+      }
+    ],
     "conditions": [
       {
-        "id": "contains_task",
+        "id": "open_task",
         "title": {
-          "en": "Task exists"
+          "en": "Task !{{open|completed}}"
         },
         "titleFormatted": {
-          "en": "Task exists with [[identifier]]"
+          "en": "Task !{{open|completed}} with [[identifier]]"
         },
         "args": [
           {
@@ -61,6 +86,37 @@
       }
     ],
     "actions": [
+      {
+        "id": "complete_all",
+        "title": {
+          "en": "Complete all Tasks"
+        },
+        "args": [],
+        "tokens": []
+      },
+      {
+        "id": "complete_task",
+        "title": {
+          "en": "Complete Task"
+        },
+        "titleFormatted": {
+          "en": "Complete Task with [[identifier]]"
+        },
+        "args": [
+          {
+            "name": "identifier",
+            "required": true,
+            "type": "autocomplete",
+            "title": {
+              "en": "Identifier"
+            },
+            "placeholder": {
+              "en": "Pick or type"
+            }
+          }
+        ],
+        "tokens": []
+      },
       {
         "id": "create_task",
         "title": {
@@ -105,37 +161,6 @@
             }
           }
         ]
-      },
-      {
-        "id": "delete_all",
-        "title": {
-          "en": "Delete all Tasks"
-        },
-        "args": [],
-        "tokens": []
-      },
-      {
-        "id": "delete_task",
-        "title": {
-          "en": "Delete Task"
-        },
-        "titleFormatted": {
-          "en": "Delete Task with [[identifier]]"
-        },
-        "args": [
-          {
-            "name": "identifier",
-            "required": true,
-            "type": "autocomplete",
-            "title": {
-              "en": "Identifier"
-            },
-            "placeholder": {
-              "en": "Pick or type"
-            }
-          }
-        ],
-        "tokens": []
       }
     ]
   },

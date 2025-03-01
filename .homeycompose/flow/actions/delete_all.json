@@ -1,8 +1,0 @@
-{
-	"id": "delete_all",
-	"title": {
-		"en": "Delete all Tasks"
-	},
-	"args": [],
-	"tokens": []
-}

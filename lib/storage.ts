@@ -1,5 +1,6 @@
 'use strict';
 
+import FlowCardTrigger from 'homey/lib/FlowCardTrigger';
 import Homey from 'homey/lib/Homey';
 import {v4 as uuidv4} from 'uuid';
 
@@ -11,9 +12,12 @@ export interface Task {
 
 export class Store {
 
-    homey: Homey;
+    private homey: Homey;
+    private taskOnComplete: FlowCardTrigger | undefined;
+
 	constructor(homey: Homey) {
         this.homey = homey;
+        this.taskOnComplete = homey.flow.getTriggerCard('on_complete')
     }
 
     get(): Task[] {
@@ -40,7 +44,12 @@ export class Store {
     }
 
     delete(identifier: string) {
-        let newResult = this.get().filter((item) => item.identifier !== identifier);
-        this.set(newResult);
+        const result = this.get();
+        const item = result.find((item) => item.identifier !== identifier);
+        
+        if (item !== undefined) {
+            this.set(result.filter((item) => item.identifier !== identifier));
+            this.taskOnComplete?.trigger({ title: item.title, identifier: item.identifier });
+        }
     }
 }

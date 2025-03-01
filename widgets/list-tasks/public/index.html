@@ -20,7 +20,7 @@
 
   <body class="homey-widget-full">
     <div id="container"></ul>
-  
+
     <script type="text/javascript">
       const $container = document.getElementById('container');
       function onHomeyReady(Homey) {
@@ -50,7 +50,7 @@
               
               $body = document.createElement('p');
               $body.classList.add('homey-text-small-light');
-              $body.innerHTML = 'todo';
+              $body.innerHTML = item.date;
               $item.appendChild($body);
 
               $item.addEventListener('click', async () => {

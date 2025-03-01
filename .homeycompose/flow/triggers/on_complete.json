@@ -1,0 +1,23 @@
+{
+	"id": "on_complete",
+	"title": {
+		"en": "Task completed"
+	},
+	"args": [],
+	"tokens": [
+		{
+			"name": "title",
+			"type": "string",
+			"title": {
+				"en": "Title"
+			}
+		},
+		{
+			"name": "identifier",
+			"type": "string",
+			"title": {
+				"en": "Identifier"
+			}
+		}
+	]
+}

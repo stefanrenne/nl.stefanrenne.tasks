@@ -1,15 +1,15 @@
 {
-	"id": "delete_task",
+	"id": "open_task",
 	"title": {
-		"en": "Delete Task"
+		"en": "Task !{{open|completed}}"
 	},
 	"titleFormatted": {
-		"en": "Delete Task with [[identifier]]"
+		"en": "Task !{{open|completed}} with [[identifier]]"
 	},
 	"args": [
 		{
 			"name": "identifier",
-			"required":true,
+			"required":false,
 			"type": "autocomplete",
 			"title": {
 				"en": "Identifier"
