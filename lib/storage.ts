@@ -13,11 +13,15 @@ export interface Task {
 export class Store {
 
     private homey: Homey;
+    private taskOnCreate: FlowCardTrigger | undefined;
+    private taskOnUpdate: FlowCardTrigger | undefined;
     private taskOnComplete: FlowCardTrigger | undefined;
 
 	constructor(homey: Homey) {
         this.homey = homey;
-        this.taskOnComplete = homey.flow.getTriggerCard('on_complete')
+        this.taskOnCreate = homey.flow.getTriggerCard('on_create');
+        this.taskOnUpdate = homey.flow.getTriggerCard('on_update');
+        this.taskOnComplete = homey.flow.getTriggerCard('on_complete');
     }
 
     get(): Task[] {
@@ -36,8 +40,18 @@ export class Store {
 
     add(title: string, identifier: string | undefined) {
         let newResult = this.get()
-        if (identifier !== undefined) {
+        const oldItem = newResult.find((item) => item.identifier == identifier);
+
+        if (oldItem?.title === title) {
+            // Existing task is not mutated
+            return
+        }
+
+        if (identifier !== undefined && oldItem !== undefined) {
             newResult = newResult.filter((item) => item.identifier !== identifier);
+            this.taskOnUpdate?.trigger({ oldTitle: oldItem.title, newTitle: title, identifier: identifier });
+        } else {
+            this.taskOnCreate?.trigger({ title: title, identifier: identifier });
         }
         newResult.push({title: title, date: new Date(), identifier: identifier ?? uuidv4()});
         this.set(newResult);
@@ -45,11 +59,12 @@ export class Store {
 
     delete(identifier: string) {
         const result = this.get();
-        const item = result.find((item) => item.identifier !== identifier);
+        const oldItem = result.find((item) => item.identifier == identifier);
         
-        if (item !== undefined) {
-            this.set(result.filter((item) => item.identifier !== identifier));
-            this.taskOnComplete?.trigger({ title: item.title, identifier: item.identifier });
+        if (oldItem !== undefined) {
+            const newResult = result.filter((item) => item.identifier !== identifier);
+            this.set(newResult);
+            this.taskOnComplete?.trigger({ title: oldItem.title, identifier: oldItem.identifier });
         }
     }
 }

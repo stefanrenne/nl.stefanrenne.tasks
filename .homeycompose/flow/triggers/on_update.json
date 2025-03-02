@@ -1,0 +1,30 @@
+{
+	"id": "on_update",
+	"title": {
+		"en": "Task updated"
+	},
+	"args": [],
+	"tokens": [
+		{
+			"name": "oldTitle",
+			"type": "string",
+			"title": {
+				"en": "Old Title"
+			}
+		},
+		{
+			"name": "newTitle",
+			"type": "string",
+			"title": {
+				"en": "New Title"
+			}
+		},
+		{
+			"name": "identifier",
+			"type": "string",
+			"title": {
+				"en": "Identifier"
+			}
+		}
+	]
+}

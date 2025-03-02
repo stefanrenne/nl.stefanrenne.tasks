@@ -59,6 +59,59 @@
             }
           }
         ]
+      },
+      {
+        "id": "on_create",
+        "title": {
+          "en": "Task created"
+        },
+        "args": [],
+        "tokens": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": {
+              "en": "Title"
+            }
+          },
+          {
+            "name": "identifier",
+            "type": "string",
+            "title": {
+              "en": "Identifier"
+            }
+          }
+        ]
+      },
+      {
+        "id": "on_update",
+        "title": {
+          "en": "Task updated"
+        },
+        "args": [],
+        "tokens": [
+          {
+            "name": "oldTitle",
+            "type": "string",
+            "title": {
+              "en": "Old Title"
+            }
+          },
+          {
+            "name": "newTitle",
+            "type": "string",
+            "title": {
+              "en": "New Title"
+            }
+          },
+          {
+            "name": "identifier",
+            "type": "string",
+            "title": {
+              "en": "Identifier"
+            }
+          }
+        ]
       }
     ],
     "conditions": [
