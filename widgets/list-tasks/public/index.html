@@ -50,6 +50,7 @@
               
               $body = document.createElement('p');
               $body.classList.add('homey-text-small-light');
+              $body.classList.add('date');
               $body.innerHTML = timeSince(item.date);
               const $dateAttribute = document.createAttribute("data-date");
               $dateAttribute.value = item.date
@@ -86,13 +87,12 @@
 
         Homey.ready();
         reload();
-        setInterval(updateTime, 1000); 
+        setInterval(updateTime, 10000); 
       }
 
       function updateTime() {
-        items = document.querySelectorAll("li");
-        items.forEach(function(item,n) {
-          console.log(n,item);
+        document.querySelectorAll("li p.date").forEach(function(item) {
+          item.innerHTML = timeSince(item.dataset.date);
         });
       }
 
