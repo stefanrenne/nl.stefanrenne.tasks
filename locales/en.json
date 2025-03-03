@@ -1,3 +1,17 @@
 {
-    "newIdentifier": "Create new Identifier"
+    "newToken": "Create new Token",
+    "noOpenTasks": "No open tasks 🎉",
+    "now": "Just now",
+    "second": " __value__ second ago",
+    "seconds": " __value__ seconds ago",
+    "minute": " __value__ minute ago",
+    "minutes": " __value__ minutes ago",
+    "hour": " __value__ hour ago",
+    "hours": " __value__ hours ago",
+    "day": " __value__ day ago",
+    "days": " __value__ days ago",
+    "month": " __value__ month ago",
+    "months": " __value__ months ago",
+    "year": " __value__ year ago",
+    "years": " __value__ years ago"
 }

@@ -7,7 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 export interface Task {
     title: string;
     date: Date;
-    identifier: string;
+    token: string;
 }
 
 export class Store {
@@ -38,33 +38,33 @@ export class Store {
         this.homey.api.realtime('didUpdateTasks', tasks);
     }
 
-    add(title: string, identifier: string | undefined) {
+    add(title: string, token: string | undefined) {
         let newResult = this.get()
-        const oldItem = newResult.find((item) => item.identifier == identifier);
+        const oldItem = newResult.find((item) => item.token == token);
 
         if (oldItem?.title === title) {
             // Existing task is not mutated
             return
         }
 
-        if (identifier !== undefined && oldItem !== undefined) {
-            newResult = newResult.filter((item) => item.identifier !== identifier);
-            this.taskOnUpdate?.trigger({ oldTitle: oldItem.title, newTitle: title, identifier: identifier });
+        if (token !== undefined && oldItem !== undefined) {
+            newResult = newResult.filter((item) => item.token !== token);
+            this.taskOnUpdate?.trigger({ oldTitle: oldItem.title, newTitle: title, token: token });
         } else {
-            this.taskOnCreate?.trigger({ title: title, identifier: identifier });
+            this.taskOnCreate?.trigger({ title: title, token: token });
         }
-        newResult.push({title: title, date: new Date(), identifier: identifier ?? uuidv4()});
+        newResult.push({title: title, date: new Date(), token: token ?? uuidv4()});
         this.set(newResult);
     }
 
-    delete(identifier: string) {
+    delete(token: string) {
         const result = this.get();
-        const oldItem = result.find((item) => item.identifier == identifier);
+        const oldItem = result.find((item) => item.token == token);
         
         if (oldItem !== undefined) {
-            const newResult = result.filter((item) => item.identifier !== identifier);
+            const newResult = result.filter((item) => item.token !== token);
             this.set(newResult);
-            this.taskOnComplete?.trigger({ title: oldItem.title, identifier: oldItem.identifier });
+            this.taskOnComplete?.trigger({ title: oldItem.title, token: oldItem.token });
         }
     }
 }

@@ -1,35 +1,42 @@
 {
 	"id": "create_task",
 	"title": {
-		"en": "Create Task"
+		"en": "Create Task",
+		"nl": "Taak aanmaken"
 	},
 	"titleFormatted": {
-		"en": "Create Task with [[title]] for [[identifier]]"
+		"en": "Create [[token]] Task with [[title]]",
+		"nl": "[[token]] taak aanmaken met [[title]]"
 	},
 	"hint": {
-		"en": "Identifiers allow you to remove or overwride tasks using flows."
+		"en": "Tokens allow you to remove or overwride tasks using flows.",
+		"nl": "Met ID's kun je taken verwijderen of overschrijven."
 	},
 	"args": [
 		{
 			"name": "title",
 			"required":true,
 			"title": {
-				"en": "Title"
+				"en": "Title",
+				"nl": "Titel"
 			},
 			"type": "text",
 			"placeholder": {
-				"en": "Type a Title"
+				"en": "Type a Title",
+				"nl": "Typ een Titel"
 			}
 		},
 		{
-			"name": "identifier",
+			"name": "token",
 			"required":false,
 			"type": "autocomplete",
 			"title": {
-				"en": "Identifier"
+				"en": "Token",
+				"nl": "ID"
 			},
 			"placeholder": {
-				"en": "Pick or type"
+				"en": "Pick or type",
+				"nl": "Kies of typ"
 			}
 		}
 	],
@@ -38,7 +45,8 @@
 			"name": "title",
 			"type": "string",
 			"title": {
-				"en": "Title"
+				"en": "Title",
+				"nl": "Titel"
 			}
 		}
 	]

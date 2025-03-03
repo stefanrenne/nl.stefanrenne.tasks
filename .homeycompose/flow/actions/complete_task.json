@@ -1,21 +1,25 @@
 {
 	"id": "complete_task",
 	"title": {
-		"en": "Complete Task"
+		"en": "Complete task",
+		"nl": "Voltooi taak"
 	},
 	"titleFormatted": {
-		"en": "Complete Task with [[identifier]]"
+		"en": "Complete [[token]] task",
+		"nl": "Voltooi [[token]] taak"
 	},
 	"args": [
 		{
-			"name": "identifier",
+			"name": "token",
 			"required":true,
 			"type": "autocomplete",
 			"title": {
-				"en": "Identifier"
+				"en": "Token",
+				"nl": "ID"
 			},
 			"placeholder": {
-				"en": "Pick or type"
+				"en": "Pick or type",
+				"nl": "Kies of typ"
 			}
 		}
 	],

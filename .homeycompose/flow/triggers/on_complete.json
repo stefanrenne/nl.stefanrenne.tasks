@@ -1,7 +1,8 @@
 {
 	"id": "on_complete",
 	"title": {
-		"en": "Task completed"
+		"en": "Task completed",
+		"nl": "Taak voltooid"
 	},
 	"args": [],
 	"tokens": [
@@ -9,14 +10,16 @@
 			"name": "title",
 			"type": "string",
 			"title": {
-				"en": "Title"
+				"en": "Title",
+				"nl": "Titel"
 			}
 		},
 		{
-			"name": "identifier",
+			"name": "token",
 			"type": "string",
 			"title": {
-				"en": "Identifier"
+				"en": "Token",
+				"nl": "ID"
 			}
 		}
 	]

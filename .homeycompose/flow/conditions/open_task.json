@@ -1,21 +1,25 @@
 {
 	"id": "open_task",
 	"title": {
-		"en": "Task !{{open|completed}}"
+		"en": "Task !{{open|completed}}",
+		"nl": "Taak !{{open|voltooid}}"
 	},
 	"titleFormatted": {
-		"en": "Task !{{open|completed}} with [[identifier]]"
+		"en": "Is [[token]] task !{{open|completed}}",
+		"nl": "Is [[token]] taak !{{open|voltooid}}"
 	},
 	"args": [
 		{
-			"name": "identifier",
+			"name": "token",
 			"required":false,
 			"type": "autocomplete",
 			"title": {
-				"en": "Identifier"
+				"en": "Token",
+				"nl": "ID"
 			},
 			"placeholder": {
-				"en": "Pick or type"
+				"en": "Pick or type",
+				"nl": "Kies of typ"
 			}
 		}
 	],

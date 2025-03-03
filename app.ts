@@ -6,14 +6,14 @@ import { Task, Store } from './lib/storage';
 
 module.exports = class MyApp extends Homey.App {
 
-  private allIdentifiers = new Set<string>();
+  private allTokens = new Set<string>();
   private store = new Store(this.homey);
 
   /**
    * onInit is called when the app is initialized.
    */
   async onInit() {
-    await this.updateAllIdentifiers();
+    await this.updateAllTokens();
     this.registerOpenTaskListeners();
     this.registerCreateTaskListeners();
     this.registerCompleteTaskListeners();
@@ -26,7 +26,7 @@ module.exports = class MyApp extends Homey.App {
       if (Object.hasOwnProperty.call(this.homey.manifest.flow, flowTypeId)) {
 				const flowType = this.homey.manifest.flow[flowTypeId];
 				for (const flowcard of flowType) {
-          if (flowcard.args && flowcard.args.some((flow: any) => flow.name == 'identifier')) {
+          if (flowcard.args && flowcard.args.some((flow: any) => flow.name == 'token')) {
             switch (flowTypeId) {
               case "actions":
                 allCards.push(this.homey.flow.getActionCard(flowcard.id))
@@ -47,46 +47,46 @@ module.exports = class MyApp extends Homey.App {
     return allCards
   }
 
-  async updateAllIdentifiers() {
+  async updateAllTokens() {
     const allCards = await this.getAllCards()
-    const uniqueIdentifiers = await allCards.reduce(
+    const uniqueTokens = await allCards.reduce(
       async (resultPromise, card) => {
         let result = await resultPromise;
         let args = await card.getArgumentValues();
-        args.filter(x => x.identifier).map(x => x.identifier.name).forEach(identifier => {
-          result.add(identifier);
+        args.filter(x => x.token).map(x => x.token.name).forEach(token => {
+          result.add(token);
         })
         return result;
     }, Promise.resolve(new Set<string>()));
-    this.allIdentifiers = uniqueIdentifiers
+    this.allTokens = uniqueTokens
   }
 
   /** Helpers */
-  registerAutocompleteListenerForCard(card: Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition, canRegisterNewIdentifier: boolean) {
-    card.registerArgumentAutocompleteListener('identifier', async (query: string, args: any) => {
-      let results = Array.from(this.allIdentifiers)
+  registerAutocompleteListenerForCard(card: Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition, canRegisterNewToken: boolean) {
+    card.registerArgumentAutocompleteListener('token', async (query: string, args: any) => {
+      let results = Array.from(this.allTokens)
       .filter((result) => {
         return query.length == 0 || result.toLowerCase().includes(query.toLowerCase());
       })
       .sort()
-      .map(identifier => {
+      .map(token => {
         return {
-          name: identifier,
+          name: token,
           description: ''
         }
       });
 
-      if (canRegisterNewIdentifier && query && query.length > 0 && !(results.length == 1 && results[0].name.toLowerCase() == query.toLowerCase())) {
+      if (canRegisterNewToken && query && query.length > 0 && !(results.length == 1 && results[0].name.toLowerCase() == query.toLowerCase())) {
         results.unshift({
           name: query,
-          description: this.homey.__('newIdentifier')
+          description: this.homey.__('newToken')
         });
       }
       return results;
     });
 
     card.on('update', async () => {
-      await this.updateAllIdentifiers();
+      await this.updateAllTokens();
     });
   }
 
@@ -95,8 +95,8 @@ module.exports = class MyApp extends Homey.App {
     const card = this.homey.flow.getConditionCard('open_task')
     this.registerAutocompleteListenerForCard(card, false)
     card.registerRunListener((args) => {
-      const identifier: string = args.identifier.name;
-      return this.store.get().some((element) => element.identifier === identifier);
+      const token: string = args.token.name;
+      return this.store.get().some((element) => element.token === token);
     });
   }
 
@@ -105,8 +105,8 @@ module.exports = class MyApp extends Homey.App {
     this.registerAutocompleteListenerForCard(card, true)
     card.registerRunListener((args) => {
       const title: string = args.title;
-      const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined;
-      this.store.add(title, identifier);
+      const token: string | undefined = (args.token) ? args.token.name : undefined;
+      this.store.add(title, token);
       return {
         title
       };
@@ -117,8 +117,8 @@ module.exports = class MyApp extends Homey.App {
     const card = this.homey.flow.getActionCard('complete_task')
     this.registerAutocompleteListenerForCard(card, false)
     card.registerRunListener((args) => {
-      const identifier: string = args.identifier.name;
-      this.store.delete(identifier);
+      const token: string = args.token.name;
+      this.store.delete(token);
       return {};
     });
   }

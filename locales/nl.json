@@ -1,0 +1,17 @@
+{
+    "newToken": "Nieuwe Token aanmaken",
+    "noOpenTasks": "Geen open Taken 🎉",
+    "now": "Zojuist aangemaakt",
+    "second": " __value__ seconde geleden",
+    "seconds": " __value__ seconden geleden",
+    "minute": " __value__ minuut geleden",
+    "minutes": " __value__ minuten geleden",
+    "hour": " __value__ uur geleden",
+    "hours": " __value__ uren geleden",
+    "day": " __value__ dag geleden",
+    "days": " __value__ dagen geleden",
+    "month": " __value__ maand geleden",
+    "months": " __value__ maanden geleden",
+    "year": " __value__ jaar geleden",
+    "years": " __value__ jaren geleden"
+}

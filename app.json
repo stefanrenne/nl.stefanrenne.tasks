@@ -40,7 +40,8 @@
       {
         "id": "on_complete",
         "title": {
-          "en": "Task completed"
+          "en": "Task completed",
+          "nl": "Taak voltooid"
         },
         "args": [],
         "tokens": [
@@ -48,14 +49,16 @@
             "name": "title",
             "type": "string",
             "title": {
-              "en": "Title"
+              "en": "Title",
+              "nl": "Titel"
             }
           },
           {
-            "name": "identifier",
+            "name": "token",
             "type": "string",
             "title": {
-              "en": "Identifier"
+              "en": "Token",
+              "nl": "ID"
             }
           }
         ]
@@ -63,7 +66,8 @@
       {
         "id": "on_create",
         "title": {
-          "en": "Task created"
+          "en": "Task created",
+          "nl": "Taak aangemaakt"
         },
         "args": [],
         "tokens": [
@@ -71,14 +75,16 @@
             "name": "title",
             "type": "string",
             "title": {
-              "en": "Title"
+              "en": "Title",
+              "nl": "Titel"
             }
           },
           {
-            "name": "identifier",
+            "name": "token",
             "type": "string",
             "title": {
-              "en": "Identifier"
+              "en": "Token",
+              "nl": "ID"
             }
           }
         ]
@@ -86,7 +92,8 @@
       {
         "id": "on_update",
         "title": {
-          "en": "Task updated"
+          "en": "Task updated",
+          "nl": "Taak geüpdate"
         },
         "args": [],
         "tokens": [
@@ -94,21 +101,24 @@
             "name": "oldTitle",
             "type": "string",
             "title": {
-              "en": "Old Title"
+              "en": "Old Title",
+              "nl": "Oude Titel"
             }
           },
           {
             "name": "newTitle",
             "type": "string",
             "title": {
-              "en": "New Title"
+              "en": "New Title",
+              "nl": "Nieuwe Titel"
             }
           },
           {
-            "name": "identifier",
+            "name": "token",
             "type": "string",
             "title": {
-              "en": "Identifier"
+              "en": "Token",
+              "nl": "ID"
             }
           }
         ]
@@ -118,21 +128,25 @@
       {
         "id": "open_task",
         "title": {
-          "en": "Task !{{open|completed}}"
+          "en": "Task !{{open|completed}}",
+          "nl": "Taak !{{open|voltooid}}"
         },
         "titleFormatted": {
-          "en": "Task !{{open|completed}} with [[identifier]]"
+          "en": "Is [[token]] task !{{open|completed}}",
+          "nl": "Is [[token]] taak !{{open|voltooid}}"
         },
         "args": [
           {
-            "name": "identifier",
+            "name": "token",
             "required": false,
             "type": "autocomplete",
             "title": {
-              "en": "Identifier"
+              "en": "Token",
+              "nl": "ID"
             },
             "placeholder": {
-              "en": "Pick or type"
+              "en": "Pick or type",
+              "nl": "Kies of typ"
             }
           }
         ],
@@ -143,7 +157,8 @@
       {
         "id": "complete_all",
         "title": {
-          "en": "Complete all Tasks"
+          "en": "Complete all tasks",
+          "nl": "Voltooi alle taken"
         },
         "args": [],
         "tokens": []
@@ -151,21 +166,25 @@
       {
         "id": "complete_task",
         "title": {
-          "en": "Complete Task"
+          "en": "Complete task",
+          "nl": "Voltooi taak"
         },
         "titleFormatted": {
-          "en": "Complete Task with [[identifier]]"
+          "en": "Complete [[token]] task",
+          "nl": "Voltooi [[token]] taak"
         },
         "args": [
           {
-            "name": "identifier",
+            "name": "token",
             "required": true,
             "type": "autocomplete",
             "title": {
-              "en": "Identifier"
+              "en": "Token",
+              "nl": "ID"
             },
             "placeholder": {
-              "en": "Pick or type"
+              "en": "Pick or type",
+              "nl": "Kies of typ"
             }
           }
         ],
@@ -174,35 +193,42 @@
       {
         "id": "create_task",
         "title": {
-          "en": "Create Task"
+          "en": "Create Task",
+          "nl": "Taak aanmaken"
         },
         "titleFormatted": {
-          "en": "Create Task with [[title]] for [[identifier]]"
+          "en": "Create [[token]] Task with [[title]]",
+          "nl": "[[token]] taak aanmaken met [[title]]"
         },
         "hint": {
-          "en": "Identifiers allow you to remove or overwride tasks using flows."
+          "en": "Tokens allow you to remove or overwride tasks using flows.",
+          "nl": "Met ID's kun je taken verwijderen of overschrijven."
         },
         "args": [
           {
             "name": "title",
             "required": true,
             "title": {
-              "en": "Title"
+              "en": "Title",
+              "nl": "Titel"
             },
             "type": "text",
             "placeholder": {
-              "en": "Type a Title"
+              "en": "Type a Title",
+              "nl": "Typ een Titel"
             }
           },
           {
-            "name": "identifier",
+            "name": "token",
             "required": false,
             "type": "autocomplete",
             "title": {
-              "en": "Identifier"
+              "en": "Token",
+              "nl": "ID"
             },
             "placeholder": {
-              "en": "Pick or type"
+              "en": "Pick or type",
+              "nl": "Kies of typ"
             }
           }
         ],
@@ -211,7 +237,8 @@
             "name": "title",
             "type": "string",
             "title": {
-              "en": "Title"
+              "en": "Title",
+              "nl": "Titel"
             }
           }
         ]

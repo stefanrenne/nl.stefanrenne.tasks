@@ -24,12 +24,53 @@
     <script type="text/javascript">
       const $container = document.getElementById('container');
       function onHomeyReady(Homey) {
+
+        function updateTime() {
+          document.querySelectorAll("li p.date").forEach(function(item) {
+            item.innerHTML = timeSince(item.dataset.date);
+          });
+        }
+
+        function timeSince(date) {
+          var seconds = Math.floor((new Date() - Date.parse(date)) / 1000);
+          if (seconds === 0) {
+            return Homey.__('now');
+          }
+
+          var interval = seconds / 31536000;
+          if (interval > 1) {
+            const years = Math.floor(interval);
+            return (years === 1) ? Homey.__('year', { value: years }) : Homey.__('years', { value: years });
+          }
+          interval = seconds / 2592000;
+          if (interval > 1) {
+            const months = Math.floor(interval);
+            return (months === 1) ? Homey.__('month', { value: months }) : Homey.__('months', { value: months });
+          }
+          interval = seconds / 86400;
+          if (interval > 1) {
+            const days = Math.floor(interval);
+            return (days === 1) ? Homey.__('day', { value: days }) : Homey.__('days', { value: days });
+          }
+          interval = seconds / 3600;
+          if (interval > 1) {
+            const hours = Math.floor(interval);
+            return (hours === 1) ? Homey.__('hour', { value: hours }) : Homey.__('hours', { value: hours });
+          }
+          interval = seconds / 60;
+          if (interval > 1) {
+            const minutes = Math.floor(interval);
+            return (minutes === 1) ? Homey.__('minute', { value: minutes }) : Homey.__('minutes', { value: minutes });
+          }
+          return (seconds === 1) ? Homey.__('second', { value: seconds }) : Homey.__('seconds', { value: seconds });
+        }
+
         function reload() {
           Promise.resolve().then(async () => {
             const feed = await Homey.api('GET', '/', {})
             $container.innerHTML = '';
             if (feed.length === 0) {
-              throw new Error('Geen open Taken 🎉.');
+              throw new Error(Homey.__('noOpenTasks'));
             }
             const $items = document.createElement('ul');
             $container.appendChild($items);
@@ -87,42 +128,7 @@
 
         Homey.ready();
         reload();
-        setInterval(updateTime, 10000); 
-      }
-
-      function updateTime() {
-        document.querySelectorAll("li p.date").forEach(function(item) {
-          item.innerHTML = timeSince(item.dataset.date);
-        });
-      }
-
-      function timeSince(date) {
-        var seconds = Math.floor((new Date() - Date.parse(date)) / 1000);
-        if (seconds == 0) {
-          return "Just now";
-        }
-
-        var interval = seconds / 31536000;
-        if (interval > 1) {
-          return Math.floor(interval) + " years ago";
-        }
-        interval = seconds / 2592000;
-        if (interval > 1) {
-          return Math.floor(interval) + " months ago";
-        }
-        interval = seconds / 86400;
-        if (interval > 1) {
-          return Math.floor(interval) + " days ago";
-        }
-        interval = seconds / 3600;
-        if (interval > 1) {
-          return Math.floor(interval) + " hours ago";
-        }
-        interval = seconds / 60;
-        if (interval > 1) {
-          return Math.floor(interval) + " minutes ago";
-        }
-        return Math.floor(seconds) + " seconds ago";
+        setInterval(updateTime, 1000); 
       }
     </script>
   </body>

@@ -1,7 +1,8 @@
 {
 	"id": "complete_all",
 	"title": {
-		"en": "Complete all Tasks"
+		"en": "Complete all tasks",
+		"nl": "Voltooi alle taken"
 	},
 	"args": [],
 	"tokens": []
