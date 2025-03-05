@@ -7,19 +7,35 @@
         margin: 0;
       }
       li.item {
-        border: var(--homey-line-light);
-        border-radius: var(--homey-border-radius-default);
-        background-color: var(--homey-color-mono-100);
+        border-top: var(--homey-line-light);
+        border-left: var(--homey-line-light);
+        border-right: var(--homey-line-light);
+        background-color: var(--homey-background-color);
         padding: var(--homey-su-1) var(--homey-su-2) var(--homey-su-1);
+        position: relative;
       }
-      li:not(:last-child) {
-        margin-bottom: var(--homey-su-2);
+      li:first-child {
+        border-radius: var(--homey-border-radius-default) var(--homey-border-radius-default) 0 0;
+      }
+      li:last-child {
+        border-radius: 0 0 var(--homey-border-radius-default) var(--homey-border-radius-default);
+        border-bottom: var(--homey-line-light);
+      }
+      .homey-custom-icon-checkmark {
+        position: absolute;
+        --homey-icon-color: var(--homey-icon-color-green);
+        --homey-icon-size: var(--homey-icon-size-regular);
+        -webkit-mask-image: url('checkmark.svg');
+        mask-image: url('checkmark.svg');
+        top: var(--homey-su-2);
+        right: var(--homey-su-2);
+        height: calc(100% - var(--homey-su-4));
       }
     </style>
   </head>
 
   <body class="homey-widget-full">
-    <div id="container"></ul>
+    <div id="container"></div>
 
     <script type="text/javascript">
       const $container = document.getElementById('container');
@@ -98,9 +114,13 @@
               $body.setAttributeNode($dateAttribute);
               $item.appendChild($body);
 
+              $icon = document.createElement('div');
+              $icon.classList.add('homey-custom-icon-checkmark');
+              $item.appendChild($icon);
+
               $item.addEventListener('click', async () => {
                 Homey.hapticFeedback();
-                await Homey.api('DELETE', '/' + item.identifier, {});
+                await Homey.api('DELETE', '/' + item.token, {});
                 // Homey.popup(item.link);
               });
               
