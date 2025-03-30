@@ -5,16 +5,16 @@
 		"nl": "Taak !{{open|voltooid}}"
 	},
 	"titleFormatted": {
-		"en": "Is [[token]] task !{{open|completed}}",
-		"nl": "Is [[token]] taak !{{open|voltooid}}"
+		"en": "Is [[identifier]] task !{{open|completed}}",
+		"nl": "Is [[identifier]] taak !{{open|voltooid}}"
 	},
 	"args": [
 		{
-			"name": "token",
+			"name": "identifier",
 			"required":false,
 			"type": "autocomplete",
 			"title": {
-				"en": "Token",
+				"en": "Identifier",
 				"nl": "ID"
 			},
 			"placeholder": {

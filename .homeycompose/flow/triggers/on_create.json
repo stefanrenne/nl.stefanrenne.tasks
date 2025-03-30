@@ -15,10 +15,10 @@
 			}
 		},
 		{
-			"name": "token",
+			"name": "identifier",
 			"type": "string",
 			"title": {
-				"en": "Token",
+				"en": "Identifier",
 				"nl": "ID"
 			}
 		}

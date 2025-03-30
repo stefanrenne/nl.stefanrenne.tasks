@@ -5,11 +5,11 @@
 		"nl": "Taak aanmaken"
 	},
 	"titleFormatted": {
-		"en": "Create [[token]] Task with [[title]]",
-		"nl": "[[token]] taak aanmaken met [[title]]"
+		"en": "Create [[identifier]] Task with [[title]]",
+		"nl": "[[identifier]] taak aanmaken met [[title]]"
 	},
 	"hint": {
-		"en": "Tokens allow you to remove or overwride tasks using flows.",
+		"en": "Identifiers allow you to remove or overwride tasks using flows.",
 		"nl": "Met ID's kun je taken verwijderen of overschrijven."
 	},
 	"args": [
@@ -27,11 +27,11 @@
 			}
 		},
 		{
-			"name": "token",
+			"name": "identifier",
 			"required":false,
 			"type": "autocomplete",
 			"title": {
-				"en": "Token",
+				"en": "Identifier",
 				"nl": "ID"
 			},
 			"placeholder": {

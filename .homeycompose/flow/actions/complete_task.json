@@ -5,16 +5,16 @@
 		"nl": "Voltooi taak"
 	},
 	"titleFormatted": {
-		"en": "Complete [[token]] task",
-		"nl": "Voltooi [[token]] taak"
+		"en": "Complete [[identifier]] task",
+		"nl": "Voltooi [[identifier]] taak"
 	},
 	"args": [
 		{
-			"name": "token",
+			"name": "identifier",
 			"required":true,
 			"type": "autocomplete",
 			"title": {
-				"en": "Token",
+				"en": "Identifier",
 				"nl": "ID"
 			},
 			"placeholder": {

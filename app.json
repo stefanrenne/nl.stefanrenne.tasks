@@ -75,16 +75,14 @@
             "name": "title",
             "type": "string",
             "title": {
-              "en": "Title",
-              "nl": "Titel"
+              "en": "Title"
             }
           },
           {
-            "name": "token",
+            "name": "identifier",
             "type": "string",
             "title": {
-              "en": "Token",
-              "nl": "ID"
+              "en": "Identifier"
             }
           }
         ]
@@ -92,8 +90,7 @@
       {
         "id": "on_update",
         "title": {
-          "en": "Task updated",
-          "nl": "Taak geüpdate"
+          "en": "Task updated"
         },
         "args": [],
         "tokens": [
@@ -128,25 +125,21 @@
       {
         "id": "open_task",
         "title": {
-          "en": "Task !{{open|completed}}",
-          "nl": "Taak !{{open|voltooid}}"
+          "en": "Task !{{open|completed}}"
         },
         "titleFormatted": {
-          "en": "Is [[token]] task !{{open|completed}}",
-          "nl": "Is [[token]] taak !{{open|voltooid}}"
+          "en": "Task !{{open|completed}} with [[identifier]]"
         },
         "args": [
           {
-            "name": "token",
+            "name": "identifier",
             "required": false,
             "type": "autocomplete",
             "title": {
-              "en": "Token",
-              "nl": "ID"
+              "en": "Identifier"
             },
             "placeholder": {
-              "en": "Pick or type",
-              "nl": "Kies of typ"
+              "en": "Pick or type"
             }
           }
         ],
@@ -157,8 +150,7 @@
       {
         "id": "complete_all",
         "title": {
-          "en": "Complete all tasks",
-          "nl": "Voltooi alle taken"
+          "en": "Complete all Tasks"
         },
         "args": [],
         "tokens": []
@@ -166,25 +158,21 @@
       {
         "id": "complete_task",
         "title": {
-          "en": "Complete task",
-          "nl": "Voltooi taak"
+          "en": "Complete Task"
         },
         "titleFormatted": {
-          "en": "Complete [[token]] task",
-          "nl": "Voltooi [[token]] taak"
+          "en": "Complete Task with [[identifier]]"
         },
         "args": [
           {
-            "name": "token",
+            "name": "identifier",
             "required": true,
             "type": "autocomplete",
             "title": {
-              "en": "Token",
-              "nl": "ID"
+              "en": "Identifier"
             },
             "placeholder": {
-              "en": "Pick or type",
-              "nl": "Kies of typ"
+              "en": "Pick or type"
             }
           }
         ],
@@ -193,42 +181,35 @@
       {
         "id": "create_task",
         "title": {
-          "en": "Create Task",
-          "nl": "Taak aanmaken"
+          "en": "Create Task"
         },
         "titleFormatted": {
-          "en": "Create [[token]] Task with [[title]]",
-          "nl": "[[token]] taak aanmaken met [[title]]"
+          "en": "Create Task with [[title]] for [[identifier]]"
         },
         "hint": {
-          "en": "Tokens allow you to remove or overwride tasks using flows.",
-          "nl": "Met ID's kun je taken verwijderen of overschrijven."
+          "en": "Identifiers allow you to remove or overwride tasks using flows."
         },
         "args": [
           {
             "name": "title",
             "required": true,
             "title": {
-              "en": "Title",
-              "nl": "Titel"
+              "en": "Title"
             },
             "type": "text",
             "placeholder": {
-              "en": "Type a Title",
-              "nl": "Typ een Titel"
+              "en": "Type a Title"
             }
           },
           {
-            "name": "token",
+            "name": "identifier",
             "required": false,
             "type": "autocomplete",
             "title": {
-              "en": "Token",
-              "nl": "ID"
+              "en": "Identifier"
             },
             "placeholder": {
-              "en": "Pick or type",
-              "nl": "Kies of typ"
+              "en": "Pick or type"
             }
           }
         ],
@@ -237,8 +218,7 @@
             "name": "title",
             "type": "string",
             "title": {
-              "en": "Title",
-              "nl": "Titel"
+              "en": "Title"
             }
           }
         ]
