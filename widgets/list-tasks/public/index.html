@@ -119,7 +119,7 @@
 
               $icon.addEventListener('click', async () => {
                 Homey.hapticFeedback();
-                await Homey.api('DELETE', '/' + item.token, {});
+                await Homey.api('DELETE', '/' + item.identifier, {});
               });
               
               $items.appendChild($item);
