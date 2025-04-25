@@ -1,7 +1,6 @@
 # Tasks
 
-Let Homey Automate your todo list.
-
+Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically creates and manages your tasks.
 
 ## Help support new languages
 Please create a pr with a new translation for the following items
