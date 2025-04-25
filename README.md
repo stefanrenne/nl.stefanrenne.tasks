@@ -18,8 +18,8 @@ Please create a pr with a new translation for the following items
 |create_task.title|Create Task||
 |create_task.titleFormatted|Create [[identifier]] Task with [[title]]||
 |create_task.hint|Identifiers allow you to remove or overwride tasks using flows.||
-|open_task.title|Task !{{open|completed}}||
-|open_task.titleFormatted|Is [[identifier]] task !{{open|completed}}||
+|open_task.title|Task !{{open\|completed}}||
+|open_task.titleFormatted|Is [[identifier]] task !{{open\|completed}}||
 |on_complete.title|Task completed||
 |on_create.title|Task created||
 |on_update.title|Task updated||
