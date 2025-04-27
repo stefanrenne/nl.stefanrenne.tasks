@@ -1,13 +1,13 @@
 # Tasks
 
-Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically creates and manages your tasks.
+Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks.
 
 ## Help support new languages
 Please create a pr with a new translation for the following items
 |Key|EN Text|{new language key} Text
 |---|---|---|
 |app name|Tasks||
-|description|Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically creates and manages your tasks.||
+|description|Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks.||
 |title.name|Title||
 |title.placeholder|Type a Title||
 |newtitle.name|New Title||
