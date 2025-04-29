@@ -33,7 +33,20 @@
   },
   "source": "https://github.com/stefanrenne/nl.stefanrenne.tasks",
   "contributors": {
-    "developers": []
+    "developers": [
+      {
+        "name": "Stefan Renne",
+        "email": "srenne1@gmail.com"
+      }
+    ],
+    "translators": [
+      {
+        "name": "🇬🇧 Stefan Renne"
+      },
+      {
+        "name": "🇳🇱 Stefan Renne"
+      }
+    ]
   },
   "contributing": {
     "donate": {
