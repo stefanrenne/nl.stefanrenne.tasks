@@ -33,18 +33,32 @@
   },
   "source": "https://github.com/stefanrenne/nl.stefanrenne.tasks",
   "contributors": {
-    "developers": []
+    "developers": [],
+    "donate": {
+      "githubSponsors": {
+        "username": "stefanrenne"
+      }
+    }
   },
   "brandColor": "#61b841",
   "support": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues",
   "homeyCommunityTopicId": 135410,
+  "tags": {
+    "en": [
+      "todo",
+      "task",
+      "list",
+      "widget",
+      "timeline"
+    ]
+  },
   "flow": {
     "triggers": [
       {
         "id": "on_complete",
         "title": {
-          "en": "Task completed",
-          "nl": "Taak voltooid"
+          "en": "A task is completed",
+          "nl": "Een taak is voltooid"
         },
         "args": [],
         "tokens": [
@@ -69,8 +83,8 @@
       {
         "id": "on_create",
         "title": {
-          "en": "Task created",
-          "nl": "Taak aangemaakt"
+          "en": "A task is created",
+          "nl": "Een taak is aangemaakt"
         },
         "args": [],
         "tokens": [
@@ -95,8 +109,8 @@
       {
         "id": "on_update",
         "title": {
-          "en": "Task updated",
-          "nl": "Taak geüpdate"
+          "en": "A task is updated",
+          "nl": "Een taak is geüpdate"
         },
         "args": [],
         "tokens": [
@@ -104,16 +118,16 @@
             "name": "oldTitle",
             "type": "string",
             "title": {
-              "en": "Old Title",
-              "nl": "Oude Titel"
+              "en": "Old title",
+              "nl": "Oude titel"
             }
           },
           {
             "name": "newTitle",
             "type": "string",
             "title": {
-              "en": "New Title",
-              "nl": "Nieuwe Titel"
+              "en": "New title",
+              "nl": "Nieuwe titel"
             }
           },
           {
@@ -131,12 +145,12 @@
       {
         "id": "open_task",
         "title": {
-          "en": "Task !{{open|completed}}",
-          "nl": "Taak !{{open|voltooid}}"
+          "en": "Task is !{{open|completed}}",
+          "nl": "Taak is !{{open|voltooid}}"
         },
         "titleFormatted": {
-          "en": "Is [[identifier]] task !{{open|completed}}",
-          "nl": "Is [[identifier]] taak !{{open|voltooid}}"
+          "en": "[[identifier]] task is !{{open|completed}}",
+          "nl": "[[identifier]] taak is !{{open|voltooid}}"
         },
         "args": [
           {
@@ -196,11 +210,11 @@
       {
         "id": "create_task",
         "title": {
-          "en": "Create Task",
+          "en": "Create task",
           "nl": "Taak aanmaken"
         },
         "titleFormatted": {
-          "en": "Create [[identifier]] Task with [[title]]",
+          "en": "Create [[identifier]] task with [[title]]",
           "nl": "[[identifier]] taak aanmaken met [[title]]"
         },
         "hint": {
