@@ -1,6 +1,6 @@
 {
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -32,9 +32,23 @@
   },
   "source": "https://github.com/stefanrenne/nl.stefanrenne.tasks",
   "contributors": {
-    "developers": []
+    "developers": [],
+    "donate": {
+      "githubSponsors": {
+         "username": "stefanrenne"
+       }
+    }
   },
   "brandColor": "#61b841",
   "support": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues",
-  "homeyCommunityTopicId": 135410
+  "homeyCommunityTopicId": 135410,
+  "tags": {
+    "en": [
+      "todo",
+      "task",
+      "list",
+      "widget",
+      "timeline"
+    ]
+  }
 }

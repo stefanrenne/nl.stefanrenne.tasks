@@ -1,12 +1,12 @@
 {
 	"id": "open_task",
 	"title": {
-		"en": "Task !{{open|completed}}",
-		"nl": "Taak !{{open|voltooid}}"
+		"en": "Task is !{{open|completed}}",
+		"nl": "Taak is !{{open|voltooid}}"
 	},
 	"titleFormatted": {
-		"en": "Is [[identifier]] task !{{open|completed}}",
-		"nl": "Is [[identifier]] taak !{{open|voltooid}}"
+		"en": "[[identifier]] task is !{{open|completed}}",
+		"nl": "[[identifier]] taak is !{{open|voltooid}}"
 	},
 	"args": [
 		{

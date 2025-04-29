@@ -1,15 +1,15 @@
 {
 	"id": "create_task",
 	"title": {
-		"en": "Create Task",
+		"en": "Create task",
 		"nl": "Taak aanmaken"
 	},
 	"titleFormatted": {
-		"en": "Create [[identifier]] Task with [[title]]",
+		"en": "Create [[identifier]] task with [[title]]",
 		"nl": "[[identifier]] taak aanmaken met [[title]]"
 	},
 	"hint": {
-		"en": "Identifiers allow you to remove or overwride tasks using flows.",
+		"en": "Identifiers allow you to remove or overwrite tasks using flows.",
 		"nl": "Met ID's kun je taken verwijderen of overschrijven."
 	},
 	"args": [

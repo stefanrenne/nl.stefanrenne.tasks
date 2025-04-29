@@ -16,14 +16,14 @@ Please create a pr with a new translation for the following items
 |identifier.placeholder|Pick or type||
 |complete_all.title|Complete all tasks||
 |complete_task.title|Complete task||
-|create_task.title|Create Task||
-|create_task.titleFormatted|Create [[identifier]] Task with [[title]]||
-|create_task.hint|Identifiers allow you to remove or overwride tasks using flows.||
-|open_task.title|Task !{{open\|completed}}||
-|open_task.titleFormatted|Is [[identifier]] task !{{open\|completed}}||
-|on_complete.title|Task completed||
-|on_create.title|Task created||
-|on_update.title|Task updated||
+|create_task.title|Create task||
+|create_task.titleFormatted|Create [[identifier]] task with [[title]]||
+|create_task.hint|Identifiers allow you to remove or overwrite tasks using flows.||
+|open_task.title|Task is !{{open\|completed}}||
+|open_task.titleFormatted|[[identifier]] task is !{{open\|completed}}||
+|on_complete.title|A task is completed||
+|on_create.title|A task is created||
+|on_update.title|A task is updated||
 |newIdentifier|Create new identifier||
 |noOpenTasks|No open tasks 🎉||
 |now|Just now||

@@ -1,8 +1,8 @@
 {
 	"id": "on_complete",
 	"title": {
-		"en": "Task completed",
-		"nl": "Taak voltooid"
+		"en": "A task is completed",
+		"nl": "Een taak is voltooid"
 	},
 	"args": [],
 	"tokens": [
