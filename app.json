@@ -33,7 +33,9 @@
   },
   "source": "https://github.com/stefanrenne/nl.stefanrenne.tasks",
   "contributors": {
-    "developers": [],
+    "developers": []
+  },
+  "contributing": {
     "donate": {
       "githubSponsors": {
         "username": "stefanrenne"
