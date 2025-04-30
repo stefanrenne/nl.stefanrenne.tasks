@@ -1,13 +1,17 @@
 # Tasks
 
-Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks.
+Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks using a Homey Flows and/or the tasks widget.
+
+Tasks can be created with an optional identifier from your Homey Flows.
+In Homey Flows you can also complete tasks or update task texts when you have created a task with an identifier.
+From the task widget you can view all open tasks and complete them task by task by pressing the checkmark icon. This also applies to tasks that don't have an identifier.
 
 ## Help support new languages
 Please create a pr with a new translation for the following items
 |Key|EN Text|{new language key} Text
 |---|---|---|
 |app name|Tasks||
-|description|Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks.||
+|description|Stay organized without lifting a finger.||
 |title.name|Title||
 |title.placeholder|Type a Title||
 |newtitle.name|New Title||

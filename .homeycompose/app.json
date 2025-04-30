@@ -1,6 +1,6 @@
 {
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -11,8 +11,8 @@
     "nl": "Taken"
   },
   "description": {
-    "en": "Stay organized without lifting a finger. Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks.",
-    "nl": "Blijf geautomatiseerd georganiseerd. Tasks is een Homey-app voor je to-dolijst waarmee je automatisch taken kunt aanmaken en beheren."
+    "en": "Stay organized without lifting a finger.",
+    "nl": "Blijf geautomatiseerd georganiseerd."
   },
   "category": [
     "tools"
