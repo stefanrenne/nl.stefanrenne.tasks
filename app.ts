@@ -18,6 +18,7 @@ module.exports = class MyApp extends Homey.App {
     this.registerCreateTaskListeners();
     this.registerCompleteTaskListeners();
     this.registerCompleteAllTasksListeners();
+    this.registerGetAllTasksListeners();
   }
 
   async getAllCards(): Promise<(Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition)[]> {
@@ -129,5 +130,19 @@ module.exports = class MyApp extends Homey.App {
       this.store.set([]);
       return {};
     });
+  }
+
+  registerGetAllTasksListeners() {
+    const card = this.homey.flow.getActionCard('get_all')
+    card.registerRunListener((args) => {
+      const tasks = this.store.get().map((element) => ({ title: element.title, date: element.date }));
+      const count = tasks.length;
+      const json = JSON.stringify(tasks)
+      return {
+        json,
+        count
+      };
+    });
+
   }
 }

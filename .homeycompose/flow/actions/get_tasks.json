@@ -1,0 +1,29 @@
+{
+	"id": "get_all",
+	"title": {
+		"en": "Get all open tasks",
+		"nl": "Alle open taken ophalen",
+		"no": "Få alle åpne oppgaver"
+	},
+	"args": [],
+	"tokens": [
+		{
+			"name": "json",
+			"type": "string",
+			"title": {
+				"en": "JSON",
+				"nl": "JSON",
+				"no": "JSON"
+			}
+		},
+		{
+			"name": "count",
+			"type": "number",
+			"title": {
+				"en": "Quantity",
+				"nl": "Aantal",
+				"no": "Antall"
+			}
+		}
+    ]
+}

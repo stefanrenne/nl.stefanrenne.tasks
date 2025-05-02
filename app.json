@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -303,6 +303,35 @@
               "en": "Title",
               "nl": "Titel",
               "no": "Tittel"
+            }
+          }
+        ]
+      },
+      {
+        "id": "get_all",
+        "title": {
+          "en": "Get all open tasks",
+          "nl": "Alle open taken ophalen",
+          "no": "Få alle åpne oppgaver"
+        },
+        "args": [],
+        "tokens": [
+          {
+            "name": "json",
+            "type": "string",
+            "title": {
+              "en": "JSON",
+              "nl": "JSON",
+              "no": "JSON"
+            }
+          },
+          {
+            "name": "count",
+            "type": "number",
+            "title": {
+              "en": "Quantity",
+              "nl": "Aantal",
+              "no": "Antall"
             }
           }
         ]

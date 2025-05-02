@@ -29,7 +29,7 @@ export class Store {
         console.log("=== GET ===");
         console.log(result);
         return result
-      }
+    }
     
     set(tasks: Task[]) {
         console.log("=== SET ===");
