@@ -2,7 +2,8 @@
 	"id": "on_create",
 	"title": {
 		"en": "A task is created",
-		"nl": "Een taak is aangemaakt"
+		"nl": "Een taak is aangemaakt",
+		"no": "En oppgave er opprettet"
 	},
 	"args": [],
 	"tokens": [
@@ -11,7 +12,8 @@
 			"type": "string",
 			"title": {
 				"en": "Title",
-				"nl": "Titel"
+				"nl": "Titel",
+				"no": "Tittel"
 			}
 		},
 		{
@@ -19,7 +21,8 @@
 			"type": "string",
 			"title": {
 				"en": "Identifier",
-				"nl": "ID"
+				"nl": "ID",
+				"no": "Identifikator"
 			}
 		}
 	]

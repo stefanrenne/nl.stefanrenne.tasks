@@ -8,11 +8,13 @@
   ],
   "name": {
     "en": "Tasks",
-    "nl": "Taken"
+    "nl": "Taken",
+    "no": "Oppgaver"
   },
   "description": {
     "en": "Stay organized without lifting a finger.",
-    "nl": "Blijf geautomatiseerd georganiseerd."
+    "nl": "Blijf geautomatiseerd georganiseerd.",
+    "no": "Hold deg organisert uten å løfte en finger."
   },
   "category": [
     "tools"
@@ -44,6 +46,9 @@
       },
       {
         "name": "🇳🇱 Stefan Renne"
+      },
+      {
+        "name": "🇳🇴 Frode Evensen"
       }
     ]
   },

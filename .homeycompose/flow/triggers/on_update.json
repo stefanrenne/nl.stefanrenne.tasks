@@ -2,7 +2,8 @@
 	"id": "on_update",
 	"title": {
 		"en": "A task is updated",
-		"nl": "Een taak is geüpdate"
+		"nl": "Een taak is geüpdate",
+		"no": "En oppgave er oppdatert"
 	},
 	"args": [],
 	"tokens": [
@@ -11,7 +12,8 @@
 			"type": "string",
 			"title": {
 				"en": "Old title",
-				"nl": "Oude titel"
+				"nl": "Oude titel",
+				"no": "Gammel Tittel"
 			}
 		},
 		{
@@ -19,7 +21,8 @@
 			"type": "string",
 			"title": {
 				"en": "New title",
-				"nl": "Nieuwe titel"
+				"nl": "Nieuwe titel",
+				"no": "Ny Tittel"
 			}
 		},
 		{
@@ -27,7 +30,8 @@
 			"type": "string",
 			"title": {
 				"en": "Identifier",
-				"nl": "ID"
+				"nl": "ID",
+				"no": "Identifikator"
 			}
 		}
 	]

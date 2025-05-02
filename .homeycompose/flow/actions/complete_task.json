@@ -2,11 +2,13 @@
 	"id": "complete_task",
 	"title": {
 		"en": "Complete task",
-		"nl": "Voltooi taak"
+		"nl": "Voltooi taak",
+		"no": "Fullfør oppgave"
 	},
 	"titleFormatted": {
 		"en": "Complete [[identifier]] task",
-		"nl": "Voltooi [[identifier]] taak"
+		"nl": "Voltooi [[identifier]] taak",
+		"no": "Fullfør [[identifier]] oppgave"
 	},
 	"args": [
 		{
@@ -15,11 +17,13 @@
 			"type": "autocomplete",
 			"title": {
 				"en": "Identifier",
-				"nl": "ID"
+				"nl": "ID",
+				"no": "Identifikator"
 			},
 			"placeholder": {
 				"en": "Pick or type",
-				"nl": "Kies of typ"
+				"nl": "Kies of typ",
+				"no": "Velg eller skriv"
 			}
 		}
 	],
