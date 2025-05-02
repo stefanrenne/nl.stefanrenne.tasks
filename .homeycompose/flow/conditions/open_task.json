@@ -2,11 +2,13 @@
 	"id": "open_task",
 	"title": {
 		"en": "Task is !{{open|completed}}",
-		"nl": "Taak is !{{open|voltooid}}"
+		"nl": "Taak is !{{open|voltooid}}",
+		"no": "Oppgave er !{{åpen|fullført}}"
 	},
 	"titleFormatted": {
 		"en": "[[identifier]] task is !{{open|completed}}",
-		"nl": "[[identifier]] taak is !{{open|voltooid}}"
+		"nl": "[[identifier]] taak is !{{open|voltooid}}",
+		"no": "[[identifier]] oppgave er !{{åpen|fullført}}"
 	},
 	"args": [
 		{
@@ -15,11 +17,13 @@
 			"type": "autocomplete",
 			"title": {
 				"en": "Identifier",
-				"nl": "ID"
+				"nl": "ID",
+				"no": "Identifikator"
 			},
 			"placeholder": {
 				"en": "Pick or type",
-				"nl": "Kies of typ"
+				"nl": "Kies of typ",
+				"no": "Velg eller skriv"
 			}
 		}
 	],

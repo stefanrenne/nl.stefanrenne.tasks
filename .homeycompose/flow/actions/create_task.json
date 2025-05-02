@@ -2,15 +2,18 @@
 	"id": "create_task",
 	"title": {
 		"en": "Create task",
-		"nl": "Taak aanmaken"
+		"nl": "Taak aanmaken",
+		"no": "Opprett oppgave"
 	},
 	"titleFormatted": {
 		"en": "Create [[identifier]] task with [[title]]",
-		"nl": "[[identifier]] taak aanmaken met [[title]]"
+		"nl": "[[identifier]] taak aanmaken met [[title]]",
+		"no": "Opprett [[identifier]] oppgave med [[title]]"
 	},
 	"hint": {
 		"en": "Identifiers allow you to remove or overwrite tasks using flows.",
-		"nl": "Met ID's kun je taken verwijderen of overschrijven."
+		"nl": "Met ID's kun je taken verwijderen of overschrijven.",
+		"no": "Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter."
 	},
 	"args": [
 		{
@@ -18,12 +21,14 @@
 			"required":true,
 			"title": {
 				"en": "Title",
-				"nl": "Titel"
+				"nl": "Titel",
+				"no": "Tittel"
 			},
 			"type": "text",
 			"placeholder": {
 				"en": "Type a Title",
-				"nl": "Typ een Titel"
+				"nl": "Typ een Titel",
+				"no": "Skriv en Tittel"
 			}
 		},
 		{
@@ -32,11 +37,13 @@
 			"type": "autocomplete",
 			"title": {
 				"en": "Identifier",
-				"nl": "ID"
+				"nl": "ID",
+				"no": "Identifikator"
 			},
 			"placeholder": {
 				"en": "Pick or type",
-				"nl": "Kies of typ"
+				"nl": "Kies of typ",
+				"no": "Velg eller skriv"
 			}
 		}
 	],
@@ -46,7 +53,8 @@
 			"type": "string",
 			"title": {
 				"en": "Title",
-				"nl": "Titel"
+				"nl": "Titel",
+				"no": "Tittel"
 			}
 		}
 	]

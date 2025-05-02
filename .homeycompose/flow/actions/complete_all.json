@@ -2,7 +2,8 @@
 	"id": "complete_all",
 	"title": {
 		"en": "Complete all tasks",
-		"nl": "Voltooi alle taken"
+		"nl": "Voltooi alle taken",
+		"no": "Fullfør alle oppgaver"
 	},
 	"args": [],
 	"tokens": []

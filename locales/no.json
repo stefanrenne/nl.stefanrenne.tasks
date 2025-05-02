@@ -1,0 +1,17 @@
+{
+    "newIdentifier": "Opprett ny identifikator",
+    "noOpenTasks": "Ingen åpne oppgaver 🎉",
+    "now": "Akkurat nå",
+    "second": " __value__ sekund siden",
+    "seconds": " __value__ sekunder siden",
+    "minute": " __value__ minutt siden",
+    "minutes": " __value__ minutter siden",
+    "hour": " __value__ time siden",
+    "hours": " __value__ timer siden",
+    "day": " __value__ dag siden",
+    "days": " __value__ dager siden",
+    "month": " __value__ måned siden",
+    "months": " __value__ måneder siden",
+    "year": " __value__ år siden",
+    "years": " __value__ år siden"
+}
