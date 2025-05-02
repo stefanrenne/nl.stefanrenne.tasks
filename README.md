@@ -7,39 +7,17 @@ In Homey Flows you can also complete tasks or update task texts when you have cr
 From the task widget you can view all open tasks and complete them task by task by pressing the checkmark icon. This also applies to tasks that don't have an identifier.
 
 ## Help support new languages
-Please create a pr with a new translation for the following items
-|Key|EN Text|{new language key} Text
-|---|---|---|
-|app name|Tasks||
-|description|Stay organized without lifting a finger.||
-|title.name|Title||
-|title.placeholder|Type a Title||
-|newtitle.name|New Title||
-|oldtitle.name|Old Title||
-|identifier.name|Identifier||
-|identifier.placeholder|Pick or type||
-|complete_all.title|Complete all tasks||
-|complete_task.title|Complete task||
-|create_task.title|Create task||
-|create_task.titleFormatted|Create [[identifier]] task with [[title]]||
-|create_task.hint|Identifiers allow you to remove or overwrite tasks using flows.||
-|open_task.title|Task is !{{open\|completed}}||
-|open_task.titleFormatted|[[identifier]] task is !{{open\|completed}}||
-|on_complete.title|A task is completed||
-|on_create.title|A task is created||
-|on_update.title|A task is updated||
-|newIdentifier|Create new identifier||
-|noOpenTasks|No open tasks 🎉||
-|now|Just now||
-|second| __value__ second ago||
-|seconds| __value__ seconds ago||
-|minute| __value__ minute ago||
-|minutes| __value__ minutes ago||
-|hour| __value__ hour ago||
-|hours| __value__ hours ago||
-|day| __value__ day ago||
-|days| __value__ days ago||
-|month| __value__ month ago||
-|months| __value__ months ago||
-|year| __value__ year ago||
-|years| __value__ years ago||
+Please create a pr with a new translation for the following files:
+
+- Translate `README.txt` into a `README.{language code}.txt`
+- Translate `locales/en.json` into a `locales/{language code}.json`
+- Translate all `en` keys into a `{language code}` key for the following flow cards:
+	- `.homeycompose/flow/actions/complete_all.json`
+	- `.homeycompose/flow/actions/create_task.json`
+	- `.homeycompose/flow/actions/complete_task.json`
+	- `.homeycompose/flow/conditions/open_task.json`
+	- `.homeycompose/flow/triggers/on_complete.json`
+	- `.homeycompose/flow/triggers/on_update.json`
+	- `.homeycompose/flow/triggers/on_create.json`
+- Translate the `name` + `description` key in `.homeycompose/app.json`
+- Add your country flag + your name to the translators list in `.homeycompose/app.json`
