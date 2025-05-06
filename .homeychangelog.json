@@ -12,6 +12,9 @@
     "en": "Description text update"
   },
   "1.0.4": {
-    "en": "Added Norwegian translations, thanks to Frode Evensen and added a fetch all open tasks card"
+    "en": "Added Norwegian translations, kudos to Frode Evensen and added a fetch all open tasks card"
+  },
+  "1.0.5": {
+    "en": "Added German translations, kudos to David Ferch and fixed on create card crash"
   }
 }

@@ -3,12 +3,14 @@
 	"title": {
 		"en": "Task is !{{open|completed}}",
 		"nl": "Taak is !{{open|voltooid}}",
-		"no": "Oppgave er !{{åpen|fullført}}"
+		"no": "Oppgave er !{{åpen|fullført}}",
+		"de": "Aufgabe ist !{{offen|erledigt}}}"
 	},
 	"titleFormatted": {
 		"en": "[[identifier]] task is !{{open|completed}}",
 		"nl": "[[identifier]] taak is !{{open|voltooid}}",
-		"no": "[[identifier]] oppgave er !{{åpen|fullført}}"
+		"no": "[[identifier]] oppgave er !{{åpen|fullført}}",
+		"de": "Aufgabe mit [[identifier]] ist !{{offen|erledigt}}"
 	},
 	"args": [
 		{
@@ -18,12 +20,14 @@
 			"title": {
 				"en": "Identifier",
 				"nl": "ID",
-				"no": "Identifikator"
+				"no": "Identifikator",
+				"de": "Kennung"
 			},
 			"placeholder": {
 				"en": "Pick or type",
 				"nl": "Kies of typ",
-				"no": "Velg eller skriv"
+				"no": "Velg eller skriv",
+				"de": "Auswählen oder eingeben"
 			}
 		}
 	],

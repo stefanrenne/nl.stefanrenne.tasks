@@ -3,7 +3,8 @@
 	"title": {
 		"en": "A task is updated",
 		"nl": "Een taak is geüpdate",
-		"no": "En oppgave er oppdatert"
+		"no": "En oppgave er oppdatert",
+		"de": "Eine Aufgabe wurde aktualisiert"
 	},
 	"args": [],
 	"tokens": [
@@ -13,7 +14,8 @@
 			"title": {
 				"en": "Old title",
 				"nl": "Oude titel",
-				"no": "Gammel Tittel"
+				"no": "Gammel Tittel",
+				"de": "Alter Titel"
 			}
 		},
 		{
@@ -22,7 +24,8 @@
 			"title": {
 				"en": "New title",
 				"nl": "Nieuwe titel",
-				"no": "Ny Tittel"
+				"no": "Ny Tittel",
+				"de": "Neuer Titel"
 			}
 		},
 		{
@@ -31,7 +34,8 @@
 			"title": {
 				"en": "Identifier",
 				"nl": "ID",
-				"no": "Identifikator"
+				"no": "Identifikator",
+				"de": "Kennung"
 			}
 		}
 	]

@@ -39,21 +39,22 @@ export class Store {
     }
 
     add(title: string, identifier: string | undefined) {
+        const newIdentifier = identifier ?? uuidv4()
         let newResult = this.get()
-        const oldItem = newResult.find((item) => item.identifier == identifier);
+        const oldItem = newResult.find((item) => item.identifier == newIdentifier);
 
         if (oldItem?.title === title) {
             // Existing task is not mutated
             return
         }
 
-        if (identifier !== undefined && oldItem !== undefined) {
-            newResult = newResult.filter((item) => item.identifier !== identifier);
-            this.taskOnUpdate?.trigger({ oldTitle: oldItem.title, newTitle: title, identifier: identifier });
+        if (oldItem !== undefined) {
+            newResult = newResult.filter((item) => item.identifier !== newIdentifier);
+            this.taskOnUpdate?.trigger({ oldTitle: oldItem.title, newTitle: title, identifier: newIdentifier });
         } else {
-            this.taskOnCreate?.trigger({ title: title, identifier: identifier });
+            this.taskOnCreate?.trigger({ title: title, identifier: newIdentifier });
         }
-        newResult.push({title: title, date: new Date(), identifier: identifier ?? uuidv4()});
+        newResult.push({title: title, date: new Date(), identifier: newIdentifier});
         this.set(newResult);
     }
 

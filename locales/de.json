@@ -1,0 +1,17 @@
+{
+    "newIdentifier": "Neue Kennung erstellen",
+    "noOpenTasks": "Keine offenen Aufgaben 🎉",
+    "now": "Gerade eben",
+    "second": "vor __value__ Sekunde",
+    "seconds": "vor __value__ Sekunden",
+    "minute": "vor __value__ Minute",
+    "minutes": "vor __value__ Minuten",
+    "hour": "vor __value__ Stunde",
+    "hours": "vor __value__ Stunden",
+    "day": "vor __value__ Tag",
+    "days": "vor __value__ Tagen",
+    "month": "vor __value__ Monat",
+    "months": "vor __value__ Monaten",
+    "year": "vor __value__ Jahr",
+    "years": "vor __value__ Jahren"
+}

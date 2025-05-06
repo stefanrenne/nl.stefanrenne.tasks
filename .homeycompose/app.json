@@ -1,6 +1,6 @@
 {
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -9,12 +9,14 @@
   "name": {
     "en": "Tasks",
     "nl": "Taken",
-    "no": "Oppgaver"
+    "no": "Oppgaver",
+    "de": "Aufgaben"
   },
   "description": {
     "en": "Stay organized without lifting a finger.",
     "nl": "Blijf geautomatiseerd georganiseerd.",
-    "no": "Hold deg organisert uten å løfte en finger."
+    "no": "Hold deg organisert uten å løfte en finger.",
+    "de": "Bleibe organisiert, ohne einen Finger zu rühren."
   },
   "category": [
     "tools"
@@ -49,6 +51,9 @@
       },
       {
         "name": "🇳🇴 Frode Evensen"
+      },
+      {
+        "name": "🇩🇪 David Ferch"
       }
     ]
   },

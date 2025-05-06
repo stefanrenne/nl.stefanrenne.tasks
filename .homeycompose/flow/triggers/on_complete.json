@@ -3,7 +3,8 @@
 	"title": {
 		"en": "A task is completed",
 		"nl": "Een taak is voltooid",
-		"no": "En oppgave er fullført"
+		"no": "En oppgave er fullført",
+		"de": "Eine Aufgabe wurde erledigt"
 	},
 	"args": [],
 	"tokens": [
@@ -13,7 +14,8 @@
 			"title": {
 				"en": "Title",
 				"nl": "Titel",
-				"no": "Tittel"
+				"no": "Tittel",
+				"de": "Titel"
 			}
 		},
 		{
@@ -22,7 +24,8 @@
 			"title": {
 				"en": "Identifier",
 				"nl": "ID",
-				"no": "Identifikator"
+				"no": "Identifikator",
+				"de": "Kennung"
 			}
 		}
 	]

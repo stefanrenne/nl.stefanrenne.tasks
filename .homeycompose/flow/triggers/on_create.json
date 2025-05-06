@@ -3,7 +3,8 @@
 	"title": {
 		"en": "A task is created",
 		"nl": "Een taak is aangemaakt",
-		"no": "En oppgave er opprettet"
+		"no": "En oppgave er opprettet",
+		"de": "Eine Aufgabe wurde erstellt"
 	},
 	"args": [],
 	"tokens": [
@@ -13,7 +14,8 @@
 			"title": {
 				"en": "Title",
 				"nl": "Titel",
-				"no": "Tittel"
+				"no": "Tittel",
+				"de": "Titel"
 			}
 		},
 		{
@@ -22,7 +24,8 @@
 			"title": {
 				"en": "Identifier",
 				"nl": "ID",
-				"no": "Identifikator"
+				"no": "Identifikator",
+				"de": "Kennung"
 			}
 		}
 	]
