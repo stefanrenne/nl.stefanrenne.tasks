@@ -1,35 +1,34 @@
 {
-	"id": "complete_task",
-	"title": {
-		"en": "Complete task",
-		"nl": "Voltooi taak",
-		"no": "Fullfør oppgave",
-		"de": "Aufgabe abschließen"
+	"id":"complete_task",
+	"title":{
+	   "en":"Complete task",
+	   "nl":"Voltooi taak",
+	   "no":"Fullfør oppgave",
+	   "de":"Aufgabe abschließen"
 	},
-	"titleFormatted": {
-		"en": "Complete [[identifier]] task",
-		"nl": "Voltooi [[identifier]] taak",
-		"no": "Fullfør [[identifier]] oppgave",
-		"de": "Aufgabe [[identifier]] abschließen"
+	"titleFormatted":{
+	   "en":"Complete [[identifier]] task",
+	   "nl":"Voltooi [[identifier]] taak",
+	   "no":"Fullfør [[identifier]] oppgave",
+	   "de":"Aufgabe [[identifier]] abschließen"
 	},
-	"args": [
-		{
-			"name": "identifier",
-			"required":true,
-			"type": "autocomplete",
-			"title": {
-				"en": "Identifier",
-				"nl": "ID",
-				"no": "Identifikator",
-				"de": "Kennung"
-			},
-			"placeholder": {
-				"en": "Pick or type",
-				"nl": "Kies of typ",
-				"no": "Velg eller skriv",
-				"de": "Auswählen oder eingeben"
-			}
-		}
-	],
-	"tokens": []
-}
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben"
+		  }
+	   }
+	]
+ }

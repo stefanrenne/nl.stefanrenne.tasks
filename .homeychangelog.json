@@ -16,5 +16,8 @@
   },
   "1.0.5": {
     "en": "Added German translations, kudos to David Ferch and fixed on create card crash"
+  },
+  "1.0.6": {
+    "en": "Fixed creating tasks from a non advanced flow"
   }
 }

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -87,7 +87,6 @@
           "no": "En oppgave er fullført",
           "de": "Eine Aufgabe wurde erledigt"
         },
-        "args": [],
         "tokens": [
           {
             "name": "title",
@@ -119,7 +118,6 @@
           "no": "En oppgave er opprettet",
           "de": "Eine Aufgabe wurde erstellt"
         },
-        "args": [],
         "tokens": [
           {
             "name": "title",
@@ -151,7 +149,6 @@
           "no": "En oppgave er oppdatert",
           "de": "Eine Aufgabe wurde aktualisiert"
         },
-        "args": [],
         "tokens": [
           {
             "name": "oldTitle",
@@ -219,8 +216,7 @@
               "de": "Auswählen oder eingeben"
             }
           }
-        ],
-        "tokens": []
+        ]
       }
     ],
     "actions": [
@@ -231,9 +227,7 @@
           "nl": "Voltooi alle taken",
           "no": "Fullfør alle oppgaver",
           "de": "Alle Aufgaben abschließen"
-        },
-        "args": [],
-        "tokens": []
+        }
       },
       {
         "id": "complete_task",
@@ -267,8 +261,7 @@
               "de": "Auswählen oder eingeben"
             }
           }
-        ],
-        "tokens": []
+        ]
       },
       {
         "id": "create_task",
@@ -325,8 +318,7 @@
               "de": "Auswählen oder eingeben"
             }
           }
-        ],
-        "tokens": []
+        ]
       },
       {
         "id": "get_all",
@@ -336,7 +328,6 @@
           "no": "Få alle åpne oppgaver",
           "de": "Alle offenen Aufgaben abrufen"
         },
-        "args": [],
         "tokens": [
           {
             "name": "json",

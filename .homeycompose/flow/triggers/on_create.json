@@ -1,32 +1,31 @@
 {
-	"id": "on_create",
-	"title": {
-		"en": "A task is created",
-		"nl": "Een taak is aangemaakt",
-		"no": "En oppgave er opprettet",
-		"de": "Eine Aufgabe wurde erstellt"
+	"id":"on_create",
+	"title":{
+	   "en":"A task is created",
+	   "nl":"Een taak is aangemaakt",
+	   "no":"En oppgave er opprettet",
+	   "de":"Eine Aufgabe wurde erstellt"
 	},
-	"args": [],
-	"tokens": [
-		{
-			"name": "title",
-			"type": "string",
-			"title": {
-				"en": "Title",
-				"nl": "Titel",
-				"no": "Tittel",
-				"de": "Titel"
-			}
-		},
-		{
-			"name": "identifier",
-			"type": "string",
-			"title": {
-				"en": "Identifier",
-				"nl": "ID",
-				"no": "Identifikator",
-				"de": "Kennung"
-			}
-		}
+	"tokens":[
+	   {
+		  "name":"title",
+		  "type":"string",
+		  "title":{
+			 "en":"Title",
+			 "nl":"Titel",
+			 "no":"Tittel",
+			 "de":"Titel"
+		  }
+	   },
+	   {
+		  "name":"identifier",
+		  "type":"string",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung"
+		  }
+	   }
 	]
-}
+ }

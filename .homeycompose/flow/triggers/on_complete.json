@@ -1,32 +1,31 @@
 {
-	"id": "on_complete",
-	"title": {
-		"en": "A task is completed",
-		"nl": "Een taak is voltooid",
-		"no": "En oppgave er fullført",
-		"de": "Eine Aufgabe wurde erledigt"
+	"id":"on_complete",
+	"title":{
+	   "en":"A task is completed",
+	   "nl":"Een taak is voltooid",
+	   "no":"En oppgave er fullført",
+	   "de":"Eine Aufgabe wurde erledigt"
 	},
-	"args": [],
-	"tokens": [
-		{
-			"name": "title",
-			"type": "string",
-			"title": {
-				"en": "Title",
-				"nl": "Titel",
-				"no": "Tittel",
-				"de": "Titel"
-			}
-		},
-		{
-			"name": "identifier",
-			"type": "string",
-			"title": {
-				"en": "Identifier",
-				"nl": "ID",
-				"no": "Identifikator",
-				"de": "Kennung"
-			}
-		}
+	"tokens":[
+	   {
+		  "name":"title",
+		  "type":"string",
+		  "title":{
+			 "en":"Title",
+			 "nl":"Titel",
+			 "no":"Tittel",
+			 "de":"Titel"
+		  }
+	   },
+	   {
+		  "name":"identifier",
+		  "type":"string",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung"
+		  }
+	   }
 	]
-}
+ }

@@ -1,11 +1,9 @@
 {
-	"id": "complete_all",
-	"title": {
-		"en": "Complete all tasks",
-		"nl": "Voltooi alle taken",
-		"no": "Fullfør alle oppgaver",
-		"de": "Alle Aufgaben abschließen"
-	},
-	"args": [],
-	"tokens": []
-}
+	"id":"complete_all",
+	"title":{
+	   "en":"Complete all tasks",
+	   "nl":"Voltooi alle taken",
+	   "no":"Fullfør alle oppgaver",
+	   "de":"Alle Aufgaben abschließen"
+	}
+ }

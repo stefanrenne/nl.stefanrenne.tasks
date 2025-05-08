@@ -1,42 +1,41 @@
 {
-	"id": "on_update",
-	"title": {
-		"en": "A task is updated",
-		"nl": "Een taak is geüpdate",
-		"no": "En oppgave er oppdatert",
-		"de": "Eine Aufgabe wurde aktualisiert"
+	"id":"on_update",
+	"title":{
+	   "en":"A task is updated",
+	   "nl":"Een taak is geüpdate",
+	   "no":"En oppgave er oppdatert",
+	   "de":"Eine Aufgabe wurde aktualisiert"
 	},
-	"args": [],
-	"tokens": [
-		{
-			"name": "oldTitle",
-			"type": "string",
-			"title": {
-				"en": "Old title",
-				"nl": "Oude titel",
-				"no": "Gammel Tittel",
-				"de": "Alter Titel"
-			}
-		},
-		{
-			"name": "newTitle",
-			"type": "string",
-			"title": {
-				"en": "New title",
-				"nl": "Nieuwe titel",
-				"no": "Ny Tittel",
-				"de": "Neuer Titel"
-			}
-		},
-		{
-			"name": "identifier",
-			"type": "string",
-			"title": {
-				"en": "Identifier",
-				"nl": "ID",
-				"no": "Identifikator",
-				"de": "Kennung"
-			}
-		}
+	"tokens":[
+	   {
+		  "name":"oldTitle",
+		  "type":"string",
+		  "title":{
+			 "en":"Old title",
+			 "nl":"Oude titel",
+			 "no":"Gammel Tittel",
+			 "de":"Alter Titel"
+		  }
+	   },
+	   {
+		  "name":"newTitle",
+		  "type":"string",
+		  "title":{
+			 "en":"New title",
+			 "nl":"Nieuwe titel",
+			 "no":"Ny Tittel",
+			 "de":"Neuer Titel"
+		  }
+	   },
+	   {
+		  "name":"identifier",
+		  "type":"string",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung"
+		  }
+	   }
 	]
-}
+ }
