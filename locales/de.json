@@ -1,5 +1,7 @@
 {
     "newIdentifier": "Neue Kennung erstellen",
+    "newTag": "Neues Etikett erstellen",
+    "deleteTag": "Etikett entfernen",
     "noOpenTasks": "Keine offenen Aufgaben 🎉",
     "now": "Gerade eben",
     "second": "vor __value__ Sekunde",

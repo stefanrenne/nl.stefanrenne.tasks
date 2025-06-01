@@ -47,7 +47,11 @@
 
         function updateTime() {
           document.querySelectorAll("li p.date").forEach(function(item) {
-            item.innerHTML = timeSince(item.dataset.date);
+            var text = timeSince(item.dataset.date);
+            if (Homey.getSettings()['showTag'] == true && item.dataset.tag !== undefined) {
+              text += " | " + item.dataset.tag;
+            }
+            item.innerHTML = text;
           });
         }
 
@@ -87,7 +91,11 @@
 
         function reload() {
           Promise.resolve().then(async () => {
-            const feed = await Homey.api('GET', '/', {})
+            let parameter = '/'
+            if (Homey.getSettings()['tag']['name'] !== undefined) {
+              parameter += Homey.getSettings()['tag']['name']
+            }
+            const feed = await Homey.api('GET', parameter, {});
             $container.innerHTML = '';
             if (feed.length === 0) {
               throw new Error(Homey.__('noOpenTasks'));
@@ -107,10 +115,21 @@
               $body = document.createElement('p');
               $body.classList.add('homey-text-small-light');
               $body.classList.add('date');
-              $body.innerHTML = timeSince(item.date);
+
+              var text = timeSince(item.date);
+              if (Homey.getSettings()['showTag'] == true && item.tag !== undefined) {
+                text += " | " + item.tag;
+              }
+              $body.innerHTML = text;
+
               const $dateAttribute = document.createAttribute("data-date");
               $dateAttribute.value = item.date
               $body.setAttributeNode($dateAttribute);
+              if (item.tag !== undefined) {
+                const $tagAttribute = document.createAttribute("data-tag");
+                $tagAttribute.value = item.tag
+                $body.setAttributeNode($tagAttribute);
+              }
               $item.appendChild($body);
 
               $icon = document.createElement('div');

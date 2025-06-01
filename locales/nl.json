@@ -1,5 +1,7 @@
 {
     "newIdentifier": "Nieuwe ID aanmaken",
+    "newTag": "Nieuw label aanmaken",
+    "deleteTag": "Label verwijderen",
     "noOpenTasks": "Geen open Taken 🎉",
     "now": "Zojuist aangemaakt",
     "second": " __value__ seconde geleden",

@@ -1,5 +1,7 @@
 {
     "newIdentifier": "Create new identifier",
+    "newTag": "Create new label",
+    "deleteTag": "Remove label",
     "noOpenTasks": "No open tasks 🎉",
     "now": "Just now",
     "second": " __value__ second ago",

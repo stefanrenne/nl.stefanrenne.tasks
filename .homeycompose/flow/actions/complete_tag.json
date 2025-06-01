@@ -1,0 +1,34 @@
+{
+	"id":"complete_tag",
+	"title":{
+	   "en":"Complete all marked tasks",
+	   "nl":"Voltooi alle gemarkeerde taken",
+	   "no":"Fullfør alle merkede oppgaver",
+	   "de":"Erledigen Sie alle markierten Aufgaben"
+	},
+	"titleFormatted":{
+	   "en":"Complete all tasks marked with [[tag]]",
+	   "nl":"Voltooi alle gemarkeerde taken met [[tag]]",
+	   "no":"Fullfør alle merkede oppgaver med [[tag]]",
+	   "de":"Erledige alle markierten Aufgaben mit dem [[tag]]"
+	},
+	"args":[
+	   {
+		  "name":"tag",
+		  "required":true,
+		  "title":{
+			 "en":"Label",
+			 "nl":"Label",
+			 "no":"Merkelapp",
+			 "de":"Etikett"
+		  },
+		  "type":"autocomplete",
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben"
+		  }
+	   }
+	]
+ }

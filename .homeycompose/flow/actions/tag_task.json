@@ -1,0 +1,57 @@
+{
+	"id":"tag_task",
+	"title":{
+	   "en":"Mark task",
+	   "nl":"Markeer taak",
+	   "no":"Merk oppgave",
+	   "de":"Aufgabe markieren"
+	},
+	"titleFormatted":{
+	   "en":"Mark [[identifier]] task with [[tag]]",
+	   "nl":"Markeer [[identifier]] taak met [[tag]]",
+	   "no":"Merk [[identifier]] oppgave med [[tag]]",
+	   "de":"[[identifier]] Aufgabe mit [[tag]] markieren"
+	},
+	"hint":{
+	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+	   "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+	   "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+	   "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+	},
+	"args":[
+	   {
+		  "name":"tag",
+		  "required":true,
+		  "title":{
+			 "en":"Label",
+			 "nl":"Label",
+			 "no":"Merkelapp",
+			 "de":"Etikett"
+		  },
+		  "type":"autocomplete",
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben"
+		  }
+	   },
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben"
+		  }
+	   }
+	]
+ }

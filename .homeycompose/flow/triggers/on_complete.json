@@ -26,6 +26,16 @@
 			 "no":"Identifikator",
 			 "de":"Kennung"
 		  }
+	   },
+	   {
+		  "name":"tag",
+		  "type":"string",
+		  "title":{
+			 "en":"Label",
+			 "nl":"Label",
+			 "no":"Merkelapp",
+			 "de":"Etikett"
+		  }
 	   }
 	]
  }

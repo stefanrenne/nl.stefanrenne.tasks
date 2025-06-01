@@ -19,5 +19,8 @@
   },
   "1.0.6": {
     "en": "Fixed creating tasks from a non advanced flow"
+  },
+  "1.1.0": {
+    "en": "Added the ability to mark tasks with a label and filter the presented tasks in the widget based on those labels, this adds the ability to show specific tasks in a dashboard or mark tasks based on a user's name and have the tasks widget on the home screen for that user only show their open tasks"
   }
 }

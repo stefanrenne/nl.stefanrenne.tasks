@@ -1,6 +1,6 @@
 {
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [

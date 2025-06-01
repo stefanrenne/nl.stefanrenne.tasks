@@ -1,0 +1,40 @@
+{
+	"id":"untag_task",
+	"title":{
+	   "en":"Remove task mak",
+	   "nl":"Verwijder taak markering",
+	   "no":"Fjern oppgaveflagg",
+	   "de":"Aufgabenmarkierung entfernen"
+	},
+	"titleFormatted":{
+	   "en":"Remove [[identifier]] task mark",
+	   "nl":"Verwijder [[identifier]] taak markering",
+	   "no":"Fjern [[identifier]] oppgaveflagg",
+	   "de":"[[identifier]] Aufgabenmarkierung entfernen"
+	},
+	"hint":{
+	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+	   "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+	   "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+	   "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+	},
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben"
+		  }
+	   }
+	]
+ }

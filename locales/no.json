@@ -1,5 +1,7 @@
 {
     "newIdentifier": "Opprett ny identifikator",
+    "newTag": "Opprett ny merkelappen",
+    "deleteTag": "Fjern merkelappen",
     "noOpenTasks": "Ingen åpne oppgaver 🎉",
     "now": "Akkurat nå",
     "second": " __value__ sekund siden",

@@ -1,18 +1,48 @@
 {
   "name": {
-    "en": "List Tasks"
+    "en": "List Tasks",
+    "nl": "Takenlijst",
+    "de": "Aufgaben auflisten",
+    "no": "Liste over oppgaver"
   },
   "height": 188,
-  "settings": [],
   "transparent": true,
   "api": {
     "getTasks": {
       "method": "GET",
       "path": "/"
     },
+    "getFilteredTasks": {
+      "method": "GET",
+      "path": "/:tag"
+    },
     "deleteTask": {
       "method": "DELETE",
       "path": "/:id"
     }
-  }
+  },
+  "settings": [
+    {
+      "id": "tag",
+      "type": "autocomplete",
+      "value": "-",
+      "title": {
+        "en": "Filter by label",
+        "nl": "Filter op label",
+        "de": "Nach Label filtern",
+        "no": "Filtrer etter etikett"
+      }
+    },
+    {
+      "id": "showTag",
+      "type": "checkbox",
+      "value": false,
+      "title": {
+        "en": "Show label",
+        "nl": "Label tonen",
+        "de": "Etikett anzeigen",
+        "no": "Vis etikett"
+      }
+    }
+  ]
 }

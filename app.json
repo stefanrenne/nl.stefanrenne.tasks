@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.stefanrenne.tasks",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -106,6 +106,16 @@
               "nl": "ID",
               "no": "Identifikator",
               "de": "Kennung"
+            }
+          },
+          {
+            "name": "tag",
+            "type": "string",
+            "title": {
+              "en": "Label",
+              "nl": "Label",
+              "no": "Merkelapp",
+              "de": "Etikett"
             }
           }
         ]
@@ -230,6 +240,40 @@
         }
       },
       {
+        "id": "complete_tag",
+        "title": {
+          "en": "Complete all marked tasks",
+          "nl": "Voltooi alle gemarkeerde taken",
+          "no": "Fullfør alle merkede oppgaver",
+          "de": "Erledigen Sie alle markierten Aufgaben"
+        },
+        "titleFormatted": {
+          "en": "Complete all tasks marked with [[tag]]",
+          "nl": "Voltooi alle gemarkeerde taken met [[tag]]",
+          "no": "Fullfør alle merkede oppgaver med [[tag]]",
+          "de": "Erledige alle markierten Aufgaben mit dem [[tag]]"
+        },
+        "args": [
+          {
+            "name": "tag",
+            "required": true,
+            "title": {
+              "en": "Label",
+              "nl": "Label",
+              "no": "Merkelapp",
+              "de": "Etikett"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Pick or type",
+              "nl": "Kies of typ",
+              "no": "Velg eller skriv",
+              "de": "Auswählen oder eingeben"
+            }
+          }
+        ]
+      },
+      {
         "id": "complete_task",
         "title": {
           "en": "Complete task",
@@ -350,27 +394,154 @@
             }
           }
         ]
+      },
+      {
+        "id": "tag_task",
+        "title": {
+          "en": "Mark task",
+          "nl": "Markeer taak",
+          "no": "Merk oppgave",
+          "de": "Aufgabe markieren"
+        },
+        "titleFormatted": {
+          "en": "Mark [[identifier]] task with [[tag]]",
+          "nl": "Markeer [[identifier]] taak met [[tag]]",
+          "no": "Merk [[identifier]] oppgave med [[tag]]",
+          "de": "[[identifier]] Aufgabe mit [[tag]] markieren"
+        },
+        "hint": {
+          "en": "Identifiers allow you to remove or overwrite tasks using flows.",
+          "nl": "Met ID's kun je taken verwijderen of overschrijven.",
+          "no": "Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+        },
+        "args": [
+          {
+            "name": "tag",
+            "required": true,
+            "title": {
+              "en": "Label",
+              "nl": "Label",
+              "no": "Merkelapp",
+              "de": "Etikett"
+            },
+            "type": "autocomplete",
+            "placeholder": {
+              "en": "Pick or type",
+              "nl": "Kies of typ",
+              "no": "Velg eller skriv",
+              "de": "Auswählen oder eingeben"
+            }
+          },
+          {
+            "name": "identifier",
+            "required": true,
+            "type": "autocomplete",
+            "title": {
+              "en": "Identifier",
+              "nl": "ID",
+              "no": "Identifikator",
+              "de": "Kennung"
+            },
+            "placeholder": {
+              "en": "Pick or type",
+              "nl": "Kies of typ",
+              "no": "Velg eller skriv",
+              "de": "Auswählen oder eingeben"
+            }
+          }
+        ]
+      },
+      {
+        "id": "untag_task",
+        "title": {
+          "en": "Remove task mak",
+          "nl": "Verwijder taak markering",
+          "no": "Fjern oppgaveflagg",
+          "de": "Aufgabenmarkierung entfernen"
+        },
+        "titleFormatted": {
+          "en": "Remove [[identifier]] task mark",
+          "nl": "Verwijder [[identifier]] taak markering",
+          "no": "Fjern [[identifier]] oppgaveflagg",
+          "de": "[[identifier]] Aufgabenmarkierung entfernen"
+        },
+        "hint": {
+          "en": "Identifiers allow you to remove or overwrite tasks using flows.",
+          "nl": "Met ID's kun je taken verwijderen of overschrijven.",
+          "no": "Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+        },
+        "args": [
+          {
+            "name": "identifier",
+            "required": true,
+            "type": "autocomplete",
+            "title": {
+              "en": "Identifier",
+              "nl": "ID",
+              "no": "Identifikator",
+              "de": "Kennung"
+            },
+            "placeholder": {
+              "en": "Pick or type",
+              "nl": "Kies of typ",
+              "no": "Velg eller skriv",
+              "de": "Auswählen oder eingeben"
+            }
+          }
+        ]
       }
     ]
   },
   "widgets": {
     "list-tasks": {
       "name": {
-        "en": "List Tasks"
+        "en": "List Tasks",
+        "nl": "Takenlijst",
+        "de": "Aufgaben auflisten",
+        "no": "Liste over oppgaver"
       },
       "height": 188,
-      "settings": [],
       "transparent": true,
       "api": {
         "getTasks": {
           "method": "GET",
           "path": "/"
         },
+        "getFilteredTasks": {
+          "method": "GET",
+          "path": "/:tag"
+        },
         "deleteTask": {
           "method": "DELETE",
           "path": "/:id"
         }
       },
+      "settings": [
+        {
+          "id": "tag",
+          "type": "autocomplete",
+          "value": "-",
+          "title": {
+            "en": "Filter by label",
+            "nl": "Filter op label",
+            "de": "Nach Label filtern",
+            "no": "Filtrer etter etikett"
+          }
+        },
+        {
+          "id": "showTag",
+          "type": "checkbox",
+          "value": false,
+          "title": {
+            "en": "Show label",
+            "nl": "Label tonen",
+            "de": "Etikett anzeigen",
+            "no": "Vis etikett"
+          }
+        }
+      ],
       "id": "list-tasks"
     }
   }
