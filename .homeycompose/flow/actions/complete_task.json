@@ -4,13 +4,15 @@
 	   "en":"Complete task",
 	   "nl":"Voltooi taak",
 	   "no":"Fullfør oppgave",
-	   "de":"Aufgabe abschließen"
+	   "de":"Aufgabe abschließen",
+	   "sv":"Slutför uppgift"
 	},
 	"titleFormatted":{
 	   "en":"Complete [[identifier]] task",
 	   "nl":"Voltooi [[identifier]] taak",
 	   "no":"Fullfør [[identifier]] oppgave",
-	   "de":"Aufgabe [[identifier]] abschließen"
+	   "de":"Aufgabe [[identifier]] abschließen",
+	   "sv":"Slutför [[identifier]] uppgift"
 	},
 	"args":[
 	   {
@@ -21,13 +23,15 @@
 			 "en":"Identifier",
 			 "nl":"ID",
 			 "no":"Identifikator",
-			 "de":"Kennung"
+			 "de":"Kennung",
+			 "sv":"Identifierare"
 		  },
 		  "placeholder":{
 			 "en":"Pick or type",
 			 "nl":"Kies of typ",
 			 "no":"Velg eller skriv",
-			 "de":"Auswählen oder eingeben"
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
 		  }
 	   }
 	]

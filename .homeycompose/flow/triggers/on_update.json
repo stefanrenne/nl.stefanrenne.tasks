@@ -4,7 +4,8 @@
 	   "en":"A task is updated",
 	   "nl":"Een taak is geüpdate",
 	   "no":"En oppgave er oppdatert",
-	   "de":"Eine Aufgabe wurde aktualisiert"
+	   "de":"Eine Aufgabe wurde aktualisiert",
+	   "sv":"En uppgift är uppdaterad"
 	},
 	"tokens":[
 	   {
@@ -14,7 +15,8 @@
 			 "en":"Old title",
 			 "nl":"Oude titel",
 			 "no":"Gammel Tittel",
-			 "de":"Alter Titel"
+			 "de":"Alter Titel",
+			 "sv":"Gammal titel"
 		  }
 	   },
 	   {
@@ -24,7 +26,8 @@
 			 "en":"New title",
 			 "nl":"Nieuwe titel",
 			 "no":"Ny Tittel",
-			 "de":"Neuer Titel"
+			 "de":"Neuer Titel",
+			 "sv":"Ny titel"
 		  }
 	   },
 	   {
@@ -34,7 +37,8 @@
 			 "en":"Identifier",
 			 "nl":"ID",
 			 "no":"Identifikator",
-			 "de":"Kennung"
+			 "de":"Kennung",
+			 "sv":"Identifierare"
 		  }
 	   }
 	]

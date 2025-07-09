@@ -1,0 +1,19 @@
+{
+    "newIdentifier": "Skapa ny identifierare",
+    "newTag": "Skapa ny etikett",
+    "deleteTag": "Ta bort etikett",
+    "noOpenTasks": "Inga öppna uppgifter 🎉",
+    "now": "Just nu",
+    "second": " __value__ sekund sedan",
+    "seconds": " __value__ sekunder sedan",
+    "minute": " __value__ minut sedan",
+    "minutes": " __value__ minuter sedan",
+    "hour": " __value__ timme sedan",
+    "hours": " __value__ timmar sedan",
+    "day": " __value__ dag sedan",
+    "days": " __value__ dagar sedan",
+    "month": " __value__ månad sedan",
+    "months": " __value__ månader sedan",
+    "year": " __value__ år sedan",
+    "years": " __value__ år sedan"
+}

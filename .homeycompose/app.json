@@ -10,13 +10,15 @@
     "en": "Tasks",
     "nl": "Taken",
     "no": "Oppgaver",
-    "de": "Aufgaben"
+    "de": "Aufgaben",
+    "sv": "Uppgifter"
   },
   "description": {
     "en": "Stay organized without lifting a finger.",
     "nl": "Blijf geautomatiseerd georganiseerd.",
     "no": "Hold deg organisert uten å løfte en finger.",
-    "de": "Bleibe organisiert, ohne einen Finger zu rühren."
+    "de": "Bleibe organisiert, ohne einen Finger zu rühren.",
+    "sv": "Håll dig organiserad utan att lyfta ett finger."
   },
   "category": [
     "tools"
@@ -53,7 +55,10 @@
         "name": "🇳🇴 Frode Evensen"
       },
       {
-        "name": "🇩🇪 David Ferch"
+        "name": "🇩🇪 David Ferch"
+      },
+      {
+        "name": "🇸🇪 Patrik Nordelind"
       }
     ]
   },

@@ -3,7 +3,8 @@
     "en": "List Tasks",
     "nl": "Takenlijst",
     "de": "Aufgaben auflisten",
-    "no": "Liste over oppgaver"
+    "no": "Liste over oppgaver",
+    "sv": "Lista över uppgifter"
   },
   "height": 188,
   "transparent": true,
