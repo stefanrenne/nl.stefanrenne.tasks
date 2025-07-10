@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.stefanrenne.tasks",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -11,13 +11,15 @@
     "en": "Tasks",
     "nl": "Taken",
     "no": "Oppgaver",
-    "de": "Aufgaben"
+    "de": "Aufgaben",
+    "sv": "Uppgifter"
   },
   "description": {
     "en": "Stay organized without lifting a finger.",
     "nl": "Blijf geautomatiseerd georganiseerd.",
     "no": "Hold deg organisert uten å løfte en finger.",
-    "de": "Bleibe organisiert, ohne einen Finger zu rühren."
+    "de": "Bleibe organisiert, ohne einen Finger zu rühren.",
+    "sv": "Håll dig organiserad utan att lyfta ett finger."
   },
   "category": [
     "tools"
@@ -54,7 +56,10 @@
         "name": "🇳🇴 Frode Evensen"
       },
       {
-        "name": "🇩🇪 David Ferch"
+        "name": "🇩🇪 David Ferch"
+      },
+      {
+        "name": "🇸🇪 Patrik Nordelind"
       }
     ]
   },
@@ -85,7 +90,8 @@
           "en": "A task is completed",
           "nl": "Een taak is voltooid",
           "no": "En oppgave er fullført",
-          "de": "Eine Aufgabe wurde erledigt"
+          "de": "Eine Aufgabe wurde erledigt",
+          "sv": "En uppgift är slutförd"
         },
         "tokens": [
           {
@@ -95,7 +101,8 @@
               "en": "Title",
               "nl": "Titel",
               "no": "Tittel",
-              "de": "Titel"
+              "de": "Titel",
+              "sv": "Titel"
             }
           },
           {
@@ -105,7 +112,8 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             }
           },
           {
@@ -115,7 +123,8 @@
               "en": "Label",
               "nl": "Label",
               "no": "Merkelapp",
-              "de": "Etikett"
+              "de": "Etikett",
+              "sv": "Etikett"
             }
           }
         ]
@@ -126,7 +135,8 @@
           "en": "A task is created",
           "nl": "Een taak is aangemaakt",
           "no": "En oppgave er opprettet",
-          "de": "Eine Aufgabe wurde erstellt"
+          "de": "Eine Aufgabe wurde erstellt",
+          "sv": "En uppgift är skapad"
         },
         "tokens": [
           {
@@ -136,7 +146,8 @@
               "en": "Title",
               "nl": "Titel",
               "no": "Tittel",
-              "de": "Titel"
+              "de": "Titel",
+              "sv": "Titel"
             }
           },
           {
@@ -146,7 +157,8 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             }
           }
         ]
@@ -157,7 +169,8 @@
           "en": "A task is updated",
           "nl": "Een taak is geüpdate",
           "no": "En oppgave er oppdatert",
-          "de": "Eine Aufgabe wurde aktualisiert"
+          "de": "Eine Aufgabe wurde aktualisiert",
+          "sv": "En uppgift är uppdaterad"
         },
         "tokens": [
           {
@@ -167,7 +180,8 @@
               "en": "Old title",
               "nl": "Oude titel",
               "no": "Gammel Tittel",
-              "de": "Alter Titel"
+              "de": "Alter Titel",
+              "sv": "Gammal titel"
             }
           },
           {
@@ -177,7 +191,8 @@
               "en": "New title",
               "nl": "Nieuwe titel",
               "no": "Ny Tittel",
-              "de": "Neuer Titel"
+              "de": "Neuer Titel",
+              "sv": "Ny titel"
             }
           },
           {
@@ -187,7 +202,8 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             }
           }
         ]
@@ -200,13 +216,15 @@
           "en": "Task is !{{open|completed}}",
           "nl": "Taak is !{{open|voltooid}}",
           "no": "Oppgave er !{{åpen|fullført}}",
-          "de": "Aufgabe ist !{{offen|erledigt}}}"
+          "de": "Aufgabe ist !{{offen|erledigt}}}",
+          "sv": "Uppgift är !{{öppen|slutförd}}"
         },
         "titleFormatted": {
           "en": "[[identifier]] task is !{{open|completed}}",
           "nl": "[[identifier]] taak is !{{open|voltooid}}",
           "no": "[[identifier]] oppgave er !{{åpen|fullført}}",
-          "de": "Aufgabe mit [[identifier]] ist !{{offen|erledigt}}"
+          "de": "Aufgabe mit [[identifier]] ist !{{offen|erledigt}}",
+          "sv": "[[identifier]] uppgift är !{{öppen|slutförd}}"
         },
         "args": [
           {
@@ -217,13 +235,15 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             },
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           }
         ]
@@ -236,7 +256,8 @@
           "en": "Complete all tasks",
           "nl": "Voltooi alle taken",
           "no": "Fullfør alle oppgaver",
-          "de": "Alle Aufgaben abschließen"
+          "de": "Alle Aufgaben abschließen",
+          "sv": "Slutför alla uppgifter"
         }
       },
       {
@@ -245,13 +266,15 @@
           "en": "Complete all marked tasks",
           "nl": "Voltooi alle gemarkeerde taken",
           "no": "Fullfør alle merkede oppgaver",
-          "de": "Erledigen Sie alle markierten Aufgaben"
+          "de": "Erledigen Sie alle markierten Aufgaben",
+          "sv": "Slutför alla markerade uppgifter"
         },
         "titleFormatted": {
           "en": "Complete all tasks marked with [[tag]]",
           "nl": "Voltooi alle gemarkeerde taken met [[tag]]",
           "no": "Fullfør alle merkede oppgaver med [[tag]]",
-          "de": "Erledige alle markierten Aufgaben mit dem [[tag]]"
+          "de": "Erledige alle markierten Aufgaben mit dem [[tag]]",
+          "sv": "Slutför alla uppgifter markerade med [[tag]]"
         },
         "args": [
           {
@@ -261,14 +284,16 @@
               "en": "Label",
               "nl": "Label",
               "no": "Merkelapp",
-              "de": "Etikett"
+              "de": "Etikett",
+              "sv": "Etikett"
             },
             "type": "autocomplete",
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           }
         ]
@@ -279,13 +304,15 @@
           "en": "Complete task",
           "nl": "Voltooi taak",
           "no": "Fullfør oppgave",
-          "de": "Aufgabe abschließen"
+          "de": "Aufgabe abschließen",
+          "sv": "Slutför uppgift"
         },
         "titleFormatted": {
           "en": "Complete [[identifier]] task",
           "nl": "Voltooi [[identifier]] taak",
           "no": "Fullfør [[identifier]] oppgave",
-          "de": "Aufgabe [[identifier]] abschließen"
+          "de": "Aufgabe [[identifier]] abschließen",
+          "sv": "Slutför [[identifier]] uppgift"
         },
         "args": [
           {
@@ -296,13 +323,15 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             },
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           }
         ]
@@ -313,19 +342,22 @@
           "en": "Create task",
           "nl": "Taak aanmaken",
           "no": "Opprett oppgave",
-          "de": "Aufgabe erstellen"
+          "de": "Aufgabe erstellen",
+          "sv": "Skapa uppgift"
         },
         "titleFormatted": {
           "en": "Create [[identifier]] task with [[title]]",
           "nl": "[[identifier]] taak aanmaken met [[title]]",
           "no": "Opprett [[identifier]] oppgave med [[title]]",
-          "de": "[[identifier]] Aufgabe mit [[title]] erstellen"
+          "de": "[[identifier]] Aufgabe mit [[title]] erstellen",
+          "sv": "Skapa [[identifier]] uppgift med [[title]]"
         },
         "hint": {
           "en": "Identifiers allow you to remove or overwrite tasks using flows.",
           "nl": "Met ID's kun je taken verwijderen of overschrijven.",
           "no": "Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
-          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+          "sv": "Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
         },
         "args": [
           {
@@ -335,14 +367,16 @@
               "en": "Title",
               "nl": "Titel",
               "no": "Tittel",
-              "de": "Titel"
+              "de": "Titel",
+              "sv": "Titel"
             },
             "type": "text",
             "placeholder": {
               "en": "Type a Title",
               "nl": "Typ een Titel",
               "no": "Skriv en Tittel",
-              "de": "Titel eingeben"
+              "de": "Titel eingeben",
+              "sv": "Skriv en titel"
             }
           },
           {
@@ -353,13 +387,15 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             },
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           }
         ]
@@ -370,7 +406,8 @@
           "en": "Get all open tasks",
           "nl": "Alle open taken ophalen",
           "no": "Få alle åpne oppgaver",
-          "de": "Alle offenen Aufgaben abrufen"
+          "de": "Alle offenen Aufgaben abrufen",
+          "sv": "Hämta alla öppna uppgifter"
         },
         "tokens": [
           {
@@ -380,7 +417,8 @@
               "en": "JSON",
               "nl": "JSON",
               "no": "JSON",
-              "de": "JSON"
+              "de": "JSON",
+              "sv": "JSON"
             }
           },
           {
@@ -390,7 +428,8 @@
               "en": "Quantity",
               "nl": "Aantal",
               "no": "Antall",
-              "de": "Quantität"
+              "de": "Quantität",
+              "sv": "Antal"
             }
           }
         ]
@@ -401,19 +440,22 @@
           "en": "Mark task",
           "nl": "Markeer taak",
           "no": "Merk oppgave",
-          "de": "Aufgabe markieren"
+          "de": "Aufgabe markieren",
+          "sv": "Markera uppgift"
         },
         "titleFormatted": {
           "en": "Mark [[identifier]] task with [[tag]]",
           "nl": "Markeer [[identifier]] taak met [[tag]]",
           "no": "Merk [[identifier]] oppgave med [[tag]]",
-          "de": "[[identifier]] Aufgabe mit [[tag]] markieren"
+          "de": "[[identifier]] Aufgabe mit [[tag]] markieren",
+          "sv": "Markera [[identifier]] uppgift med [[tag]]"
         },
         "hint": {
           "en": "Identifiers allow you to remove or overwrite tasks using flows.",
           "nl": "Met ID's kun je taken verwijderen of overschrijven.",
           "no": "Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
-          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+          "sv": "Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
         },
         "args": [
           {
@@ -423,14 +465,16 @@
               "en": "Label",
               "nl": "Label",
               "no": "Merkelapp",
-              "de": "Etikett"
+              "de": "Etikett",
+              "sv": "Etikett"
             },
             "type": "autocomplete",
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           },
           {
@@ -441,13 +485,15 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             },
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           }
         ]
@@ -458,19 +504,22 @@
           "en": "Remove task mak",
           "nl": "Verwijder taak markering",
           "no": "Fjern oppgaveflagg",
-          "de": "Aufgabenmarkierung entfernen"
+          "de": "Aufgabenmarkierung entfernen",
+          "sv": "Ta bort uppgiftsmarkering"
         },
         "titleFormatted": {
           "en": "Remove [[identifier]] task mark",
           "nl": "Verwijder [[identifier]] taak markering",
           "no": "Fjern [[identifier]] oppgaveflagg",
-          "de": "[[identifier]] Aufgabenmarkierung entfernen"
+          "de": "[[identifier]] Aufgabenmarkierung entfernen",
+          "sv": "Ta bort [[identifier]] uppgiftsmarkering"
         },
         "hint": {
           "en": "Identifiers allow you to remove or overwrite tasks using flows.",
           "nl": "Met ID's kun je taken verwijderen of overschrijven.",
           "no": "Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
-          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben."
+          "de": "Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+          "sv": "Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
         },
         "args": [
           {
@@ -481,13 +530,15 @@
               "en": "Identifier",
               "nl": "ID",
               "no": "Identifikator",
-              "de": "Kennung"
+              "de": "Kennung",
+              "sv": "Identifierare"
             },
             "placeholder": {
               "en": "Pick or type",
               "nl": "Kies of typ",
               "no": "Velg eller skriv",
-              "de": "Auswählen oder eingeben"
+              "de": "Auswählen oder eingeben",
+              "sv": "Välj eller skriv"
             }
           }
         ]
@@ -500,7 +551,8 @@
         "en": "List Tasks",
         "nl": "Takenlijst",
         "de": "Aufgaben auflisten",
-        "no": "Liste over oppgaver"
+        "no": "Liste over oppgaver",
+        "sv": "Lista över uppgifter"
       },
       "height": 188,
       "transparent": true,
