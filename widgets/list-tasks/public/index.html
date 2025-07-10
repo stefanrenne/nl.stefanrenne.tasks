@@ -92,7 +92,7 @@
         function reload() {
           Promise.resolve().then(async () => {
             let parameter = '/'
-            if (Homey.getSettings()['tag']['name'] !== undefined) {
+            if (Homey.getSettings()['tag']['name'] !== undefined && Homey.getSettings()['tag']['name'] !== "-") {
               parameter += Homey.getSettings()['tag']['name']
             }
             const feed = await Homey.api('GET', parameter, {});
