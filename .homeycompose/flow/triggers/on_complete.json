@@ -4,7 +4,8 @@
 	   "en":"A task is completed",
 	   "nl":"Een taak is voltooid",
 	   "no":"En oppgave er fullført",
-	   "de":"Eine Aufgabe wurde erledigt"
+	   "de":"Eine Aufgabe wurde erledigt",
+	   "sv":"En uppgift är slutförd"
 	},
 	"tokens":[
 	   {
@@ -14,7 +15,8 @@
 			 "en":"Title",
 			 "nl":"Titel",
 			 "no":"Tittel",
-			 "de":"Titel"
+			 "de":"Titel",
+			 "sv":"Titel"
 		  }
 	   },
 	   {
@@ -24,7 +26,8 @@
 			 "en":"Identifier",
 			 "nl":"ID",
 			 "no":"Identifikator",
-			 "de":"Kennung"
+			 "de":"Kennung",
+			 "sv":"Identifierare"
 		  }
 	   },
 	   {
@@ -34,7 +37,8 @@
 			 "en":"Label",
 			 "nl":"Label",
 			 "no":"Merkelapp",
-			 "de":"Etikett"
+			 "de":"Etikett",
+			 "sv":"Etikett"
 		  }
 	   }
 	]

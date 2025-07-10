@@ -4,7 +4,8 @@
 	   "en":"Get all open tasks",
 	   "nl":"Alle open taken ophalen",
 	   "no":"Få alle åpne oppgaver",
-	   "de":"Alle offenen Aufgaben abrufen"
+	   "de":"Alle offenen Aufgaben abrufen",
+	   "sv":"Hämta alla öppna uppgifter"
 	},
 	"tokens":[
 	   {
@@ -14,7 +15,8 @@
 			 "en":"JSON",
 			 "nl":"JSON",
 			 "no":"JSON",
-			 "de":"JSON"
+			 "de":"JSON",
+			 "sv":"JSON"
 		  }
 	   },
 	   {
@@ -24,7 +26,8 @@
 			 "en":"Quantity",
 			 "nl":"Aantal",
 			 "no":"Antall",
-			 "de":"Quantität"
+			 "de":"Quantität",
+			 "sv":"Antal"
 		  }
 	   }
 	]
