@@ -25,5 +25,8 @@
   },
   "1.1.1": {
     "en": "Added Swedish translations, kudos to Patrik Nordelind and aixed filtering in the widget when no tag is provided."
+  },
+  "1.1.2": {
+    "en": "Fixed a bug where large text in the widget would sometimes overlap the complete icon."
   }
 }
