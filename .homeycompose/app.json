@@ -80,5 +80,19 @@
       "widget",
       "timeline"
     ]
+  },
+  "api": {
+    "getTasks": {
+      "method": "GET",
+      "path": "/"
+    },
+    "deleteTask": {
+      "method": "DELETE",
+      "path": "/:id"
+    },
+    "deleteTaskItem": {
+      "method": "DELETE",
+      "path": "/:id/:item"
+    }
   }
 }

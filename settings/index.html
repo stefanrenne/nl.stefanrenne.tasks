@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./bootstrap.min.css" />
+    <script src="./bootstrap.min.js"></script>
+    <style>
+      td button {
+        -webkit-mask-image: url('./checkmark.svg');
+        mask-image: url('./checkmark.svg');
+        mask-size: 25px !important;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        background-color: green !important;
+        min-height: 25px;
+        min-width: 25px;
+      }
+      td.action {
+        width: 50px;
+      }
+      td.center {
+        text-align: center
+      }
+    </style>
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  </head>
+  <body>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Identifier</th>
+        <th>Item</th>
+        <th>Label</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody id="container"></tbody>
+    </table>
+
+    <script type="text/javascript">
+      const $container = document.getElementById('container');
+      function onHomeyReady(Homey) {
+
+        function updateTime() {
+          document.querySelectorAll("td.date").forEach(function(task) {
+            task.innerHTML = timeSince(task.dataset.date);
+          });
+        }
+
+        function timeSince(date) {
+          var seconds = Math.floor((new Date() - Date.parse(date)) / 1000);
+          if (seconds === 0) {
+            return Homey.__('now');
+          }
+
+          var interval = seconds / 31536000;
+          if (interval > 1) {
+            const years = Math.floor(interval);
+            return (years === 1) ? Homey.__('year', { value: years }) : Homey.__('years', { value: years });
+          }
+          interval = seconds / 2592000;
+          if (interval > 1) {
+            const months = Math.floor(interval);
+            return (months === 1) ? Homey.__('month', { value: months }) : Homey.__('months', { value: months });
+          }
+          interval = seconds / 86400;
+          if (interval > 1) {
+            const days = Math.floor(interval);
+            return (days === 1) ? Homey.__('day', { value: days }) : Homey.__('days', { value: days });
+          }
+          interval = seconds / 3600;
+          if (interval > 1) {
+            const hours = Math.floor(interval);
+            return (hours === 1) ? Homey.__('hour', { value: hours }) : Homey.__('hours', { value: hours });
+          }
+          interval = seconds / 60;
+          if (interval > 1) {
+            const minutes = Math.floor(interval);
+            return (minutes === 1) ? Homey.__('minute', { value: minutes }) : Homey.__('minutes', { value: minutes });
+          }
+          return (seconds === 1) ? Homey.__('second', { value: seconds }) : Homey.__('seconds', { value: seconds });
+        }
+
+        function reload() {
+          Promise.resolve().then(async () => {
+            const tasks = await Homey.api('GET', '/');
+            $container.innerHTML = '';
+            if (tasks.length === 0) {
+              throw new Error(Homey.__('noOpenTasks'));
+            }
+
+            for (const task of Object.values(tasks)) {
+              const $task = document.createElement('tr');
+
+              $title = document.createElement('td');
+              $title.classList.add('title');
+              $title.innerHTML = task.title;
+              $task.appendChild($title);
+              
+              $date = document.createElement('td');
+              $date.classList.add('date');
+              $date.innerHTML = timeSince(task.date);
+              const $dateAttribute = document.createAttribute("data-date");
+              $dateAttribute.value = task.date
+              $date.setAttributeNode($dateAttribute);
+              $task.appendChild($date);
+
+              $identifier = document.createElement('td');
+              $identifier.innerHTML = task.identifier;
+              $task.appendChild($identifier);
+
+              $item = document.createElement('td');
+              $item.innerHTML = task.item !== undefined ? task.item : "-";
+              $task.appendChild($item);
+
+              $tag = document.createElement('td');
+              $tag.innerHTML = task.tag !== undefined ? task.tag : "-";
+              $task.appendChild($tag);
+
+              $action = document.createElement('td');
+              $action.classList.add('action');
+              $task.appendChild($action);
+
+              $button = document.createElement('button');
+              $action.appendChild($button);
+
+              $button.addEventListener('click', async () => {
+                if (task.item === undefined) {
+                  await Homey.api('DELETE', '/' + task.identifier, {});
+                } else {
+                  await Homey.api('DELETE', '/' + task.identifier + '/' + task.item, {});
+                }
+              });
+              
+              $container.appendChild($task);
+            }
+          })
+          .catch(err => {
+            const $task = document.createElement('tr');
+            $title = document.createElement('td');
+            $title.classList.add('center');
+            const $colspanAttribute = document.createAttribute("colspan");
+            $colspanAttribute.value = '6';
+            $title.setAttributeNode($colspanAttribute);
+            $title.innerHTML = err.message;
+            $container.appendChild($title);
+          })
+          .finally();
+        }
+
+        Homey.on('didUpdateTasks', (event) => {
+          reload();
+        });
+
+        Homey.ready();
+        reload();
+        setInterval(updateTime, 1000); 
+      }
+    </script>
+  </body>
+</html>
