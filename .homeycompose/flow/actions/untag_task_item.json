@@ -1,0 +1,64 @@
+{
+	"id":"untag_task_item",
+	"title":{
+	   "en":"Remove task mark for item",
+	   "nl":"Verwijder taak markering voor item",
+	   "no":"Fjern oppgaveflagg for items",
+	   "de":"Aufgabenmarkierung für Artikel entfernen",
+	   "sv":"Ta bort uppgiftsmarkering för items"
+	},
+	"titleFormatted":{
+	   "en":"Remove [[identifier]] task mark for [[item]]",
+	   "nl":"Verwijder [[identifier]] taak markering voor [[item]]",
+	   "no":"Fjern [[identifier]] oppgaveflagg for [[item]]",
+	   "de":"[[identifier]] Aufgabenmarkierung entfernen für [[item]]",
+	   "sv":"Ta bort [[identifier]] uppgiftsmarkering for [[item]]"
+	},
+	"hint":{
+	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+	   "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+	   "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+	   "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+	   "sv":"Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
+	},
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung",
+			 "sv":"Identifierare"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   },
+	   {
+		  "name":"item",
+		  "required":true,
+		  "type":"text",
+		  "title":{
+			 "en":"Item identifier",
+			 "nl":"Item-ID",
+			 "no":"Vareidentifikator",
+			 "de":"Artikelkennung",
+			 "sv":"Artikelidentifierare"
+		  },
+		  "placeholder":{
+			 "en":"Create item identifier",
+			 "nl":"Item-ID aanmaken",
+			 "no":"Opprett vareidentifikator",
+			 "de":"Artikelkennung erstellen",
+			 "sv":"Skapa artikelidentifierare"
+		  }
+	   }
+	]
+ }

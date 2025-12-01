@@ -6,7 +6,7 @@
         padding: 0;
         margin: 0;
       }
-      li.item {
+      li.task {
         border-top: var(--homey-line-light);
         border-left: var(--homey-line-light);
         border-right: var(--homey-line-light);
@@ -14,7 +14,7 @@
         padding: var(--homey-su-1) var(--homey-su-2) var(--homey-su-1);
         position: relative;
       }
-      li.item p {
+      li.task p {
         padding-right: 35px;
       }
       li:first-child {
@@ -49,12 +49,12 @@
       function onHomeyReady(Homey) {
 
         function updateTime() {
-          document.querySelectorAll("li p.date").forEach(function(item) {
-            var text = timeSince(item.dataset.date);
-            if (Homey.getSettings()['showTag'] == true && item.dataset.tag !== undefined) {
-              text += " | " + item.dataset.tag;
+          document.querySelectorAll("li p.date").forEach(function(task) {
+            var text = timeSince(task.dataset.date);
+            if (Homey.getSettings()['showTag'] == true && task.dataset.tag !== undefined) {
+              text += " | " + task.dataset.tag;
             }
-            item.innerHTML = text;
+            task.innerHTML = text;
           });
         }
 
@@ -98,58 +98,62 @@
             if (Homey.getSettings()['tag']['name'] !== undefined && Homey.getSettings()['tag']['name'] !== "-") {
               parameter += Homey.getSettings()['tag']['name']
             }
-            const feed = await Homey.api('GET', parameter, {});
+            const tasks = await Homey.api('GET', parameter, {});
             $container.innerHTML = '';
-            if (feed.length === 0) {
+            if (tasks.length === 0) {
               throw new Error(Homey.__('noOpenTasks'));
             }
-            const $items = document.createElement('ul');
-            $container.appendChild($items);
+            const $tasks = document.createElement('ul');
+            $container.appendChild($tasks);
 
-            for (const item of Object.values(feed)) {
-              const $item = document.createElement('li');
-              $item.classList.add('item');
+            for (const task of Object.values(tasks)) {
+              const $task = document.createElement('li');
+              $task.classList.add('task');
 
               $title = document.createElement('p');
               $title.classList.add('homey-text-medium');
-              $title.innerHTML = item.title;
-              $item.appendChild($title);
+              $title.innerHTML = task.title;
+              $task.appendChild($title);
               
               $body = document.createElement('p');
               $body.classList.add('homey-text-small-light');
               $body.classList.add('date');
 
-              var text = timeSince(item.date);
-              if (Homey.getSettings()['showTag'] == true && item.tag !== undefined) {
-                text += " | " + item.tag;
+              var text = timeSince(task.date);
+              if (Homey.getSettings()['showTag'] == true && task.tag !== undefined) {
+                text += " | " + task.tag;
               }
               $body.innerHTML = text;
 
               const $dateAttribute = document.createAttribute("data-date");
-              $dateAttribute.value = item.date
+              $dateAttribute.value = task.date
               $body.setAttributeNode($dateAttribute);
-              if (item.tag !== undefined) {
+              if (task.tag !== undefined) {
                 const $tagAttribute = document.createAttribute("data-tag");
-                $tagAttribute.value = item.tag
+                $tagAttribute.value = task.tag
                 $body.setAttributeNode($tagAttribute);
               }
-              $item.appendChild($body);
+              $task.appendChild($body);
 
               $icon = document.createElement('div');
               $icon.classList.add('homey-custom-icon-checkmark');
-              $item.appendChild($icon);
+              $task.appendChild($icon);
 
               $icon.addEventListener('click', async () => {
                 Homey.hapticFeedback();
-                await Homey.api('DELETE', '/' + item.identifier, {});
+                if (task.item === undefined) {
+                  await Homey.api('DELETE', '/' + task.identifier, {});
+                } else {
+                  await Homey.api('DELETE', '/' + task.identifier + '/' + task.item, {});
+                }
               });
               
-              $items.appendChild($item);
+              $tasks.appendChild($task);
             }
             Homey.setHeight($container.offsetHeight);
           })
           .catch(err => {
-            const $item = document.createElement('li');
+            const $task = document.createElement('li');
 
             $title = document.createElement('p');
             $title.classList.add('homey-text-regular');

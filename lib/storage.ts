@@ -8,6 +8,7 @@ export interface Task {
     title: string;
     date: Date;
     identifier: string;
+    item: string | undefined;
     tag: string | undefined;
 }
 
@@ -25,8 +26,8 @@ export class Store {
         this.taskOnComplete = homey.flow.getTriggerCard('on_complete');
     }
 
-    getTask(identifier: string): Task | undefined {
-        return this.getTasks().find((item) => item.identifier === identifier);
+    getTask(identifier: string, item: string | undefined): Task | undefined {
+        return this.getTasks().find((task) => task.identifier === identifier && task.item === item);
     }
 
     getTasks(): Task[] {
@@ -43,55 +44,55 @@ export class Store {
         this.homey.api.realtime('didUpdateTasks', tasks);
     }
 
-    addTask(title: string, identifier: string | undefined, tag: string | undefined = undefined) {
+    addTask(title: string, identifier: string | undefined, item: string | undefined, tag: string | undefined = undefined) {
         const newIdentifier = identifier ?? uuidv4()
         let newResult = this.getTasks()
-        const oldItem = newResult.find((item) => item.identifier === newIdentifier);
+        const oldTask = newResult.find((task) => task.identifier === identifier && (!item || task.item === item));
 
-        if (oldItem?.title === title) {
+        if (oldTask?.title === title) {
             // Existing task is not mutated
             return
         }
 
-        if (oldItem !== undefined) {
-            newResult = newResult.filter((item) => item.identifier !== newIdentifier);
-            this.taskOnUpdate?.trigger({ oldTitle: oldItem.title, newTitle: title, identifier: newIdentifier });
+        if (oldTask !== undefined) {
+            newResult = newResult.filter((task) => task.identifier !== newIdentifier || (item && task.item !== item));
+            this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: title, identifier: newIdentifier, item: item ?? "" });
         } else {
-            this.taskOnCreate?.trigger({ title: title, identifier: newIdentifier });
+            this.taskOnCreate?.trigger({ title: title, identifier: newIdentifier, item: item ?? "" });
         }
-        newResult.push({title: title, date: new Date(), identifier: newIdentifier, tag: tag});
+        newResult.push({title: title, date: new Date(), identifier: newIdentifier, item: item, tag: tag});
         this.setTasks(newResult);
     }
 
-    deleteTaskByIdentifier(identifier: string) {
+    deleteTaskByIdentifier(identifier: string, item: string | undefined = undefined) {
         const result = this.getTasks();
-        const oldItem = result.find((item) => item.identifier === identifier);
+        const oldTask = result.find((task) => task.identifier === identifier && (!item || task.item === item));
         
-        if (oldItem !== undefined) {
-            const newResult = result.filter((item) => item.identifier !== identifier);
+        if (oldTask !== undefined) {
+            const newResult = result.filter((task) => task.identifier !== identifier || (item && task.item !== item));
             this.setTasks(newResult);
-            this.taskOnComplete?.trigger({ title: oldItem.title, identifier: oldItem.identifier, tag: oldItem.tag ?? "" });
+            this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier, item: oldTask.item ?? "", tag: oldTask.tag ?? "" });
         }
     }
 
     deleteTaskByTag(tag: string) {
         const result = this.getTasks();
-        const oldItems = result.filter((item) => item.tag === tag);
-        if (oldItems.length > 0) {
-            const newResult = result.filter((item) => item.tag !== tag);
+        const oldTasks = result.filter((task) => task.tag === tag);
+        if (oldTasks.length > 0) {
+            const newResult = result.filter((task) => task.tag !== tag);
             this.setTasks(newResult);
-            oldItems.forEach((oldItem) => {
-                this.taskOnComplete?.trigger({ title: oldItem.title, identifier: oldItem.identifier, tag: oldItem.tag ?? "" });
+            oldTasks.forEach((oldTask) => {
+                this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier, item: oldTask.item ?? "", tag: oldTask.tag ?? "" });
             });
         }
     }
 
-    setTag(tag: string | undefined, identifier: string) {
-        let newResult = this.getTasks().map((item) => {
-            if (item.identifier === identifier) {
-                item.tag = tag
+    setTag(tag: string | undefined, identifier: string, item: string | undefined) {
+        let newResult = this.getTasks().map((task) => {
+            if (task.identifier === identifier && (!item || task.item === item)) {
+                task.tag = tag
             }
-            return item
+            return task
         });
         this.setTasks(newResult);        
     }

@@ -1,45 +1,56 @@
 {
-	"id":"on_update",
-	"title":{
-	   "en":"A task is updated",
-	   "nl":"Een taak is geüpdate",
-	   "no":"En oppgave er oppdatert",
-	   "de":"Eine Aufgabe wurde aktualisiert",
-	   "sv":"En uppgift är uppdaterad"
-	},
-	"tokens":[
-	   {
-		  "name":"oldTitle",
-		  "type":"string",
-		  "title":{
-			 "en":"Old title",
-			 "nl":"Oude titel",
-			 "no":"Gammel Tittel",
-			 "de":"Alter Titel",
-			 "sv":"Gammal titel"
-		  }
-	   },
-	   {
-		  "name":"newTitle",
-		  "type":"string",
-		  "title":{
-			 "en":"New title",
-			 "nl":"Nieuwe titel",
-			 "no":"Ny Tittel",
-			 "de":"Neuer Titel",
-			 "sv":"Ny titel"
-		  }
-	   },
-	   {
-		  "name":"identifier",
-		  "type":"string",
-		  "title":{
-			 "en":"Identifier",
-			 "nl":"ID",
-			 "no":"Identifikator",
-			 "de":"Kennung",
-			 "sv":"Identifierare"
-		  }
-	   }
-	]
- }
+   "id":"on_update",
+   "title":{
+      "en":"A task is updated",
+      "nl":"Een taak is geüpdate",
+      "no":"En oppgave er oppdatert",
+      "de":"Eine Aufgabe wurde aktualisiert",
+      "sv":"En uppgift är uppdaterad"
+   },
+   "tokens":[
+      {
+         "name":"oldTitle",
+         "type":"string",
+         "title":{
+            "en":"Old title",
+            "nl":"Oude titel",
+            "no":"Gammel Tittel",
+            "de":"Alter Titel",
+            "sv":"Gammal titel"
+         }
+      },
+      {
+         "name":"newTitle",
+         "type":"string",
+         "title":{
+            "en":"New title",
+            "nl":"Nieuwe titel",
+            "no":"Ny Tittel",
+            "de":"Neuer Titel",
+            "sv":"Ny titel"
+         }
+      },
+      {
+         "name":"identifier",
+         "type":"string",
+         "title":{
+            "en":"Identifier",
+            "nl":"ID",
+            "no":"Identifikator",
+            "de":"Kennung",
+            "sv":"Identifierare"
+         }
+      },
+      {
+         "name":"item",
+         "type":"string",
+         "title":{
+            "en":"Item identifier",
+            "nl":"Item-ID",
+            "no":"Vareidentifikator",
+            "de":"Artikelkennung",
+            "sv":"Artikelidentifierare"
+         }
+      }
+   ]
+}

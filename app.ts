@@ -146,52 +146,72 @@ module.exports = class MyApp extends Homey.App {
 
   /** TaskListeners */
   registerOpenTaskListeners() {
-    const card = this.homey.flow.getConditionCard('open_task')
-    this.registerIdentifierAutocompleteListenerForCard(card, false)
-    card.registerRunListener((args) => {
-      const identifier: string = args.identifier.name;
-      return this.store.getTasks().some((element) => element.identifier === identifier);
+    [
+      this.homey.flow.getConditionCard('open_task'),
+      this.homey.flow.getConditionCard('open_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, false)
+      card.registerRunListener((args) => {
+        const identifier: string = args.identifier.name;
+        return this.store.getTasks().some((element) => element.identifier === identifier);
+      });
     });
   }
 
   registerCreateTaskListeners() {
-    const card = this.homey.flow.getActionCard('create_task')
-    this.registerIdentifierAutocompleteListenerForCard(card, true)
-    card.registerRunListener((args) => {
-      const title: string = args.title;
-      const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined;
-      this.store.addTask(title, identifier);
-      return {
-        title
-      };
+    [
+      this.homey.flow.getActionCard('create_task'),
+      this.homey.flow.getActionCard('create_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, true)
+      card.registerRunListener((args) => {
+        const title: string = args.title;
+        const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined;
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        this.store.addTask(title, identifier, item);
+        return {
+          title
+        };
+      });
     });
   }
 
   registerCompleteTaskListeners() {
-    const card = this.homey.flow.getActionCard('complete_task')
-    this.registerIdentifierAutocompleteListenerForCard(card, false)
-    card.registerRunListener((args) => {
-      const identifier: string = args.identifier.name;
-      this.store.deleteTaskByIdentifier(identifier);
-      return {};
+    [
+      this.homey.flow.getActionCard('complete_task'),
+      this.homey.flow.getActionCard('complete_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, false)
+      card.registerRunListener((args) => {
+        const identifier: string = args.identifier.name;
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        this.store.deleteTaskByIdentifier(identifier, item);
+        return {};
+      });
     });
   }
 
   registerCompleteMarkedTasksListeners() {
-    const card = this.homey.flow.getActionCard('complete_tag')
-    this.registerTagAutocompleteListenerForCard(card, false)
-    card.registerRunListener((args) => {
-      const tag: string = args.tag.name;
-      this.store.deleteTaskByTag(tag);
-      return {};
+    [
+      this.homey.flow.getActionCard('complete_tag')
+    ].forEach(card => {
+      this.registerTagAutocompleteListenerForCard(card, false)
+      card.registerRunListener((args) => {
+        const tag: string = args.tag.name;
+        this.store.deleteTaskByTag(tag);
+        return {};
+      });
     });
   }
 
   registerCompleteAllTasksListeners() {
-    const card = this.homey.flow.getActionCard('complete_all')
-    card.registerRunListener((args) => {
-      this.store.setTasks([]);
-      return {};
+    [
+      this.homey.flow.getActionCard('complete_all')
+    ].forEach(card => {
+      card.registerRunListener((args) => {
+        this.store.setTasks([]);
+        return {};
+      });
     });
   }
 
@@ -209,21 +229,31 @@ module.exports = class MyApp extends Homey.App {
   }
 
   registerTagTaskListeners() {
-    const card = this.homey.flow.getActionCard('tag_task')
-    this.registerIdentifierAutocompleteListenerForCard(card, false);
-    this.registerTagAutocompleteListenerForCard(card, true);
-    card.registerRunListener((args) => {
-      this.store.setTag(args.tag.name, args.identifier.name);
-      return {};
+    [
+      this.homey.flow.getActionCard('tag_task'),
+      this.homey.flow.getActionCard('tag_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, false);
+      this.registerTagAutocompleteListenerForCard(card, true);
+      card.registerRunListener((args) => {
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        this.store.setTag(args.tag.name, args.identifier.name, item);
+        return {};
+      });
     });
   }
 
   registerUntagTaskListener() {
-    const card = this.homey.flow.getActionCard('untag_task')
+    [
+      this.homey.flow.getActionCard('untag_task'),
+      this.homey.flow.getActionCard('untag_task_item')
+    ].forEach(card => {
     this.registerIdentifierAutocompleteListenerForCard(card, false);
-    card.registerRunListener((args) => {
-      this.store.setTag(undefined, args.identifier.name);
-      return {};
+      card.registerRunListener((args) => {
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        this.store.setTag(undefined, args.identifier.name, item);
+        return {};
+      });
     });
   }
 

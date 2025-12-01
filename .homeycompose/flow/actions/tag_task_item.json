@@ -1,0 +1,83 @@
+{
+	"id":"tag_task_item",
+	"title":{
+	   "en":"Mark task for item",
+	   "nl":"Markeer taak voor item",
+	   "no":"Merk oppgave for items",
+	   "de":"Aufgabe für Artikel markieren",
+	   "sv":"Markera uppgift för items"
+	},
+	"titleFormatted":{
+	   "en":"Mark [[identifier]] task for [[item]] with [[tag]]",
+	   "nl":"Markeer [[identifier]] taak voor [[item]] met [[tag]]",
+	   "no":"Merk [[identifier]] oppgave for [[item]] med [[tag]]",
+	   "de":"[[identifier]] Aufgabe für [[item]] mit [[tag]] markieren",
+	   "sv":"Markera [[identifier]] uppgift for [[item]] med [[tag]]"
+	},
+	"hint":{
+	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+	   "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+	   "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+	   "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+	   "sv":"Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
+	},
+	"args":[
+	   {
+		  "name":"tag",
+		  "required":true,
+		  "title":{
+			 "en":"Label",
+			 "nl":"Label",
+			 "no":"Merkelapp",
+			 "de":"Etikett",
+			 "sv":"Etikett"
+		  },
+		  "type":"autocomplete",
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   },
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung",
+			 "sv":"Identifierare"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   },
+	   {
+		  "name":"item",
+		  "required":true,
+		  "type":"text",
+		  "title":{
+			 "en":"Item identifier",
+			 "nl":"Item-ID",
+			 "no":"Vareidentifikator",
+			 "de":"Artikelkennung",
+			 "sv":"Artikelidentifierare"
+		  },
+		  "placeholder":{
+			 "en":"Create item identifier",
+			 "nl":"Item-ID aanmaken",
+			 "no":"Opprett vareidentifikator",
+			 "de":"Artikelkennung erstellen",
+			 "sv":"Skapa artikelidentifierare"
+		  }
+	   }
+	]
+ }

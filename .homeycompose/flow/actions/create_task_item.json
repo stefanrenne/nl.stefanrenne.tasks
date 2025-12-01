@@ -1,18 +1,18 @@
 {
-	"id":"create_task",
+	"id":"create_task_item",
 	"title":{
-	   "en":"Create task",
-	   "nl":"Taak aanmaken",
-	   "no":"Opprett oppgave",
-	   "de":"Aufgabe erstellen",
-	   "sv":"Skapa uppgift"
+	   "en":"Create task for iten",
+	   "nl":"Taak aanmaken voor item",
+	   "no":"Opprett oppgave for items",
+	   "de":"Aufgabe für Artikel erstellen",
+	   "sv":"Skapa uppgift för items"
 	},
 	"titleFormatted":{
-	   "en":"Create [[identifier]] task with [[title]]",
-	   "nl":"[[identifier]] taak aanmaken met [[title]]",
-	   "no":"Opprett [[identifier]] oppgave med [[title]]",
-	   "de":"[[identifier]] Aufgabe mit [[title]] erstellen",
-	   "sv":"Skapa [[identifier]] uppgift med [[title]]"
+	   "en":"Create [[identifier]] task for [[item]] with [[title]]",
+	   "nl":"[[identifier]] taak aanmaken voor [[item]] met [[title]]",
+	   "no":"Opprett [[identifier]] oppgave for [[item]] med [[title]]",
+	   "de":"[[identifier]] Aufgabe für [[item]] mit [[title]] erstellen",
+	   "sv":"Skapa [[identifier]] uppgift for [[item]] med [[title]]"
 	},
 	"hint":{
 	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
@@ -58,6 +58,25 @@
 			 "no":"Velg eller skriv (valgfri)",
 			 "de":"Auswählen oder eingeben (optional)",
 			 "sv":"Välj eller skriv (frivillig)"
+		  }
+	   },
+	   {
+		  "name":"item",
+		  "required":true,
+		  "type":"text",
+		  "title":{
+			 "en":"Item identifier",
+			 "nl":"Item-ID",
+			 "no":"Vareidentifikator",
+			 "de":"Artikelkennung",
+			 "sv":"Artikelidentifierare"
+		  },
+		  "placeholder":{
+			 "en":"Create item identifier",
+			 "nl":"Item-ID aanmaken",
+			 "no":"Opprett vareidentifikator",
+			 "de":"Artikelkennung erstellen",
+			 "sv":"Skapa artikelidentifierare"
 		  }
 	   }
 	]

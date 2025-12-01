@@ -1,0 +1,57 @@
+{
+	"id":"complete_task_item",
+	"title":{
+	   "en":"Complete task for iten",
+	   "nl":"Voltooi taak voor item",
+	   "no":"Fullfør oppgaven for items",
+	   "de":"Aufgabe für Artikel abschließen",
+	   "sv":"Slutför uppgift för items"
+	},
+	"titleFormatted":{
+	   "en":"Complete [[identifier]] task for [[item]]",
+	   "nl":"Voltooi [[identifier]] taak voor [[item]]",
+	   "no":"Fullfør [[identifier]] oppgave for [[item]]",
+	   "de":"Aufgabe [[identifier]] für [[item]] abschließen",
+	   "sv":"Slutför [[identifier]] uppgift för [[item]]"
+	},
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung",
+			 "sv":"Identifierare"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   },
+	   {
+		  "name":"item",
+		  "required":true,
+		  "type":"text",
+		  "title":{
+			 "en":"Item identifier",
+			 "nl":"Item-ID",
+			 "no":"Vareidentifikator",
+			 "de":"Artikelkennung",
+			 "sv":"Artikelidentifierare"
+		  },
+		  "placeholder":{
+			 "en":"Create item identifier",
+			 "nl":"Item-ID aanmaken",
+			 "no":"Opprett vareidentifikator",
+			 "de":"Artikelkennung erstellen",
+			 "sv":"Skapa artikelidentifierare"
+		  }
+	   }
+	]
+ }

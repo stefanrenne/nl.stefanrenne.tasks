@@ -14,4 +14,8 @@ module.exports = {
   async deleteTask({ homey, params }) {
     homey.app.store.deleteTaskByIdentifier(params.id);
   },
+
+  async deleteTaskItem({ homey, params }) {
+    homey.app.store.deleteTaskByIdentifier(params.id, params.item);
+  },
 };

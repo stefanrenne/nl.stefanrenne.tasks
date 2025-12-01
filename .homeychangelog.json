@@ -28,5 +28,8 @@
   },
   "1.1.2": {
     "en": "Fixed a bug where large text in the widget would sometimes overlap the complete icon."
+  },
+  "1.2.0": {
+    "en": "Added the ability to specific a item id for a identifier. Allowing you to use variables or complete a set of tasks with the same identifier."
   }
 }
