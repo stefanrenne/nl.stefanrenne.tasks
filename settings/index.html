@@ -20,23 +20,86 @@
       td.center {
         text-align: center
       }
+      .hidden {
+          display: none;
+      }
     </style>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
   </head>
   <body>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Date</th>
-        <th>Identifier</th>
-        <th>Item</th>
-        <th>Label</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody id="container"></tbody>
-    </table>
+
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-page="page-open-tasks" href="#">Open Tasks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-page="page-create-task" href="#">Create Task</a>
+      </li>
+    </ul>
+
+    <!-- Page Open Tasks -->
+    <div id="page-open-tasks" class="page">
+      <table class="table table-striped homey-form-group">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Identifier</th>
+          <th>Item</th>
+          <th>Label</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="container"></tbody>
+      </table>
+    </div>
+
+    <!-- Page Create Task -->
+    <div class="page hidden" id="page-create-task">
+      <fieldset class="homey-form-fieldset">
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="title">Title</label>
+          <input class="homey-form-input" id="title" type="text" value="" />
+        </div>
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="identifier">Identifier</label>
+          <select class="homey-form-select" name="select-example" id="identifier">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Create New</option>
+          </select>
+          <input class="homey-form-input" id="identifier-create" type="text" value="" style="margin-top: 20px"/>
+        </div>
+      </fieldset>
+
+      <button id="save" class="homey-button-primary-full">Create Task</button>
+    </div>
+
+    <script type="text/javascript">
+      const $navLinks = document.getElementsByClassName("nav-link");
+      for (var i = 0; i < $navLinks.length; i ++) {
+        const $navLink = $navLinks[i]
+        $navLink.addEventListener("click", () => {
+
+          Array.from(document.getElementsByClassName("nav-link active")).forEach(
+              function($oldActiveNavLink, index, array) {
+                $oldActiveNavLink.classList.remove("active"); 
+              }
+          );
+          $navLink.classList.add("active");
+
+          Array.from(document.getElementsByClassName("page")).forEach(
+              function($page, index, array) {
+                if ($page.id == $navLink.dataset.page) {
+                  $page.classList.remove("hidden")
+                } else {
+                  $page.classList.add("hidden")
+                }
+              }
+          );
+        });
+      }
+    </script>
 
     <script type="text/javascript">
       const $container = document.getElementById('container');
