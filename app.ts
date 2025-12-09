@@ -55,6 +55,7 @@ module.exports = class MyApp extends Homey.App {
   }
 
   async updateAllIdentifiers() {
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
     const allCards = await this.getAllCards()
     const uniqueIdentifiers = await allCards.reduce(
       async (resultPromise, card) => {
@@ -65,6 +66,10 @@ module.exports = class MyApp extends Homey.App {
         })
         return result;
     }, Promise.resolve(new Set<string>()));
+
+    this.store.getTasks().map(x => x.identifier).filter((identifier) => uuidRegex.test(identifier) == false).forEach(identifier => {
+      uniqueIdentifiers.add(identifier);
+    });
     this.allIdentifiers = uniqueIdentifiers
   }
 

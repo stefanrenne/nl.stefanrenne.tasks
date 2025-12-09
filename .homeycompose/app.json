@@ -84,15 +84,23 @@
   "api": {
     "getTasks": {
       "method": "GET",
-      "path": "/"
+      "path": "/tasks"
+    },
+    "createTask": {
+      "method": "POST",
+      "path": "/task"
     },
     "deleteTask": {
       "method": "DELETE",
-      "path": "/:id"
+      "path": "/task/:id"
     },
     "deleteTaskItem": {
       "method": "DELETE",
-      "path": "/:id/:item"
+      "path": "/task/:id/:item"
+    },
+    "getIdentifiers": {
+      "method": "GET",
+      "path": "/identifiers"
     }
   }
 }

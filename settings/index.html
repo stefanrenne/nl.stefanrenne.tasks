@@ -21,7 +21,7 @@
         text-align: center
       }
       .hidden {
-          display: none;
+          display: none !important;
       }
     </style>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
@@ -64,15 +64,17 @@
         <div class="homey-form-group">
           <label class="homey-form-label" for="identifier">Identifier</label>
           <select class="homey-form-select" name="select-example" id="identifier">
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Create New</option>
+            <option value="">Create new identifier</option>
           </select>
-          <input class="homey-form-input" id="identifier-create" type="text" value="" style="margin-top: 20px"/>
+          <input class="homey-form-input hidden" id="identifier-create" type="text" value="" style="margin-top: 20px"/>
+        </div>
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="item-identifier">Item Identifier (Optional)</label>
+          <input class="homey-form-input" id="item-identifier" type="text" value="" />
         </div>
       </fieldset>
 
-      <button id="save" class="homey-button-primary-full">Create Task</button>
+      <button id="save" class="homey-button-primary-full is-disabled">Create Task</button>
     </div>
 
     <script type="text/javascript">
@@ -102,6 +104,7 @@
     </script>
 
     <script type="text/javascript">
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
       const $container = document.getElementById('container');
       function onHomeyReady(Homey) {
 
@@ -145,9 +148,104 @@
           return (seconds === 1) ? Homey.__('second', { value: seconds }) : Homey.__('seconds', { value: seconds });
         }
 
-        function reload() {
+        function loadIdentifiers() {
+          const $titleInputField = document.getElementById('title');
+          const $selectIdentifiers = document.getElementById('identifier');
+          const $createInputField = document.getElementById('identifier-create');
+          const $itemIdentifier = document.getElementById('item-identifier');
+
           Promise.resolve().then(async () => {
-            const tasks = await Homey.api('GET', '/');
+            $titleInputField.value = '';
+            $createInputField.value = '';
+            $itemIdentifier.value = '';
+
+            const identifiers = await Homey.api('GET', '/identifiers');
+
+            $selectIdentifiers.innerHTML = '';
+            $noOption = document.createElement('option');
+            $noOption.innerHTML = '-';
+            $noOption.value = '-';
+            $selectIdentifiers.appendChild($noOption);
+
+            for (const identifier of identifiers) {
+              $option = document.createElement('option');
+              $option.value = identifier
+              $option.innerHTML = identifier;
+              $selectIdentifiers.appendChild($option);
+            }
+
+            $newOption = document.createElement('option');
+            $newOption.innerHTML = 'Create new identifier';
+            $newOption.value = '';
+            $selectIdentifiers.appendChild($newOption);
+
+            if (identifiers.length === 0) {
+                $createInputField.classList.remove("hidden"); 
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .finally();
+        }
+
+        function initialize() {
+          const $titleInputField = document.getElementById('title');
+          const $selectIdentifiers = document.getElementById('identifier');
+          const $createInputField = document.getElementById('identifier-create');
+          const $itemIdentifier = document.getElementById('item-identifier');
+          const $saveButton = document.getElementById('save');
+
+          /* Load Identifiers */
+          loadIdentifiers();
+
+          /* Show / Hide create identifier field */
+          $selectIdentifiers.addEventListener("change", function() {
+            if ($selectIdentifiers.value == "") {
+              $createInputField.classList.remove("hidden"); 
+            } else {
+              $createInputField.classList.add("hidden"); 
+            }
+            validateForm();
+          });
+
+          /* Observe Value */
+          $createInputField.addEventListener("input", function() {
+            validateForm();
+          });
+
+          $titleInputField.addEventListener("input", function() {
+            validateForm();
+          });
+
+          function validateForm() {
+            const title = $titleInputField.value.trim();
+            const identifier = ($selectIdentifiers.value == "") ? $createInputField.value.trim() : $selectIdentifiers.value;
+            const isValid = (title != "" && identifier != "");
+            if (isValid) {
+              $saveButton.classList.remove("is-disabled")
+            } else {
+              $saveButton.classList.add("is-disabled")
+            }
+          }
+
+          /* Save */
+          $saveButton.addEventListener("click", async () => {
+            const title = $titleInputField.value.trim();
+            const identifier = ($selectIdentifiers.value == "") ? $createInputField.value.trim() : ($selectIdentifiers.value == "-") ? undefined : $selectIdentifiers.value;
+            const itemIdentifier = ($itemIdentifier.value.trim() == "") ? undefined : $itemIdentifier.value.trim();
+            await Homey.api('POST', '/task', {'title': title, 'identifier': identifier, 'item': itemIdentifier});
+            loadIdentifiers();
+          });
+
+          reload();
+        }
+
+        function reload() {
+
+          /* Load Tasks */
+          Promise.resolve().then(async () => {
+            const tasks = await Homey.api('GET', '/tasks');
             $container.innerHTML = '';
             if (tasks.length === 0) {
               throw new Error(Homey.__('noOpenTasks'));
@@ -170,7 +268,7 @@
               $task.appendChild($date);
 
               $identifier = document.createElement('td');
-              $identifier.innerHTML = task.identifier;
+              $identifier.innerHTML = uuidRegex.test(task.identifier) ? '-' : task.identifier;
               $task.appendChild($identifier);
 
               $item = document.createElement('td');
@@ -190,9 +288,9 @@
 
               $button.addEventListener('click', async () => {
                 if (task.item === undefined) {
-                  await Homey.api('DELETE', '/' + task.identifier, {});
+                  await Homey.api('DELETE', '/task/' + task.identifier, {});
                 } else {
-                  await Homey.api('DELETE', '/' + task.identifier + '/' + task.item, {});
+                  await Homey.api('DELETE', '/task/' + task.identifier + '/' + task.item, {});
                 }
               });
               
@@ -217,7 +315,7 @@
         });
 
         Homey.ready();
-        reload();
+        initialize();
         setInterval(updateTime, 1000); 
       }
     </script>
