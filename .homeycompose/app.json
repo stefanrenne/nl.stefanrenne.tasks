@@ -101,6 +101,10 @@
     "getIdentifiers": {
       "method": "GET",
       "path": "/identifiers"
+    },
+    "getTags": {
+      "method": "GET",
+      "path": "/tags"
     }
   }
 }

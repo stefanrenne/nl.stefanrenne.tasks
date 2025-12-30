@@ -8,7 +8,7 @@ module.exports = {
   },
 
   async createTask({ homey, body }) {
-    homey.app.store.addTask(body.title, body.identifier, body.item);
+    homey.app.store.addTask(body.title, body.identifier, body.item, body.tag);
   },
 
   async deleteTask({ homey, params }) {
@@ -22,6 +22,11 @@ module.exports = {
   async getIdentifiers({ homey, query }) {
     await homey.app.updateAllIdentifiers();
     return Array.from(homey.app.allIdentifiers);
+  },
+
+  async getTags({ homey, query }) {
+    await homey.app.updateAllTags();
+    return Array.from(homey.app.allTags);
   },
 
 };

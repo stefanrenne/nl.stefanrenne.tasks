@@ -102,6 +102,10 @@
     "getIdentifiers": {
       "method": "GET",
       "path": "/identifiers"
+    },
+    "getTags": {
+      "method": "GET",
+      "path": "/tags"
     }
   },
   "flow": {
@@ -718,7 +722,7 @@
               "nl": "Label",
               "no": "Merkelapp",
               "de": "Etikett",
-              "sv": "Etikett"
+              "sv": "Märka"
             },
             "type": "autocomplete",
             "placeholder": {

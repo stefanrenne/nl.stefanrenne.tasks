@@ -15,5 +15,39 @@
     "month": " __value__ månad sedan",
     "months": " __value__ månader sedan",
     "year": " __value__ år sedan",
-    "years": " __value__ år sedan"
+    "years": " __value__ år sedan",
+    "settings": {
+        "tab": {
+            "about": "Om",
+            "list": "Lista",
+            "create": "Skapa",
+            "history": "Historik"
+        },
+        "about": {
+            "section1": {
+                "item1": "Tasks är en att göra lista app för Homey som låter dig automatiskt skapa och hantera dina uppgifter.",
+                "item2": "Hantera din uppgiftslista från dina Homey Flows och/eller med uppgiftswidgeten."
+            },
+            "section2": {
+                "item1": "Uppgifter kan skapas med en valfri identifierare från dina Homey Flows.",
+                "item2": "I Homey Flows kan du också slutföra uppgifter eller uppdatera uppgiftstexter när du har skapat en uppgift med en identifierare.",
+                "item3": "Från uppgifts-widgeten kan du se alla öppna uppgifter och slutföra dem en efter en genom att trycka på bockikonen. Detta gäller även uppgifter som inte har någon identifierare."
+            }
+        },
+       "list": {
+            "title": "Titel",
+            "date": "Datum",
+            "identifier": "Identifierare",
+            "item": "Objekt",
+            "tag": "Märka",
+            "action": "Åtgärd"
+        },
+        "create": {
+            "title": "Titel",
+            "identifier": "Identifierare",
+            "item": "Artikelidentifierare (frivillig)",
+            "tag": "Märka (frivillig)",
+            "save": "Skapa uppgift"
+        }
+    }
 }

@@ -1,4 +1,4 @@
-Tasks is een Homey-app voor je to-dolijst waarmee je automatisch taken kunt aanmaken en beheren. 
+Taken is een Homey-app voor je to-dolijst waarmee je automatisch taken kunt aanmaken en beheren. 
 Beheer je takenlijst vanuit je Homey Flows en/of met de takenwidget.
 
 Taken kunnen worden aangemaakt met een optionele ID vanuit je Homey Flows.

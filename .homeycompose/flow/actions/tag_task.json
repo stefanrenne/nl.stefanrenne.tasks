@@ -30,7 +30,7 @@
 			 "nl":"Label",
 			 "no":"Merkelapp",
 			 "de":"Etikett",
-			 "sv":"Etikett"
+			 "sv":"Märka"
 		  },
 		  "type":"autocomplete",
 		  "placeholder":{

@@ -15,5 +15,39 @@
     "month": " __value__ maand geleden",
     "months": " __value__ maanden geleden",
     "year": " __value__ jaar geleden",
-    "years": " __value__ jaren geleden"
+    "years": " __value__ jaren geleden",
+    "settings": {
+        "tab": {
+            "about": "Over",
+            "list": "Lijst",
+            "create": "Aanmaken",
+            "history": "Geschiedenis"
+        },
+        "about": {
+            "section1": {
+                "item1": "Taken is een Homey-app voor je to-dolijst waarmee je automatisch taken kunt aanmaken en beheren.",
+                "item2": "Beheer je takenlijst vanuit je Homey Flows en/of met de takenwidget."
+            },
+            "section2": {
+                "item1": "Taken kunnen worden aangemaakt met een optionele ID vanuit je Homey Flows.",
+                "item2": "In Homey Flows kun je ook taken voltooien of taak texten bijwerken wanneer je een taak hebt aangemaakt met een ID.",
+                "item3": "Vanuit de takenwidget kun je alle openstaande taken bekijken en taak voor taak voltooien door op het vinkje te drukken. Dit geldt ook voor taken zonder ID."
+            }
+        },
+        "list": {
+            "title": "Titel",
+            "date": "Datum",
+            "identifier": "ID",
+            "item": "Item",
+            "tag": "Label",
+            "action": "Actie"
+        },
+        "create": {
+            "title": "Titel",
+            "identifier": "ID",
+            "item": "Item-ID (optioneel)",
+            "tag": "Label (optioneel)",
+            "save": "Taak aanmaken"
+        }
+    }
 }

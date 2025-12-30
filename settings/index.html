@@ -23,6 +23,13 @@
       .hidden {
           display: none !important;
       }
+      .section {
+        padding-top: 20px;
+        margin: 0;
+      }
+      .linebreak {
+        margin: 0;
+      }
     </style>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
   </head>
@@ -30,24 +37,41 @@
 
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" data-page="page-open-tasks" href="#">Open Tasks</a>
+        <a class="nav-link active" data-page="page-about-tasks" href="#" data-i18n="settings.tab.about"></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-page="page-create-task" href="#">Create Task</a>
+        <a class="nav-link" data-page="page-list-tasks" href="#" data-i18n="settings.tab.list"></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-page="page-create-task" href="#" data-i18n="settings.tab.create"></a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" data-page="page-history" href="#" data-i18n="settings.tab-history"></a>
+      </li> -->
     </ul>
 
-    <!-- Page Open Tasks -->
-    <div id="page-open-tasks" class="page">
+    <!-- Page About -->
+    <div class="page" id="page-about-tasks">
+      
+      <p data-i18n="settings.about.section1.item1" class="section"></p>
+      <p data-i18n="settings.about.section1.item2" class="linebreak"></p>
+
+      <p data-i18n="settings.about.section2.item1" class="section"></p>
+      <p data-i18n="settings.about.section2.item2" class="linebreak"></p>
+      <p data-i18n="settings.about.section2.item3" class="linebreak"></p>
+    </div>
+
+    <!-- Page List Tasks -->
+    <div class="page hidden" id="page-list-tasks">
       <table class="table table-striped homey-form-group">
         <thead>
         <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Identifier</th>
-          <th>Item</th>
-          <th>Label</th>
-          <th>Action</th>
+          <th data-i18n="settings.list.title"></th>
+          <th data-i18n="settings.list.date"></th>
+          <th data-i18n="settings.list.identifier"></th>
+          <th data-i18n="settings.list.item"></th>
+          <th data-i18n="settings.list.tag"></th>
+          <th data-i18n="settings.list.action"></th>
         </tr>
         </thead>
         <tbody id="container"></tbody>
@@ -58,23 +82,31 @@
     <div class="page hidden" id="page-create-task">
       <fieldset class="homey-form-fieldset">
         <div class="homey-form-group">
-          <label class="homey-form-label" for="title">Title</label>
+          <label class="homey-form-label" for="title" data-i18n="settings.create.title"></label></label>
           <input class="homey-form-input" id="title" type="text" value="" />
         </div>
         <div class="homey-form-group">
-          <label class="homey-form-label" for="identifier">Identifier</label>
-          <select class="homey-form-select" name="select-example" id="identifier">
-            <option value="">Create new identifier</option>
-          </select>
+          <label class="homey-form-label" for="identifier" data-i18n="settings.create.identifier"></label>
+          <select class="homey-form-select" id="identifier"></select>
           <input class="homey-form-input hidden" id="identifier-create" type="text" value="" style="margin-top: 20px"/>
         </div>
         <div class="homey-form-group">
-          <label class="homey-form-label" for="item-identifier">Item Identifier (Optional)</label>
+          <label class="homey-form-label" for="item-identifier" data-i18n="settings.create.item"></label>
           <input class="homey-form-input" id="item-identifier" type="text" value="" />
+        </div>
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="tag" data-i18n="settings.create.tag"></label>
+          <select class="homey-form-select" id="tag"></select>
+          <input class="homey-form-input hidden" id="tag-create" type="text" value="" style="margin-top: 20px"/>
         </div>
       </fieldset>
 
-      <button id="save" class="homey-button-primary-full is-disabled">Create Task</button>
+      <button id="save" class="homey-button-primary-full is-disabled" data-i18n="settings.create.save"></button>
+    </div>
+
+    <!-- Page Create Task -->
+    <div class="page hidden" id="page-history">
+      TODO
     </div>
 
     <script type="text/javascript">
@@ -148,16 +180,21 @@
           return (seconds === 1) ? Homey.__('second', { value: seconds }) : Homey.__('seconds', { value: seconds });
         }
 
+        function clear() {
+          document.getElementById('title').innerHTML = '';
+          document.getElementById('identifier').innerHTML = '';
+          document.getElementById('identifier-create').innerHTML = '';
+          document.getElementById('item-identifier').innerHTML = '';
+          document.getElementById('tag').innerHTML = '';
+          document.getElementById('tag-create').innerHTML = '';
+        }
+
         function loadIdentifiers() {
-          const $titleInputField = document.getElementById('title');
           const $selectIdentifiers = document.getElementById('identifier');
-          const $createInputField = document.getElementById('identifier-create');
-          const $itemIdentifier = document.getElementById('item-identifier');
+          const $createIdentifier = document.getElementById('identifier-create');
 
           Promise.resolve().then(async () => {
-            $titleInputField.value = '';
-            $createInputField.value = '';
-            $itemIdentifier.value = '';
+            $createIdentifier.value = '';
 
             const identifiers = await Homey.api('GET', '/identifiers');
 
@@ -175,13 +212,42 @@
             }
 
             $newOption = document.createElement('option');
-            $newOption.innerHTML = 'Create new identifier';
+            $newOption.innerHTML = Homey.__('newIdentifier');
             $newOption.value = '';
             $selectIdentifiers.appendChild($newOption);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .finally();
+        }
 
-            if (identifiers.length === 0) {
-                $createInputField.classList.remove("hidden"); 
+        function loadTags() {
+          const $selectTags = document.getElementById('tag');
+          const $createTag = document.getElementById('tag-create');
+
+          Promise.resolve().then(async () => {
+            $createTag.value = '';
+
+            const labels = await Homey.api('GET', '/tags');
+
+            $selectTags.innerHTML = '';
+            $noOption = document.createElement('option');
+            $noOption.innerHTML = '-';
+            $noOption.value = '-';
+            $selectTags.appendChild($noOption);
+
+            for (const label of labels) {
+              $option = document.createElement('option');
+              $option.value = label
+              $option.innerHTML = label;
+              $selectTags.appendChild($option);
             }
+
+            $newOption = document.createElement('option');
+            $newOption.innerHTML = Homey.__('newTag');
+            $newOption.value = '';
+            $selectTags.appendChild($newOption);
           })
           .catch(err => {
             console.log(err);
@@ -192,25 +258,43 @@
         function initialize() {
           const $titleInputField = document.getElementById('title');
           const $selectIdentifiers = document.getElementById('identifier');
-          const $createInputField = document.getElementById('identifier-create');
+          const $createIdentifier = document.getElementById('identifier-create');
           const $itemIdentifier = document.getElementById('item-identifier');
+          const $selectTags = document.getElementById('tag');
+          const $createTag = document.getElementById('tag-create');
           const $saveButton = document.getElementById('save');
 
-          /* Load Identifiers */
+          /* Load Identifiers and tags */
+          clear();
           loadIdentifiers();
+          loadTags();
 
           /* Show / Hide create identifier field */
           $selectIdentifiers.addEventListener("change", function() {
             if ($selectIdentifiers.value == "") {
-              $createInputField.classList.remove("hidden"); 
+              $createIdentifier.classList.remove("hidden"); 
             } else {
-              $createInputField.classList.add("hidden"); 
+              $createIdentifier.classList.add("hidden"); 
+            }
+            validateForm();
+          });
+
+          /* Show / Hide create tag field */
+          $selectTags.addEventListener("change", function() {
+            if ($selectTags.value == "") {
+              $createTag.classList.remove("hidden"); 
+            } else {
+              $createTag.classList.add("hidden"); 
             }
             validateForm();
           });
 
           /* Observe Value */
-          $createInputField.addEventListener("input", function() {
+          $createIdentifier.addEventListener("input", function() {
+            validateForm();
+          });
+
+          $createTag.addEventListener("input", function() {
             validateForm();
           });
 
@@ -220,7 +304,7 @@
 
           function validateForm() {
             const title = $titleInputField.value.trim();
-            const identifier = ($selectIdentifiers.value == "") ? $createInputField.value.trim() : $selectIdentifiers.value;
+            const identifier = ($selectIdentifiers.value == "") ? $createIdentifier.value.trim() : $selectIdentifiers.value;
             const isValid = (title != "" && identifier != "");
             if (isValid) {
               $saveButton.classList.remove("is-disabled")
@@ -232,10 +316,13 @@
           /* Save */
           $saveButton.addEventListener("click", async () => {
             const title = $titleInputField.value.trim();
-            const identifier = ($selectIdentifiers.value == "") ? $createInputField.value.trim() : ($selectIdentifiers.value == "-") ? undefined : $selectIdentifiers.value;
+            const identifier = ($selectIdentifiers.value == "") ? $createIdentifier.value.trim() : ($selectIdentifiers.value == "-") ? undefined : $selectIdentifiers.value;
+            const tag = ($selectTags.value == "") ? $createTag.value.trim() : ($selectTags.value == "-") ? undefined : $selectTags.value;
             const itemIdentifier = ($itemIdentifier.value.trim() == "") ? undefined : $itemIdentifier.value.trim();
-            await Homey.api('POST', '/task', {'title': title, 'identifier': identifier, 'item': itemIdentifier});
+            await Homey.api('POST', '/task', {'title': title, 'identifier': identifier, 'item': itemIdentifier, 'tag': tag});
+            clear();
             loadIdentifiers();
+            loadTags();
           });
 
           reload();

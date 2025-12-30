@@ -15,5 +15,39 @@
     "month": " __value__ month ago",
     "months": " __value__ months ago",
     "year": " __value__ year ago",
-    "years": " __value__ years ago"
+    "years": " __value__ years ago",
+    "settings": {
+        "tab": {
+            "about": "About",
+            "list": "List",
+            "create": "Create",
+            "history": "History"
+        },
+        "about": {
+            "section1": {
+                "item1": "Tasks is a Homey to-do list app that allow you to automatically create and manages your tasks.",
+                "item2": "Manage your task list from your Homey Flows and/or with the task widget."
+            },
+            "section2": {
+                "item1": "Tasks can be created with an optional identifier from your Homey Flows.",
+                "item2": "In Homey Flows you can also complete tasks or update task texts when you have created a task with an identifier.",
+                "item3": "From the task widget you can view all open tasks and complete them task by task by pressing the checkmark icon. This also applies to tasks that don't have an identifier."
+            }
+        },
+        "list": {
+            "title": "Title",
+            "date": "Date",
+            "identifier": "Identifier",
+            "item": "Item",
+            "tag": "Label",
+            "action": "Action"
+        },
+        "create": {
+            "title": "Title",
+            "identifier": "Identifier",
+            "item": "Item Identifier (optional)",
+            "tag": "Label (optional)",
+            "save": "Create Task"
+        }
+    }
 }

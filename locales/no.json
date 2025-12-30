@@ -15,5 +15,39 @@
     "month": " __value__ måned siden",
     "months": " __value__ måneder siden",
     "year": " __value__ år siden",
-    "years": " __value__ år siden"
+    "years": " __value__ år siden",
+    "settings": {
+        "tab": {
+            "about": "Om",
+            "list": "Liste",
+            "create": "Opprett",
+            "history": "Historikk"
+        },
+        "about": {
+            "section1": {
+                "item1": "Tasks er en Homey app for gjøremålsliste som lar deg opprette og administrere oppgaver automatisk.",
+                "item2": "Administrer oppgavelisten din fra Homey Flows og/eller med oppgavewidgeten."
+            },
+            "section2": {
+                "item1": "Oppgaver kan opprettes med en valgfri identifikator fra Homey Flows.",
+                "item2": "I Homey Flows kan du også fullføre oppgaver eller oppdatere oppgavetekster når du har opprettet en oppgave med en identifikator.",
+                "item3": "Fra oppgavewidgeten kan du se alle åpne oppgaver og fullføre dem oppgave for oppgave ved å trykke på hakeikonet. Dette gjelder også oppgaver som ikke har en identifikator."
+            }
+        },
+        "list": {
+            "title": "Tittel",
+            "date": "Dato",
+            "identifier": "Identifikator",
+            "item": "Element",
+            "tag": "Merkelapp",
+            "action": "Handling"
+        },
+        "create": {
+            "title": "Tittel",
+            "identifier": "Identifikator",
+            "item": "Vareidentifikator (valgfri)",
+            "tag": "Merkelapp (valgfri)",
+            "save": "Opprett oppgave"
+        }
+    }
 }

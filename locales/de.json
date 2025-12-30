@@ -15,5 +15,39 @@
     "month": "vor __value__ Monat",
     "months": "vor __value__ Monaten",
     "year": "vor __value__ Jahr",
-    "years": "vor __value__ Jahren"
+    "years": "vor __value__ Jahren",
+    "settings": {
+        "tab": {
+            "about": "Über uns",
+            "list": "Liste",
+            "create": "Erstellen",
+            "history": "Verlauf"
+        },
+        "about": {
+            "section1": {
+                "item1": "Aufgaben ist eine Homey ToDo-Listen App die es Dir erlaubt automatisch Aufgaben zu erstellen und diese zu verwalten.",
+                "item2": "Verwalte Deine Aufgabenliste von Homey Flows und/oder mit dem Aufgaben-Widget."
+            },
+            "section2": {
+                "item1": "Aufgaben können mit einer optionalen Kennung (ID) aus deinen Homey-Flows erstellt werden.",
+                "item2": "Mit Homey Flows kannst Du Aufgaben abschließen oder den Text der Aufgabe aktualisieren, wenn sie eine Kennung besitzt.",
+                "item3": "Im Aufgaben-Widget kannst Du alle offenen Aufgaben sehen und durch Antippen des Häkchens als erledigt markieren. Das gilt auch für Aufgaben ohne Kennung."
+            }
+        },
+        "list": {
+            "title": "Titel",
+            "date": "Datum",
+            "identifier": "Kennung",
+            "item": "Element",
+            "tag": "Etikett",
+            "action": "Aktion"
+        },
+        "create": {
+            "title": "Titel",
+            "identifier": "Kennung",
+            "item": "Artikelkennung (optional)",
+            "tag": "Etikett (optional)",
+            "save": "Aufgabe erstellen"
+        }
+    }
 }
