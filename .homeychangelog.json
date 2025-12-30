@@ -31,5 +31,8 @@
   },
   "1.2.0": {
     "en": "Added the ability to specific a item id for a identifier. Allowing you to use variables or complete a set of tasks with the same identifier."
+  },
+  "1.2.1": {
+    "en": "Added the ability to create and manage tasks from the settings screen."
   }
 }
