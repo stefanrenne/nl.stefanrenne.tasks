@@ -6,6 +6,9 @@ Tasks can be created with an optional identifier from your Homey Flows.
 In Homey Flows you can also complete tasks or update task texts when you have created a task with an identifier.
 From the task widget you can view all open tasks and complete them task by task by pressing the checkmark icon. This also applies to tasks that don't have an identifier.
 
+## Support
+[Homey Community Forum](https://community.homey.app/t/app-pro-tasks/135410)
+
 ## Help support new languages
 Please create a pr with a new translation for the following files:
 
