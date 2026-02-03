@@ -34,5 +34,8 @@
   },
   "1.2.1": {
     "en": "Added the ability to create and manage tasks from the settings screen."
-  }
+  },
+  "1.2.2": {
+    "en": "Fixed a bug where the widget would sometimes show a tag error."
+  },
 }

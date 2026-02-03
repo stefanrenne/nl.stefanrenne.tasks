@@ -94,9 +94,10 @@
 
         function reload() {
           Promise.resolve().then(async () => {
+            const tag = Homey.getSettings()['tag'];
             let parameter = '/'
-            if (typeof Homey.getSettings()['tag']['name'] !== 'undefined' && Homey.getSettings()['tag']['name'] !== "-") {
-              parameter += Homey.getSettings()['tag']['name']
+            if (tag !== undefined && typeof tag['name'] !== 'undefined' && tag['name'] !== "-") {
+              parameter += tag['name']
             }
             const tasks = await Homey.api('GET', parameter, {});
             $container.innerHTML = '';
