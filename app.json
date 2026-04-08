@@ -65,6 +65,9 @@
   },
   "contributing": {
     "donate": {
+      "paypal": {
+        "username": "srenne1"
+      },
       "githubSponsors": {
         "username": "stefanrenne"
       }
