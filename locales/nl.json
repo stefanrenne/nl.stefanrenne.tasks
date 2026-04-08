@@ -40,7 +40,12 @@
             "identifier": "ID",
             "item": "Item",
             "tag": "Label",
-            "action": "Actie"
+            "action": "Actie",
+            "actions": {
+                "lock": "Taak vergrendelen",
+                "unlock": "Taak ontgrendelen",
+                "complete": "Taak voltooien"
+            }
         },
         "create": {
             "title": "Titel",

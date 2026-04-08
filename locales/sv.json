@@ -40,7 +40,12 @@
             "identifier": "Identifierare",
             "item": "Objekt",
             "tag": "Märka",
-            "action": "Åtgärd"
+            "action": "Åtgärd",
+            "actions": {
+                "lock": "Lås uppgift",
+                "unlock": "Lås upp uppgift",
+                "complete": "Slutför uppgiften"
+            }
         },
         "create": {
             "title": "Titel",

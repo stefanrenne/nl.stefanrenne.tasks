@@ -40,7 +40,12 @@
             "identifier": "Identifier",
             "item": "Item",
             "tag": "Label",
-            "action": "Action"
+            "action": "Action",
+            "actions": {
+                "lock": "Lock task",
+                "unlock": "Unlock task",
+                "complete": "Complete task"
+            }
         },
         "create": {
             "title": "Title",

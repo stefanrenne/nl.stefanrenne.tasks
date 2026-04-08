@@ -10,6 +10,7 @@ export interface Task {
     identifier: string;
     item: string | undefined;
     tag: string | undefined;
+    locked: boolean;
 }
 
 export class Store {
@@ -60,7 +61,27 @@ export class Store {
         } else {
             this.taskOnCreate?.trigger({ title: title, identifier: newIdentifier, item: item ?? "" });
         }
-        newResult.push({title: title, date: new Date(), identifier: newIdentifier, item: item, tag: tag});
+        newResult.push({title: title, date: new Date(), identifier: newIdentifier, item: item, tag: tag, locked: false});
+        this.setTasks(newResult);
+    }
+
+    lockTaskByIdentifier(identifier: string, item: string | undefined = undefined) {
+        let newResult = this.getTasks().map((task) => {
+            if (task.identifier === identifier && (!item || task.item === item)) {
+                task.locked = true
+            }
+            return task
+        });
+        this.setTasks(newResult);
+    }
+
+    unlockTaskByIdentifier(identifier: string, item: string | undefined = undefined) {
+        let newResult = this.getTasks().map((task) => {
+            if (task.identifier === identifier && (!item || task.item === item)) {
+                task.locked = false
+            }
+            return task
+        });
         this.setTasks(newResult);
     }
 
@@ -94,6 +115,6 @@ export class Store {
             }
             return task
         });
-        this.setTasks(newResult);        
+        this.setTasks(newResult);
     }
 }

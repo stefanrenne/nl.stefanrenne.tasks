@@ -40,7 +40,12 @@
             "identifier": "Kennung",
             "item": "Element",
             "tag": "Etikett",
-            "action": "Aktion"
+            "action": "Aktion",
+            "actions": {
+                "lock": "Sperraufgabe",
+                "unlock": "Aufgabe freischalten",
+                "complete": "Aufgabe abschließen"
+            }
         },
         "create": {
             "title": "Titel",

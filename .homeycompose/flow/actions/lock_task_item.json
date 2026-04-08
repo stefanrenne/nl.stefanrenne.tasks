@@ -1,0 +1,64 @@
+{
+	"id":"lock_task_item",
+	"title":{
+	   "en":"Lock task for item",
+	   "nl":"Vergrendel taak voor item",
+	   "no":"Lås oppgave for element",
+	   "de":"Sperraufgabe für Artikel",
+	   "sv":"Lås uppgift för objekt"
+	},
+	"titleFormatted":{
+	   "en":"Lock [[identifier]] task for [[item]]",
+	   "nl":"Vergrendel [[identifier]] taak voor [[item]]",
+	   "no":"Lås [[identifier]]-oppgave for [[item]]",
+	   "de":"Sperre die Aufgabe [[identifier]] für [[item]]",
+	   "sv":"Lås [[identifier]]-uppgift för [[item]]"
+	},
+	"hint":{
+	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+	   "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+	   "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+	   "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+	   "sv":"Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
+	},
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung",
+			 "sv":"Identifierare"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   },
+	   {
+		  "name":"item",
+		  "required":true,
+		  "type":"text",
+		  "title":{
+			 "en":"Item identifier",
+			 "nl":"Item-ID",
+			 "no":"Vareidentifikator",
+			 "de":"Artikelkennung",
+			 "sv":"Artikelidentifierare"
+		  },
+		  "placeholder":{
+			 "en":"Create item identifier",
+			 "nl":"Item-ID aanmaken",
+			 "no":"Opprett vareidentifikator",
+			 "de":"Artikelkennung erstellen",
+			 "sv":"Skapa artikelidentifierare"
+		  }
+	   }
+	]
+ }

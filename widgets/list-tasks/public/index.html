@@ -136,18 +136,20 @@
               }
               $task.appendChild($body);
 
-              $icon = document.createElement('div');
-              $icon.classList.add('homey-custom-icon-checkmark');
-              $task.appendChild($icon);
+              if (!task.locked) {
+                $icon = document.createElement('div');
+                $icon.classList.add('homey-custom-icon-checkmark');
+                $task.appendChild($icon);
 
-              $icon.addEventListener('click', async () => {
-                Homey.hapticFeedback();
-                if (task.item === undefined) {
-                  await Homey.api('DELETE', '/' + task.identifier, {});
-                } else {
-                  await Homey.api('DELETE', '/' + task.identifier + '/' + task.item, {});
-                }
-              });
+                $icon.addEventListener('click', async () => {
+                  Homey.hapticFeedback();
+                  if (task.item === undefined) {
+                    await Homey.api('DELETE', '/' + task.identifier, {});
+                  } else {
+                    await Homey.api('DELETE', '/' + task.identifier + '/' + task.item, {});
+                  }
+                });
+              }
               
               $tasks.appendChild($task);
             }

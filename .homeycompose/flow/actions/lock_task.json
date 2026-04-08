@@ -1,0 +1,45 @@
+{
+	"id":"lock_task",
+	"title":{
+	   "en":"Lock task",
+	   "nl":"Vergrendel taak",
+	   "no":"Lås oppgave",
+	   "de":"Sperraufgabe",
+	   "sv":"Lås uppgift"
+	},
+	"titleFormatted":{
+	   "en":"Lock [[identifier]] task",
+	   "nl":"Vergrendel [[identifier]] taak",
+	   "no":"Lås [[identifier]]-oppgave",
+	   "de":"Sperre die Aufgabe [[identifier]]",
+	   "sv":"Lås [[identifier]]-uppgift"
+	},
+	"hint":{
+	   "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+	   "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+	   "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+	   "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+	   "sv":"Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
+	},
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":true,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung",
+			 "sv":"Identifierare"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   }
+	]
+ }

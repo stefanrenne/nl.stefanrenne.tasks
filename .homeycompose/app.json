@@ -1,6 +1,6 @@
 {
   "id": "nl.stefanrenne.tasks",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "compatibility": ">=12.1.2",
   "sdk": 3,
   "platforms": [
@@ -100,6 +100,22 @@
     "deleteTaskItem": {
       "method": "DELETE",
       "path": "/task/:id/:item"
+    },
+    "lockTask": {
+      "method": "POST",
+      "path": "/lock/:id"
+    },
+    "lockTaskItem": {
+      "method": "POST",
+      "path": "/lock/:id/:item"
+    },
+    "unlockTask": {
+      "method": "POST",
+      "path": "/unlock/:id"
+    },
+    "unlockTaskItem": {
+      "method": "POST",
+      "path": "/unlock/:id/:item"
     },
     "getIdentifiers": {
       "method": "GET",

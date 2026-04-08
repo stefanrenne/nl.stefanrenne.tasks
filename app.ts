@@ -17,6 +17,8 @@ module.exports = class MyApp extends Homey.App {
     await this.updateAllIdentifiers();
     await this.updateAllTags();
     this.registerTagTaskListeners();
+    this.registerLockTaskListeners();
+    this.registerUnlockTaskListeners();
     this.registerUntagTaskListener();
     this.registerOpenTaskListeners();
     this.registerCreateTaskListeners();
@@ -230,6 +232,34 @@ module.exports = class MyApp extends Homey.App {
         json,
         count
       };
+    });
+  }
+
+  registerLockTaskListeners() {
+    [
+      this.homey.flow.getActionCard('lock_task'),
+      this.homey.flow.getActionCard('lock_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, false);
+      card.registerRunListener((args) => {
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        this.store.lockTaskByIdentifier(args.identifier.name, item);
+        return {};
+      });
+    });
+  }
+
+  registerUnlockTaskListeners() {
+    [
+      this.homey.flow.getActionCard('unlock_task'),
+      this.homey.flow.getActionCard('unlock_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, false);
+      card.registerRunListener((args) => {
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        this.store.unlockTaskByIdentifier(args.identifier.name, item);
+        return {};
+      });
     });
   }
 

@@ -4,18 +4,53 @@
     <link rel="stylesheet" type="text/css" href="./bootstrap.min.css" />
     <script src="./bootstrap.min.js"></script>
     <style>
-      td button {
-        -webkit-mask-image: url('./checkmark.svg');
-        mask-image: url('./checkmark.svg');
-        mask-size: 25px !important;
-        mask-repeat: no-repeat;
-        mask-position: center;
-        background-color: green !important;
-        min-height: 25px;
-        min-width: 25px;
+      td a {
+          cursor: pointer;
+          display: inherit;
+          height: 35px;
+          width: 35px;
+          border-radius: 17.5px;
+          padding: 7.5px;
+      }
+      td span.spacer {
+          display: inherit;
+          width: 5px;
+      }
+      td a span {
+          display: block;
+          mask-size: 20px;
+          mask-size: auto;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          min-height: 20px;
+          min-width: 20px;
+      }
+      td a.checkmark {
+          background-color: green;
+      }
+      td a.checkmark span {
+          -webkit-mask-image: url('./checkmark.svg');
+          mask-image: url('./checkmark.svg');
+          background-color: white;
+      }
+      td a.lock {
+          background-color: darkred;
+      }
+      td a.lock span {
+          -webkit-mask-image: url('./lock.closed.svg');
+          mask-image: url('./lock.closed.svg');
+          background-color: white;
+      }
+      td a.unlock {
+          background-color: green;
+      }
+      td a.unlock span {
+          -webkit-mask-image: url('./lock.open.svg');
+          mask-image: url('./lock.open.svg');
+          background-color: white;
       }
       td.action {
-        width: 50px;
+        width: 96px;
       }
       td.center {
         text-align: center
@@ -370,16 +405,56 @@
               $action.classList.add('action');
               $task.appendChild($action);
 
-              $button = document.createElement('button');
-              $action.appendChild($button);
+              if (task.locked) {
 
-              $button.addEventListener('click', async () => {
-                if (task.item === undefined) {
-                  await Homey.api('DELETE', '/task/' + task.identifier, {});
-                } else {
-                  await Homey.api('DELETE', '/task/' + task.identifier + '/' + task.item, {});
-                }
-              });
+                $unlock = document.createElement('a');
+                $unlock.title = Homey.__('settings.list.actions.unlock');
+                $unlock.classList.add('unlock');
+                $action.appendChild($unlock);
+                $unlockMask = document.createElement('span');
+                $unlock.appendChild($unlockMask);
+                $unlock.addEventListener('click', async () => {
+                  if (task.item === undefined) {
+                    await Homey.api('POST', '/unlock/' + task.identifier, {});
+                  } else {
+                    await Homey.api('POST', '/unlock/' + task.identifier + '/' + task.item, {});
+                  }
+                });
+                
+              } else {
+                
+                $lock = document.createElement('a');
+                $lock.title = Homey.__('settings.list.actions.lock');
+                $lock.classList.add('lock');
+                $action.appendChild($lock);
+                $lockMask = document.createElement('span');
+                $lock.appendChild($lockMask);
+                $lock.addEventListener('click', async () => {
+                  if (task.item === undefined) {
+                    await Homey.api('POST', '/lock/' + task.identifier, {});
+                  } else {
+                    await Homey.api('POST', '/lock/' + task.identifier + '/' + task.item, {});
+                  }
+                });
+
+                $spacer = document.createElement('span');
+                $spacer.classList.add('spacer');
+                $action.appendChild($spacer);
+
+                $check = document.createElement('a');
+                $check.title = Homey.__('settings.list.actions.complete');
+                $check.classList.add('checkmark');
+                $action.appendChild($check);
+                $checkMask = document.createElement('span');
+                $check.appendChild($checkMask);
+                $check.addEventListener('click', async () => {
+                  if (task.item === undefined) {
+                    await Homey.api('DELETE', '/task/' + task.identifier, {});
+                  } else {
+                    await Homey.api('DELETE', '/task/' + task.identifier + '/' + task.item, {});
+                  }
+                });
+              }
               
               $container.appendChild($task);
             }

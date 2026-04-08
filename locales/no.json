@@ -40,7 +40,12 @@
             "identifier": "Identifikator",
             "item": "Element",
             "tag": "Merkelapp",
-            "action": "Handling"
+            "action": "Handling",
+            "actions": {
+                "lock": "Lås oppgave",
+                "unlock": "Lås opp oppgaven",
+                "complete": "Fullfør oppgaven"
+            }
         },
         "create": {
             "title": "Tittel",
