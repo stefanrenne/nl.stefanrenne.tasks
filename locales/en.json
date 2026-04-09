@@ -1,4 +1,5 @@
 {
+    "noMatchedTask": "No open task found.",
     "newIdentifier": "Create new identifier",
     "newTag": "Create new label",
     "deleteTag": "Remove label",

@@ -161,7 +161,8 @@ module.exports = class MyApp extends Homey.App {
       this.registerIdentifierAutocompleteListenerForCard(card, false)
       card.registerRunListener((args) => {
         const identifier: string = args.identifier.name;
-        return this.store.getTasks().some((element) => element.identifier === identifier);
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        return this.store.getTasks().some((element) => element.identifier === identifier && (!item || element.item === item));
       });
     });
   }
@@ -174,7 +175,12 @@ module.exports = class MyApp extends Homey.App {
       this.registerIdentifierAutocompleteListenerForCard(card, false)
       card.registerRunListener((args) => {
         const identifier: string = args.identifier.name;
-        return this.store.getTasks().find((element) => element.identifier === identifier)?.locked === true;
+        const item: string | undefined = (args.item) ? args.item : undefined;
+        const matches = this.store.getTasks().filter((element) => element.identifier === identifier && (!item || element.item === item));
+        if (matches.length === 0) {
+          throw this.homey.__('noMatchedTask');
+        }
+        return matches.some((element) => element.locked === true);
       });
     });
   }

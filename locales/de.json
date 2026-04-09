@@ -1,4 +1,5 @@
 {
+    "noMatchedTask": "Es wurde keine offene Aufgabe gefunden.",
     "newIdentifier": "Neue Kennung erstellen",
     "newTag": "Neues Etikett erstellen",
     "deleteTag": "Etikett entfernen",
