@@ -1,0 +1,38 @@
+{
+	"id":"locked_task",
+	"title":{
+	   "en":"Task is !{{locked|unlocked}}",
+	   "nl":"Taak is !{{vergrendeld|ontgrendeld}}",
+	   "no":"Oppgave er !{{låst|ulåst}}",
+	   "de":"Aufgabe ist !{{gesperrt|entsperrt}}}",
+	   "sv":"Uppgift är !{{låst|olåst}}"
+	},
+	"titleFormatted":{
+	   "en":"[[identifier]] task is !{{locked|unlocked}}",
+	   "nl":"[[identifier]] taak is !{{vergrendeld|ontgrendeld}}",
+	   "no":"[[identifier]] oppgave er !{{låst|ulåst}}",
+	   "de":"Aufgabe mit [[identifier]] ist !{{gesperrt|entsperrt}}",
+	   "sv":"[[identifier]] uppgift är !{{låst|olåst}}"
+	},
+	"args":[
+	   {
+		  "name":"identifier",
+		  "required":false,
+		  "type":"autocomplete",
+		  "title":{
+			 "en":"Identifier",
+			 "nl":"ID",
+			 "no":"Identifikator",
+			 "de":"Kennung",
+			 "sv":"Identifierare"
+		  },
+		  "placeholder":{
+			 "en":"Pick or type",
+			 "nl":"Kies of typ",
+			 "no":"Velg eller skriv",
+			 "de":"Auswählen oder eingeben",
+			 "sv":"Välj eller skriv"
+		  }
+	   }
+	]
+ }

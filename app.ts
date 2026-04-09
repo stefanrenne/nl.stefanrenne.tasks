@@ -21,6 +21,7 @@ module.exports = class MyApp extends Homey.App {
     this.registerUnlockTaskListeners();
     this.registerUntagTaskListener();
     this.registerOpenTaskListeners();
+    this.registerLockedTaskListeners();
     this.registerCreateTaskListeners();
     this.registerCompleteTaskListeners();
     this.registerCompleteMarkedTasksListeners();
@@ -165,6 +166,19 @@ module.exports = class MyApp extends Homey.App {
     });
   }
 
+  registerLockedTaskListeners() {
+    [
+      this.homey.flow.getConditionCard('locked_task'),
+      this.homey.flow.getConditionCard('locked_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, false)
+      card.registerRunListener((args) => {
+        const identifier: string = args.identifier.name;
+        return this.store.getTasks().find((element) => element.identifier === identifier)?.locked === true;
+      });
+    });
+  }
+
   registerCreateTaskListeners() {
     [
       this.homey.flow.getActionCard('create_task'),
@@ -225,7 +239,7 @@ module.exports = class MyApp extends Homey.App {
   registerGetAllTasksListeners() {
     const card = this.homey.flow.getActionCard('get_all')
     card.registerRunListener((args) => {
-      const tasks = this.store.getTasks().map((element) => ({ title: element.title, date: element.date }));
+      const tasks = this.store.getTasks().map((element) => ({ title: element.title, date: element.date, locked: element.locked, tag: element.tag ?? '' }));
       const count = tasks.length;
       const json = JSON.stringify(tasks)
       return {
