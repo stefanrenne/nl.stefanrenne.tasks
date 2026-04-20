@@ -33,14 +33,14 @@ export class Store {
 
     getTasks(): Task[] {
         const result = this.homey.settings.get('tasks') ?? [];
-        console.log("=== GET ===");
-        console.log(result);
+        this.homey.log("=== GET ===");
+        this.homey.log(result);
         return result
     }
     
     setTasks(tasks: Task[]) {
-        console.log("=== SET ===");
-        console.log(tasks);
+        this.homey.log("=== SET ===");
+        this.homey.log(tasks);
         this.homey.settings.set('tasks', tasks);
         this.homey.api.realtime('didUpdateTasks', tasks);
     }

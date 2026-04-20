@@ -1,7 +1,5 @@
 'use strict';
 
-import { Task, Store } from './lib/storage';
-
 module.exports = {
   async getTasks({ homey, query }) {
     return homey.app.store.getTasks().sort((a, b) => new Date(b.date) - new Date(a.date))
