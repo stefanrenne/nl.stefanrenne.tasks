@@ -1,10 +1,7 @@
-'use strict';
-
 import Homey from 'homey';
-import {v4 as uuidv4} from 'uuid';
 import { Task, Store } from './lib/storage';
 
-module.exports = class MyApp extends Homey.App {
+module.exports = class TasksApp extends Homey.App {
 
   private allIdentifiers = new Set<string>();
   private allTags = new Set<string>();

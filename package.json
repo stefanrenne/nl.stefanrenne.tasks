@@ -2,23 +2,18 @@
   "name": "nl.stefanrenne.tasks",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
   },
   "devDependencies": {
-    "@tsconfig/node16": "^16.1.8",
-    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.10",
+    "@tsconfig/node22": "^22.0.5",
+    "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12",
     "@types/node": "^25.6.0",
-    "typescript": "^5.7.3"
+    "eslint": "^10.2.1",
+    "eslint-config-athom": "^3.1.5",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "uuid": "^11.0.5"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stefanrenne/nl.stefanrenne.tasks.git"
-  },
-  "author": "Stefan Renne",
-  "bugs": {
-    "url": "https://github.com/stefanrenne/nl.stefanrenne.tasks/issues"
+    "uuid": "^14.0.0"
   }
 }
