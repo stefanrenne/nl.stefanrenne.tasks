@@ -15,5 +15,10 @@
   },
   "dependencies": {
     "uuid": "^14.0.1"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^9.0.7"
+    }
   }
 }
