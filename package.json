@@ -3,22 +3,19 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tsconfig/node22": "^22.0.5",
     "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12",
     "@types/node": "^26.1.2",
     "eslint": "^10.8.0",
-    "eslint-config-athom": "^3.1.5",
-    "typescript": "^7.0.2"
+    "globals": "^17.7.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0"
   },
   "dependencies": {
-    "uuid": "^14.0.1"
-  },
-  "overrides": {
-    "@typescript-eslint/typescript-estree": {
-      "minimatch": "^9.0.7"
-    }
+    "@seald-io/nedb": "^4.1.2"
   }
 }

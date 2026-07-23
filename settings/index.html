@@ -26,11 +26,19 @@
           min-width: 20px;
       }
       td a.checkmark {
-          background-color: green;
+          background-color: darkblue;
       }
       td a.checkmark span {
           -webkit-mask-image: url('./checkmark.svg');
           mask-image: url('./checkmark.svg');
+          background-color: white;
+      }
+      td a.trash {
+          background-color: darkred;
+      }
+      td a.trash span {
+          -webkit-mask-image: url('./trash.svg');
+          mask-image: url('./trash.svg');
           background-color: white;
       }
       td a.lock {
@@ -65,6 +73,31 @@
       .linebreak {
         margin: 0;
       }
+      h2 {
+        font-size: var(--homey-font-size-default) !important;
+        font-weight: var(--homey-font-weight-regular) !important;
+        margin-top: var(--homey-su-2) !important;
+        margin-bottom: var(--homey-su-1) !important;
+      }
+      input.homey-form-input[type="datetime-local"] {
+        width: calc( 100% - 2px );
+        appearance: none;
+        display: block;
+        box-sizing: border-box;
+        margin: 0 1px;
+        background: var(--homey-color-component);
+        padding: var(--homey-su-1);
+        border-radius: var(--homey-border-radius-small);
+        font-size: var(--homey-font-size-default);
+        line-height: 24px;
+        color: var(--homey-color-text);
+        border: none;
+        box-shadow: 0 0 0 1px var(--homey-color-line);
+        transition: var(--homey-duration-fast) var(--homey-curve-fast-in);
+        transition-property: box-shadow, color;
+        -webkit-tap-highlight-color: transparent;
+        text-align: start;
+      }
     </style>
     <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
   </head>
@@ -98,7 +131,9 @@
 
     <!-- Page List Tasks -->
     <div class="page hidden" id="page-list-tasks">
-      <table class="table table-striped homey-form-group">
+
+      <h2>Open tasks</h2>
+      <table class="table table-striped homey-form-group" style="margin-top: 0">
         <thead>
         <tr>
           <th data-i18n="settings.list.title"></th>
@@ -109,7 +144,22 @@
           <th data-i18n="settings.list.action"></th>
         </tr>
         </thead>
-        <tbody id="container"></tbody>
+        <tbody id="open-container"></tbody>
+      </table>
+
+      <h2>Future tasks</h2>
+      <table class="table table-striped homey-form-group" style="margin-top: 0">
+        <thead>
+        <tr>
+          <th data-i18n="settings.list.title"></th>
+          <th data-i18n="settings.list.date"></th>
+          <th data-i18n="settings.list.identifier"></th>
+          <th data-i18n="settings.list.item"></th>
+          <th data-i18n="settings.list.tag"></th>
+          <th data-i18n="settings.list.action"></th>
+        </tr>
+        </thead>
+        <tbody id="future-container"></tbody>
       </table>
     </div>
 
@@ -119,6 +169,14 @@
         <div class="homey-form-group">
           <label class="homey-form-label" for="title" data-i18n="settings.create.title"></label></label>
           <input class="homey-form-input" id="title" type="text" value="" />
+        </div>
+        <div class="homey-form-group">
+          <label class="homey-form-label" for="scheduleDate" data-i18n="settings.create.schedule"></label>
+          <select class="homey-form-select" id="scheduleDate">
+            <option value="0" data-i18n="settings.create.scheduleNow"></option>
+            <option value="1" data-i18n="settings.create.scheduleFuture"></option>
+          </select>
+          <input class="homey-form-input hidden" id="futureDate" type="datetime-local" value="" style="margin-top: 20px"/>
         </div>
         <div class="homey-form-group">
           <label class="homey-form-label" for="identifier" data-i18n="settings.create.identifier"></label>
@@ -171,9 +229,33 @@
     </script>
 
     <script type="text/javascript">
-      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
-      const $container = document.getElementById('container');
+      const $openContainer = document.getElementById('open-container');
+      const $futureContainer = document.getElementById('future-container');
       function onHomeyReady(Homey) {
+
+        function getMinDate() {
+           const minDate = new Date();
+          minDate.setMinutes(minDate.getMinutes() + 1);
+
+          const yyyy = minDate.getFullYear();
+          const mm = String(minDate.getMonth() + 1).padStart(2, '0');
+          const dd = String(minDate.getDate()).padStart(2, '0');
+          const hh = String(minDate.getHours()).padStart(2, '0');
+          const min = String(minDate.getMinutes()).padStart(2, '0');
+          return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
+        }
+
+        function getExampleFutureDate() {
+           const minDate = new Date();
+          minDate.setHours(minDate.getHours() + 1);
+
+          const yyyy = minDate.getFullYear();
+          const mm = String(minDate.getMonth() + 1).padStart(2, '0');
+          const dd = String(minDate.getDate()).padStart(2, '0');
+          const hh = String(minDate.getHours()).padStart(2, '0');
+          const min = String(minDate.getMinutes()).padStart(2, '0');
+          return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
+        }
 
         function updateTime() {
           document.querySelectorAll("td.date").forEach(function(task) {
@@ -182,46 +264,47 @@
         }
 
         function timeSince(date) {
-          var seconds = Math.floor((new Date() - Date.parse(date)) / 1000);
+
+          const TIME_UNITS = [
+            [31536000, 'year', 'years'],
+            [2592000, 'month', 'months'],
+            [86400, 'day', 'days'],
+            [3600, 'hour', 'hours'],
+            [60, 'minute', 'minutes'],
+          ];
+
+          const diffMs = Date.now() - Date.parse(date);
+          const isFuture = diffMs < 0;
+          const seconds = Math.floor(Math.abs(diffMs) / 1000);
+
           if (seconds === 0) {
             return Homey.__('now');
           }
 
-          var interval = seconds / 31536000;
-          if (interval > 1) {
-            const years = Math.floor(interval);
-            return (years === 1) ? Homey.__('year', { value: years }) : Homey.__('years', { value: years });
+          for (const [unitSeconds, singular, plural] of TIME_UNITS) {
+            const interval = seconds / unitSeconds;
+            if (interval >= 1) {
+              const value = Math.floor(interval);
+              const key = value === 1 ? singular : plural;
+              return Homey.__(isFuture ? `time.from.${key}` : `time.untill.${key}`, { value });
+            }
           }
-          interval = seconds / 2592000;
-          if (interval > 1) {
-            const months = Math.floor(interval);
-            return (months === 1) ? Homey.__('month', { value: months }) : Homey.__('months', { value: months });
-          }
-          interval = seconds / 86400;
-          if (interval > 1) {
-            const days = Math.floor(interval);
-            return (days === 1) ? Homey.__('day', { value: days }) : Homey.__('days', { value: days });
-          }
-          interval = seconds / 3600;
-          if (interval > 1) {
-            const hours = Math.floor(interval);
-            return (hours === 1) ? Homey.__('hour', { value: hours }) : Homey.__('hours', { value: hours });
-          }
-          interval = seconds / 60;
-          if (interval > 1) {
-            const minutes = Math.floor(interval);
-            return (minutes === 1) ? Homey.__('minute', { value: minutes }) : Homey.__('minutes', { value: minutes });
-          }
-          return (seconds === 1) ? Homey.__('second', { value: seconds }) : Homey.__('seconds', { value: seconds });
+
+          const key = seconds === 1 ? 'second' : 'seconds';
+          return Homey.__(isFuture ? `time.from.${key}` : `time.untill.${key}`, { value: seconds });
         }
 
         function clear() {
           document.getElementById('title').value = '';
           document.getElementById('identifier').innerHTML = '';
+          document.querySelector("#scheduleDate option[value='0']").selected = true;
+          document.getElementById('futureDate').value = '';
+          document.getElementById('futureDate').classList.add("hidden"); 
           document.getElementById('identifier-create').value = '';
           document.getElementById('item-identifier').value = '';
           document.getElementById('tag').innerHTML = '';
           document.getElementById('tag-create').value = '';
+          document.getElementById('tag-create').classList.add("hidden"); 
         }
 
         function loadIdentifiers() {
@@ -294,6 +377,8 @@
           const $titleInputField = document.getElementById('title');
           const $selectIdentifiers = document.getElementById('identifier');
           const $createIdentifier = document.getElementById('identifier-create');
+          const $scheduleDate = document.getElementById('scheduleDate');
+          const $futureDate = document.getElementById('futureDate');
           const $itemIdentifier = document.getElementById('item-identifier');
           const $selectTags = document.getElementById('tag');
           const $createTag = document.getElementById('tag-create');
@@ -314,6 +399,20 @@
             validateForm();
           });
 
+          /* Show / Hide create date field */
+          $scheduleDate.addEventListener("change", function() {
+            if ($scheduleDate.value === "1") {
+              $futureDate.classList.remove("hidden"); 
+              $futureDate.min = getMinDate();
+              if ($futureDate.value == '') {
+                $futureDate.value = getExampleFutureDate();
+              }
+            } else {
+              $futureDate.classList.add("hidden"); 
+            }
+            validateForm();
+          });
+
           /* Show / Hide create tag field */
           $selectTags.addEventListener("change", function() {
             if ($selectTags.value == "") {
@@ -329,6 +428,10 @@
             validateForm();
           });
 
+          $futureDate.addEventListener("input", function() {
+            validateForm();
+          });
+
           $createTag.addEventListener("input", function() {
             validateForm();
           });
@@ -338,9 +441,19 @@
           });
 
           function validateForm() {
+            const now = new Date();
             const title = $titleInputField.value.trim();
-            const identifier = ($selectIdentifiers.value == "") ? $createIdentifier.value.trim() : $selectIdentifiers.value;
-            const isValid = (title != "" && identifier != "");
+            const identifier = ($selectIdentifiers.value === "") ? $createIdentifier.value.trim() : $selectIdentifiers.value;
+            const selectedDate = $scheduleDate.value === "0" ? new Date() : new Date($futureDate.value);
+
+            // if (selectedDate < now) {
+            //   $futureDate.setCustomValidity('Please select a future date and time.');
+            // } else {
+            //   $futureDate.setCustomValidity('');
+            // }
+            // $futureDate.reportValidity();
+
+            const isValid = (title != "" && identifier != "" && selectedDate >= now);
             if (isValid) {
               $saveButton.classList.remove("is-disabled")
             } else {
@@ -350,11 +463,15 @@
 
           /* Save */
           $saveButton.addEventListener("click", async () => {
+            if ($saveButton.classList.contains("is-disabled")) {
+              return;
+            }
             const title = $titleInputField.value.trim();
-            const identifier = ($selectIdentifiers.value == "") ? $createIdentifier.value.trim() : ($selectIdentifiers.value == "-") ? undefined : $selectIdentifiers.value;
-            const tag = ($selectTags.value == "") ? $createTag.value.trim() : ($selectTags.value == "-") ? undefined : $selectTags.value;
-            const itemIdentifier = ($itemIdentifier.value.trim() == "") ? undefined : $itemIdentifier.value.trim();
-            await Homey.api('POST', '/task', {'title': title, 'identifier': identifier, 'item': itemIdentifier, 'tag': tag});
+            const identifier = ($selectIdentifiers.value === "") ? $createIdentifier.value.trim() : ($selectIdentifiers.value === "-") ? undefined : $selectIdentifiers.value;
+            const tag = ($selectTags.value === "") ? $createTag.value.trim() : ($selectTags.value === "-") ? undefined : $selectTags.value;
+            const itemIdentifier = ($itemIdentifier.value.trim() === "") ? undefined : $itemIdentifier.value.trim();
+            const date = ($scheduleDate.value === "1") ? new Date($futureDate.value) : new Date();
+            await Homey.api('POST', '/task', {'title': title, 'date': date.getTime(), 'identifier': identifier, 'item': itemIdentifier, 'tag': tag});
             clear();
             loadIdentifiers();
             loadTags();
@@ -368,10 +485,8 @@
           /* Load Tasks */
           Promise.resolve().then(async () => {
             const tasks = await Homey.api('GET', '/tasks');
-            $container.innerHTML = '';
-            if (tasks.length === 0) {
-              throw new Error(Homey.__('noOpenTasks'));
-            }
+            $openContainer.innerHTML = '';
+            $futureContainer.innerHTML = '';
 
             for (const task of Object.values(tasks)) {
               const $task = document.createElement('tr');
@@ -390,7 +505,7 @@
               $task.appendChild($date);
 
               $identifier = document.createElement('td');
-              $identifier.innerHTML = uuidRegex.test(task.identifier) ? '-' : task.identifier;
+              $identifier.innerHTML = task.identifier !== undefined ? task.identifier : "-";
               $task.appendChild($identifier);
 
               $item = document.createElement('td');
@@ -407,22 +522,6 @@
 
               if (task.locked) {
 
-                $unlock = document.createElement('a');
-                $unlock.title = Homey.__('settings.list.actions.unlock');
-                $unlock.classList.add('unlock');
-                $action.appendChild($unlock);
-                $unlockMask = document.createElement('span');
-                $unlock.appendChild($unlockMask);
-                $unlock.addEventListener('click', async () => {
-                  if (task.item === undefined) {
-                    await Homey.api('POST', '/unlock/' + task.identifier, {});
-                  } else {
-                    await Homey.api('POST', '/unlock/' + task.identifier + '/' + task.item, {});
-                  }
-                });
-                
-              } else {
-                
                 $lock = document.createElement('a');
                 $lock.title = Homey.__('settings.list.actions.lock');
                 $lock.classList.add('lock');
@@ -430,49 +529,112 @@
                 $lockMask = document.createElement('span');
                 $lock.appendChild($lockMask);
                 $lock.addEventListener('click', async () => {
-                  if (task.item === undefined) {
-                    await Homey.api('POST', '/lock/' + task.identifier, {});
-                  } else {
-                    await Homey.api('POST', '/lock/' + task.identifier + '/' + task.item, {});
-                  }
+                  const parameters = new URLSearchParams();
+                  parameters.set('id', task._id);
+
+                  const query = parameters.size > 0 ? `?${parameters}` : '';
+                  await Homey.api('POST', `/unlock${query}`, {});
+                });
+                
+              } else {
+                
+                $unlock = document.createElement('a');
+                $unlock.title = Homey.__('settings.list.actions.unlock');
+                $unlock.classList.add('unlock');
+                $action.appendChild($unlock);
+                $unlockMask = document.createElement('span');
+                $unlock.appendChild($unlockMask);
+                $unlock.addEventListener('click', async () => {
+                  const parameters = new URLSearchParams();
+                  parameters.set('id', task._id);
+
+                  const query = parameters.size > 0 ? `?${parameters}` : '';
+                  await Homey.api('POST', `/lock${query}`, {});
                 });
 
-                $spacer = document.createElement('span');
-                $spacer.classList.add('spacer');
-                $action.appendChild($spacer);
+                switch (task.state) {
+                  case 'open':
 
-                $check = document.createElement('a');
-                $check.title = Homey.__('settings.list.actions.complete');
-                $check.classList.add('checkmark');
-                $action.appendChild($check);
-                $checkMask = document.createElement('span');
-                $check.appendChild($checkMask);
-                $check.addEventListener('click', async () => {
-                  if (task.item === undefined) {
-                    await Homey.api('DELETE', '/task/' + task.identifier, {});
-                  } else {
-                    await Homey.api('DELETE', '/task/' + task.identifier + '/' + task.item, {});
-                  }
-                });
+                    $spacer = document.createElement('span');
+                    $spacer.classList.add('spacer');
+                    $action.appendChild($spacer);
+
+                    $check = document.createElement('a');
+                    $check.title = Homey.__('settings.list.actions.complete');
+                    $check.classList.add('checkmark');
+                    $action.appendChild($check);
+                    $checkMask = document.createElement('span');
+                    $check.appendChild($checkMask);
+                    $check.addEventListener('click', async () => {
+                      const parameters = new URLSearchParams();
+                      parameters.set('id', task._id);
+                      
+                      const query = parameters.size > 0 ? `?${parameters}` : '';
+                      await Homey.api('POST', `/complete${query}`, {});
+                    });
+
+                    break;
+                  case 'future':
+
+                    $spacer = document.createElement('span');
+                    $spacer.classList.add('spacer');
+                    $action.appendChild($spacer);
+
+                    $delete = document.createElement('a');
+                    $delete.title = Homey.__('settings.list.actions.delete');
+                    $delete.classList.add('trash');
+                    $action.appendChild($delete);
+                    $deleteMask = document.createElement('span');
+                    $delete.appendChild($deleteMask);
+                    $delete.addEventListener('click', async () => {
+                      const parameters = new URLSearchParams();
+                      parameters.set('id', task._id);
+                      
+                      const query = parameters.size > 0 ? `?${parameters}` : '';
+                      await Homey.api('DELETE', `/task${query}`, {});
+                    });
+
+                    break;
+                  case 'closed':
+                    break;
+
+                }
               }
               
-              $container.appendChild($task);
+              if (task.state === 'future') {
+                $futureContainer.appendChild($task);
+              } else if (task.state === 'open') {
+                $openContainer.appendChild($task);
+              }
             }
-          })
-          .catch(err => {
-            const $task = document.createElement('tr');
-            $title = document.createElement('td');
-            $title.classList.add('center');
-            const $colspanAttribute = document.createAttribute("colspan");
-            $colspanAttribute.value = '6';
-            $title.setAttributeNode($colspanAttribute);
-            $title.innerHTML = err.message;
-            $container.appendChild($title);
+
+            if ($openContainer.children.length === 0) {
+              const $task = document.createElement('tr');
+              $title = document.createElement('td');
+              $title.classList.add('center');
+              const $colspanAttribute = document.createAttribute("colspan");
+              $colspanAttribute.value = '6';
+              $title.setAttributeNode($colspanAttribute);
+              $title.innerHTML = Homey.__('noOpenTasks');
+              $openContainer.appendChild($title);
+            }
+
+            if ($futureContainer.children.length === 0) {
+              const $task = document.createElement('tr');
+              $title = document.createElement('td');
+              $title.classList.add('center');
+              const $colspanAttribute = document.createAttribute("colspan");
+              $colspanAttribute.value = '6';
+              $title.setAttributeNode($colspanAttribute);
+              $title.innerHTML = Homey.__('noFutureTasks');
+              $futureContainer.appendChild($title);
+            }
           })
           .finally();
         }
 
         Homey.on('didUpdateTasks', (event) => {
+          console.log('didUpdateTasks');
           reload();
         });
 

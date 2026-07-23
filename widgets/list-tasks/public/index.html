@@ -59,47 +59,48 @@
         }
 
         function timeSince(date) {
-          var seconds = Math.floor((new Date() - Date.parse(date)) / 1000);
+
+          const TIME_UNITS = [
+            [31536000, 'year', 'years'],
+            [2592000, 'month', 'months'],
+            [86400, 'day', 'days'],
+            [3600, 'hour', 'hours'],
+            [60, 'minute', 'minutes'],
+          ];
+
+          const diffMs = Date.now() - Date.parse(date);
+          const isFuture = diffMs < 0;
+          const seconds = Math.floor(Math.abs(diffMs) / 1000);
+
           if (seconds === 0) {
             return Homey.__('now');
           }
 
-          var interval = seconds / 31536000;
-          if (interval > 1) {
-            const years = Math.floor(interval);
-            return (years === 1) ? Homey.__('year', { value: years }) : Homey.__('years', { value: years });
+          for (const [unitSeconds, singular, plural] of TIME_UNITS) {
+            const interval = seconds / unitSeconds;
+            if (interval >= 1) {
+              const value = Math.floor(interval);
+              const key = value === 1 ? singular : plural;
+              return Homey.__(isFuture ? `time.from.${key}` : `time.untill.${key}`, { value });
+            }
           }
-          interval = seconds / 2592000;
-          if (interval > 1) {
-            const months = Math.floor(interval);
-            return (months === 1) ? Homey.__('month', { value: months }) : Homey.__('months', { value: months });
-          }
-          interval = seconds / 86400;
-          if (interval > 1) {
-            const days = Math.floor(interval);
-            return (days === 1) ? Homey.__('day', { value: days }) : Homey.__('days', { value: days });
-          }
-          interval = seconds / 3600;
-          if (interval > 1) {
-            const hours = Math.floor(interval);
-            return (hours === 1) ? Homey.__('hour', { value: hours }) : Homey.__('hours', { value: hours });
-          }
-          interval = seconds / 60;
-          if (interval > 1) {
-            const minutes = Math.floor(interval);
-            return (minutes === 1) ? Homey.__('minute', { value: minutes }) : Homey.__('minutes', { value: minutes });
-          }
-          return (seconds === 1) ? Homey.__('second', { value: seconds }) : Homey.__('seconds', { value: seconds });
+
+          const key = seconds === 1 ? 'second' : 'seconds';
+          return Homey.__(isFuture ? `time.from.${key}` : `time.untill.${key}`, { value: seconds });
         }
 
         function reload() {
           Promise.resolve().then(async () => {
             const tag = Homey.getSettings()['tag'];
-            let parameter = '/'
+
+            const parameters = new URLSearchParams();
+            parameters.set('future', 'false');
             if (tag !== undefined && typeof tag['name'] !== 'undefined' && tag['name'] !== "-") {
-              parameter += tag['name']
+              parameters.set('tag', tag['name']);
             }
-            const tasks = await Homey.api('GET', parameter, {});
+
+            const query = parameters.size > 0 ? `?${parameters}` : '';
+            const tasks = await Homey.api('GET', `/tasks${query}`, {});
             $container.innerHTML = '';
             if (tasks.length === 0) {
               throw new Error(Homey.__('noOpenTasks'));
@@ -143,11 +144,12 @@
 
                 $icon.addEventListener('click', async () => {
                   Homey.hapticFeedback();
-                  if (task.item === undefined) {
-                    await Homey.api('DELETE', '/' + task.identifier, {});
-                  } else {
-                    await Homey.api('DELETE', '/' + task.identifier + '/' + task.item, {});
-                  }
+
+                  const parameters = new URLSearchParams();
+                  parameters.set('id', task._id);
+
+                  const query = parameters.size > 0 ? `?${parameters}` : '';
+                  await Homey.api('POST', `/complete${query}`, {});
                 });
               }
               

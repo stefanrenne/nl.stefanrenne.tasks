@@ -4,19 +4,38 @@
     "newTag": "Opprett ny merkelappen",
     "deleteTag": "Fjern merkelappen",
     "noOpenTasks": "Ingen åpne oppgaver 🎉",
+    "noFutureTasks": "Ingen fremtidige oppgaver 🎉",
     "now": "Akkurat nå",
-    "second": " __value__ sekund siden",
-    "seconds": " __value__ sekunder siden",
-    "minute": " __value__ minutt siden",
-    "minutes": " __value__ minutter siden",
-    "hour": " __value__ time siden",
-    "hours": " __value__ timer siden",
-    "day": " __value__ dag siden",
-    "days": " __value__ dager siden",
-    "month": " __value__ måned siden",
-    "months": " __value__ måneder siden",
-    "year": " __value__ år siden",
-    "years": " __value__ år siden",
+    "time": {
+        "untill": {
+            "second": "__value__ sekund siden",
+            "seconds": "__value__ sekunder siden",
+            "minute": "__value__ minutt siden",
+            "minutes": "__value__ minutter siden",
+            "hour": "__value__ time siden",
+            "hours": "__value__ timer siden",
+            "day": "__value__ dag siden",
+            "days": "__value__ dager siden",
+            "month": "__value__ måned siden",
+            "months": "__value__ måneder siden",
+            "year": "__value__ år siden",
+            "years": "__value__ år siden"
+        },
+        "from": {
+            "second": "om __value__ sekund",
+            "seconds": "om __value__ sekunder",
+            "minute": "om __value__ minutt",
+            "minutes": "om __value__ minutter",
+            "hour": "om __value__ time",
+            "hours": "om __value__ timer",
+            "day": "om __value__ dag",
+            "days": "om __value__ dager",
+            "month": "om __value__ måned",
+            "months": "om __value__ måneder",
+            "year": "om __value__ år",
+            "years": "om __value__ år"
+        }
+    },
     "settings": {
         "tab": {
             "about": "Om",
@@ -45,7 +64,8 @@
             "actions": {
                 "lock": "Lås oppgave",
                 "unlock": "Lås opp oppgaven",
-                "complete": "Fullfør oppgaven"
+                "complete": "Fullfør oppgaven",
+                "delete": "Slett oppgaven"
             }
         },
         "create": {
@@ -53,7 +73,10 @@
             "identifier": "Identifikator",
             "item": "Vareidentifikator (valgfri)",
             "tag": "Merkelapp (valgfri)",
-            "save": "Opprett oppgave"
+            "save": "Opprett oppgave",
+            "schedule": "Planlegg",
+            "scheduleNow": "Nå",
+            "scheduleFuture": "I fremtiden"
         }
     }
 }

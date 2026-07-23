@@ -4,19 +4,38 @@
     "newTag": "Skapa ny etikett",
     "deleteTag": "Ta bort etikett",
     "noOpenTasks": "Inga öppna uppgifter 🎉",
+    "noFutureTasks": "Inga framtida uppgifter 🎉",
     "now": "Just nu",
-    "second": " __value__ sekund sedan",
-    "seconds": " __value__ sekunder sedan",
-    "minute": " __value__ minut sedan",
-    "minutes": " __value__ minuter sedan",
-    "hour": " __value__ timme sedan",
-    "hours": " __value__ timmar sedan",
-    "day": " __value__ dag sedan",
-    "days": " __value__ dagar sedan",
-    "month": " __value__ månad sedan",
-    "months": " __value__ månader sedan",
-    "year": " __value__ år sedan",
-    "years": " __value__ år sedan",
+    "time": {
+        "untill": {
+            "second": "__value__ sekund sedan",
+            "seconds": "__value__ sekunder sedan",
+            "minute": "__value__ minut sedan",
+            "minutes": "__value__ minuter sedan",
+            "hour": "__value__ timme sedan",
+            "hours": "__value__ timmar sedan",
+            "day": "__value__ dag sedan",
+            "days": "__value__ dagar sedan",
+            "month": "__value__ månad sedan",
+            "months": "__value__ månader sedan",
+            "year": "__value__ år sedan",
+            "years": "__value__ år sedan"
+        },
+        "from": {
+            "second": "om __value__ sekund",
+            "seconds": "om __value__ sekunder",
+            "minute": "om __value__ minut",
+            "minutes": "om __value__ minuter",
+            "hour": "om __value__ timme",
+            "hours": "om __value__ timmar",
+            "day": "om __value__ dag",
+            "days": "om __value__ dagar",
+            "month": "om __value__ månad",
+            "months": "om __value__ månader",
+            "year": "om __value__ år",
+            "years": "om __value__ år"
+        }
+    },
     "settings": {
         "tab": {
             "about": "Om",
@@ -45,7 +64,8 @@
             "actions": {
                 "lock": "Lås uppgift",
                 "unlock": "Lås upp uppgift",
-                "complete": "Slutför uppgiften"
+                "complete": "Slutför uppgiften",
+                "delete": "Ta bort uppgiften"
             }
         },
         "create": {
@@ -53,7 +73,10 @@
             "identifier": "Identifierare",
             "item": "Artikelidentifierare (frivillig)",
             "tag": "Märka (frivillig)",
-            "save": "Skapa uppgift"
+            "save": "Skapa uppgift",
+            "schedule": "Planera",
+            "scheduleNow": "Nu",
+            "scheduleFuture": "I framtiden"
         }
     }
 }

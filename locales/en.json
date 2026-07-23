@@ -4,19 +4,38 @@
     "newTag": "Create new label",
     "deleteTag": "Remove label",
     "noOpenTasks": "No open tasks 🎉",
+    "noFutureTasks": "No future tasks 🎉",
     "now": "Just now",
-    "second": " __value__ second ago",
-    "seconds": " __value__ seconds ago",
-    "minute": " __value__ minute ago",
-    "minutes": " __value__ minutes ago",
-    "hour": " __value__ hour ago",
-    "hours": " __value__ hours ago",
-    "day": " __value__ day ago",
-    "days": " __value__ days ago",
-    "month": " __value__ month ago",
-    "months": " __value__ months ago",
-    "year": " __value__ year ago",
-    "years": " __value__ years ago",
+    "time": {
+        "untill": {
+            "second": "__value__ second ago",
+            "seconds": "__value__ seconds ago",
+            "minute": "__value__ minute ago",
+            "minutes": "__value__ minutes ago",
+            "hour": "__value__ hour ago",
+            "hours": "__value__ hours ago",
+            "day": "__value__ day ago",
+            "days": "__value__ days ago",
+            "month": "__value__ month ago",
+            "months": "__value__ months ago",
+            "year": "__value__ year ago",
+            "years": "__value__ years ago"
+        },
+        "from": {
+            "second": "in __value__ second",
+            "seconds": "in __value__ seconds",
+            "minute": "in __value__ minute",
+            "minutes": "in __value__ minutes",
+            "hour": "in __value__ hour",
+            "hours": "in __value__ hours",
+            "day": "in __value__ day",
+            "days": "in __value__ days",
+            "month": "in __value__ month",
+            "months": "in __value__ months",
+            "year": "in __value__ year",
+            "years": "in __value__ years"
+        }
+    },
     "settings": {
         "tab": {
             "about": "About",
@@ -45,7 +64,8 @@
             "actions": {
                 "lock": "Lock task",
                 "unlock": "Unlock task",
-                "complete": "Complete task"
+                "complete": "Complete task",
+                "delete": "Delete task"
             }
         },
         "create": {
@@ -53,7 +73,10 @@
             "identifier": "Identifier",
             "item": "Item Identifier (optional)",
             "tag": "Label (optional)",
-            "save": "Create Task"
+            "save": "Create Task",
+            "schedule": "Schedule",
+            "scheduleNow": "Now",
+            "scheduleFuture": "In the future"
         }
     }
 }

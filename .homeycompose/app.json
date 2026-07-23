@@ -95,27 +95,19 @@
     },
     "deleteTask": {
       "method": "DELETE",
-      "path": "/task/:id"
+      "path": "/task"
     },
-    "deleteTaskItem": {
-      "method": "DELETE",
-      "path": "/task/:id/:item"
+    "completeTask": {
+      "method": "POST",
+      "path": "/complete"
     },
     "lockTask": {
       "method": "POST",
-      "path": "/lock/:id"
-    },
-    "lockTaskItem": {
-      "method": "POST",
-      "path": "/lock/:id/:item"
+      "path": "/lock"
     },
     "unlockTask": {
       "method": "POST",
-      "path": "/unlock/:id"
-    },
-    "unlockTaskItem": {
-      "method": "POST",
-      "path": "/unlock/:id/:item"
+      "path": "/unlock"
     },
     "getIdentifiers": {
       "method": "GET",

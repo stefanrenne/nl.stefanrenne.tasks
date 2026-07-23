@@ -4,19 +4,38 @@
     "newTag": "Nieuw label aanmaken",
     "deleteTag": "Label verwijderen",
     "noOpenTasks": "Geen open Taken 🎉",
+    "noFutureTasks": "Geen toekomstige Taken 🎉",
     "now": "Zojuist aangemaakt",
-    "second": " __value__ seconde geleden",
-    "seconds": " __value__ seconden geleden",
-    "minute": " __value__ minuut geleden",
-    "minutes": " __value__ minuten geleden",
-    "hour": " __value__ uur geleden",
-    "hours": " __value__ uren geleden",
-    "day": " __value__ dag geleden",
-    "days": " __value__ dagen geleden",
-    "month": " __value__ maand geleden",
-    "months": " __value__ maanden geleden",
-    "year": " __value__ jaar geleden",
-    "years": " __value__ jaren geleden",
+    "time": {
+        "untill": {
+            "second": "__value__ seconde geleden",
+            "seconds": "__value__ seconden geleden",
+            "minute": "__value__ minuut geleden",
+            "minutes": "__value__ minuten geleden",
+            "hour": "__value__ uur geleden",
+            "hours": "__value__ uren geleden",
+            "day": "__value__ dag geleden",
+            "days": "__value__ dagen geleden",
+            "month": "__value__ maand geleden",
+            "months": "__value__ maanden geleden",
+            "year": "__value__ jaar geleden",
+            "years": "__value__ jaren geleden"
+        },
+        "from": {
+            "second": "over __value__ seconde",
+            "seconds": "over __value__ seconden",
+            "minute": "over __value__ minuut",
+            "minutes": "over __value__ minuten",
+            "hour": "over __value__ uur",
+            "hours": "over __value__ uren",
+            "day": "over __value__ dag",
+            "days": "over __value__ dagen",
+            "month": "over __value__ maand",
+            "months": "over __value__ maanden",
+            "year": "over __value__ jaar",
+            "years": "over __value__ jaren"
+        }
+    },
     "settings": {
         "tab": {
             "about": "Over",
@@ -45,7 +64,8 @@
             "actions": {
                 "lock": "Taak vergrendelen",
                 "unlock": "Taak ontgrendelen",
-                "complete": "Taak voltooien"
+                "complete": "Taak voltooien",
+                "delete": "Taak verwijderen"
             }
         },
         "create": {
@@ -53,7 +73,10 @@
             "identifier": "ID",
             "item": "Item-ID (optioneel)",
             "tag": "Label (optioneel)",
-            "save": "Taak aanmaken"
+            "save": "Taak aanmaken",
+            "schedule": "Plannen",
+            "scheduleNow": "Nu",
+            "scheduleFuture": "In de toekomst"
         }
     }
 }

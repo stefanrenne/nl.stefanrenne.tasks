@@ -4,19 +4,38 @@
     "newTag": "Neues Etikett erstellen",
     "deleteTag": "Etikett entfernen",
     "noOpenTasks": "Keine offenen Aufgaben 🎉",
+    "noFutureTasks": "Keine zukünftigen Aufgaben 🎉",
     "now": "Gerade eben",
-    "second": "vor __value__ Sekunde",
-    "seconds": "vor __value__ Sekunden",
-    "minute": "vor __value__ Minute",
-    "minutes": "vor __value__ Minuten",
-    "hour": "vor __value__ Stunde",
-    "hours": "vor __value__ Stunden",
-    "day": "vor __value__ Tag",
-    "days": "vor __value__ Tagen",
-    "month": "vor __value__ Monat",
-    "months": "vor __value__ Monaten",
-    "year": "vor __value__ Jahr",
-    "years": "vor __value__ Jahren",
+    "time": {
+        "untill": {
+            "second": "vor __value__ Sekunde",
+            "seconds": "vor __value__ Sekunden",
+            "minute": "vor __value__ Minute",
+            "minutes": "vor __value__ Minuten",
+            "hour": "vor __value__ Stunde",
+            "hours": "vor __value__ Stunden",
+            "day": "vor __value__ Tag",
+            "days": "vor __value__ Tagen",
+            "month": "vor __value__ Monat",
+            "months": "vor __value__ Monaten",
+            "year": "vor __value__ Jahr",
+            "years": "vor __value__ Jahren"
+        },
+        "from": {
+            "second": "in __value__ Sekunde",
+            "seconds": "in __value__ Sekunden",
+            "minute": "in __value__ Minute",
+            "minutes": "in __value__ Minuten",
+            "hour": "in __value__ Stunde",
+            "hours": "in __value__ Stunden",
+            "day": "in __value__ Tag",
+            "days": "in __value__ Tagen",
+            "month": "in __value__ Monat",
+            "months": "in __value__ Monaten",
+            "year": "in __value__ Jahr",
+            "years": "in __value__ Jahren"
+        }
+    },
     "settings": {
         "tab": {
             "about": "Über uns",
@@ -45,7 +64,8 @@
             "actions": {
                 "lock": "Sperraufgabe",
                 "unlock": "Aufgabe freischalten",
-                "complete": "Aufgabe abschließen"
+                "complete": "Aufgabe abschließen",
+                "delete": "Aufgabe löschen"
             }
         },
         "create": {
@@ -53,7 +73,10 @@
             "identifier": "Kennung",
             "item": "Artikelkennung (optional)",
             "tag": "Etikett (optional)",
-            "save": "Aufgabe erstellen"
+            "save": "Aufgabe erstellen",
+            "schedule": "Planen",
+            "scheduleNow": "Jetzt",
+            "scheduleFuture": "In der Zukunft"
         }
     }
 }
