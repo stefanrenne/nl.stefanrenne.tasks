@@ -1,0 +1,149 @@
+{
+   "id":"schedule_task",
+   "title":{
+      "en":"Schedule task",
+      "nl":"Taak inplannen",
+      "no":"Planlegg oppgave",
+      "de":"Aufgabe planen",
+      "sv":"Planera uppgift"
+   },
+   "titleFormatted":{
+      "en":"Schedule [[identifier]] task with [[title]] in [[number]] [[units]]",
+      "nl":"[[identifier]] taak inplannen met [[title]] over [[number]] [[units]]",
+      "no":"Planlegg [[identifier]] oppgave med [[title]] in [[number]] [[units]]",
+      "de":"[[identifier]] Aufgabe mit [[title]] planen in [[number]] [[units]]",
+      "sv":"Planera [[identifier]] uppgift med [[title]] i [[number]] [[units]]"
+   },
+   "hint":{
+      "en":"Identifiers allow you to remove or overwrite tasks using flows.",
+      "nl":"Met ID's kun je taken verwijderen of overschrijven.",
+      "no":"Identifikatorer lar deg fjerne eller overskrive oppgaver ved hjelp av flyter.",
+      "de":"Mit Kennungen kannst du Aufgaben über Flows entfernen oder überschreiben.",
+      "sv":"Identifierare låter dig ta bort eller skriva över uppgifter med hjälp av flöden."
+   },
+   "args":[
+      {
+         "name":"title",
+         "required":true,
+         "title":{
+            "en":"Title",
+            "nl":"Titel",
+            "no":"Tittel",
+            "de":"Titel",
+            "sv":"Titel"
+         },
+         "type":"text",
+         "placeholder":{
+            "en":"Type a Title",
+            "nl":"Typ een Titel",
+            "no":"Skriv en Tittel",
+            "de":"Titel eingeben",
+            "sv":"Skriv en titel"
+         }
+      },
+      {
+         "name":"identifier",
+         "required":false,
+         "type":"autocomplete",
+         "title":{
+            "en":"Identifier",
+            "nl":"ID",
+            "no":"Identifikator",
+            "de":"Kennung",
+            "sv":"Identifierare"
+         },
+         "placeholder":{
+            "en":"Pick or type (optional)",
+            "nl":"Kies of typ (optioneel)",
+            "no":"Velg eller skriv (valgfri)",
+            "de":"Auswählen oder eingeben (optional)",
+            "sv":"Välj eller skriv (frivillig)"
+         }
+      },
+      {
+         "name":"number",
+         "required":true,
+         "type":"number",
+         "min":1,
+         "step":1,
+         "title":{
+            "en":"Amount",
+            "nl":"Aantal",
+            "no":"Antall",
+            "de":"Anzahl",
+            "sv":"Antal"
+         },
+         "placeholder":{
+            "en":"e.g. 5",
+            "nl":"bijv. 5",
+            "no":"f.eks. 5",
+            "de":"z. B. 5",
+            "sv":"t.ex. 5"
+         }
+      },
+      {
+         "name":"units",
+         "required":true,
+         "type":"dropdown",
+         "title":{
+            "en":"Units",
+            "nl":"Eenheden",
+            "no":"Enheter",
+            "de":"Einheiten",
+            "sv":"Enheter"
+         },
+         "values":[
+            {
+               "id":"minutes",
+               "title":{
+                  "en":"Minutes",
+                  "nl":"Minuten",
+                  "no":"Minutter",
+                  "de":"Minuten",
+                  "sv":"Minuter"
+               }
+            },
+            {
+               "id":"hours",
+               "title":{
+                  "en":"Hours",
+                  "nl":"Uren",
+                  "no":"Timer",
+                  "de":"Stunden",
+                  "sv":"Timmar"
+               }
+            },
+            {
+               "id":"days",
+               "title":{
+                  "en":"Days",
+                  "nl":"Dagen",
+                  "no":"Dager",
+                  "de":"Tage",
+                  "sv":"Dagar"
+               }
+            },
+            {
+               "id":"weeks",
+               "title":{
+                  "en":"Weeks",
+                  "nl":"Weken",
+                  "no":"Uker",
+                  "de":"Wochen",
+                  "sv":"Veckor"
+               }
+            },
+            {
+               "id":"months",
+               "title":{
+                  "en":"Months",
+                  "nl":"Maanden",
+                  "no":"Måneder",
+                  "de":"Monate",
+                  "sv":"Månader"
+               }
+            }
+         ]
+      }
+   ]
+}

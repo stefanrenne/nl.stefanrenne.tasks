@@ -55,7 +55,7 @@ export class Store {
         }
     
         const updateQuery: any = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
-        const oldTask: Task | undefined = await this.db.findOneAsync(updateQuery)
+        const oldTask: Task | undefined = (identifier !== undefined) ? await this.db.findOneAsync(updateQuery) : undefined
     
         if (oldTask == undefined) {
             await this.db.insertAsync({ title: title, date: date, identifier: identifier, item: item, tag: tag, locked: false, state: 'open' })
@@ -70,7 +70,7 @@ export class Store {
         }
     
         await this.db.updateAsync(updateQuery, { $set: { title: title } })
-        this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: title, identifier: identifier ?? "", item: item ?? "", locked: false, state: 'open' })
+        this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: title, identifier: identifier ?? "", item: item ?? "", locked: oldTask.locked, state: 'open' })
         this.homey.api.realtime('didUpdateTasks', {})
     }
     
@@ -134,12 +134,19 @@ export class Store {
         if (matured.length === 0) {
             return
         }
-    
-        await this.db.updateAsync(query, { $set: { state: 'open' } }, { multi: true })
-        this.homey.api.realtime('didUpdateTasks', {})
 
-        for (const task of matured) {
-            this.taskOnCreate?.trigger({ title: task.title, identifier: task.identifier ?? "", item: task.item ?? "" })
+        for (const maturedTask of matured) {
+            const maturedQuery: any = { _id: maturedTask._id }
+            const openTaskQuery: any = { state: 'open' , identifier: maturedTask.identifier, $where: function () { return !maturedTask.item || this.item === maturedTask.item }}
+            const oldTask: Task | undefined = (maturedTask.identifier !== undefined) ? await this.db.findOneAsync(openTaskQuery) : undefined
+            if (oldTask === undefined) {
+                await this.db.updateAsync(maturedQuery, { $set: { state: 'open' } })
+                this.taskOnCreate?.trigger({ title: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "" })
+            } else {
+                await this.db.updateAsync(openTaskQuery, { $set: { title: maturedTask.title } })
+                await this.db.removeAsync(maturedQuery, { multi: true })
+                this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "", locked: oldTask.locked, state: 'open' })
+            }
         }
     }
 }

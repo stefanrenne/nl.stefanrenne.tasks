@@ -21,6 +21,7 @@ export default class TasksApp extends Homey.App {
     this.registerOpenTaskListeners()
     this.registerLockedTaskListeners()
     this.registerCreateTaskListeners()
+    this.registerScheduleTaskListeners()
     this.registerCompleteTaskListeners()
     this.registerCompleteMarkedTasksListeners()
     this.registerCompleteAllTasksListeners()
@@ -218,6 +219,41 @@ export default class TasksApp extends Homey.App {
         const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined
         const item: string | undefined = (args.item) ? args.item : undefined
         await this.store.createTask(title, new Date(), identifier, item)
+        return {
+          title
+        }
+      })
+    })
+  }
+
+  registerScheduleTaskListeners() {
+    // Calendar-aware offset so days/weeks/months honour DST and month lengths.
+    const scheduledDate = (amount: number, units: string): Date | undefined => {
+      const date = new Date()
+      switch (units) {
+        case 'minutes': date.setMinutes(date.getMinutes() + amount); return date
+        case 'hours': date.setHours(date.getHours() + amount); return date
+        case 'days': date.setDate(date.getDate() + amount); return date
+        case 'weeks': date.setDate(date.getDate() + amount * 7); return date
+        case 'months': date.setMonth(date.getMonth() + amount); return date
+        default: return undefined
+      }
+    };
+    [
+      this.homey.flow.getActionCard('schedule_task'),
+      this.homey.flow.getActionCard('schedule_task_item')
+    ].forEach(card => {
+      this.registerIdentifierAutocompleteListenerForCard(card, true)
+      card.registerRunListener(async (args) => {
+        const title: string = args.title
+        const identifier: string | undefined = (args.identifier) ? args.identifier.name : undefined
+        const item: string | undefined = (args.item) ? args.item : undefined
+        const amount: number = Number(args.number)
+        const date = Number.isFinite(amount) ? scheduledDate(amount, args.units) : undefined
+        if (date === undefined) {
+          throw new Error(`Invalid schedule: ${args.number} ${args.units}`)
+        }
+        await this.store.createTask(title, date, identifier, item)
         return {
           title
         }
