@@ -36,6 +36,7 @@ export default class TasksApp extends Homey.App {
    */
   async startFutureTaskProcessor() {
     const scheduleNextRun = () => {
+      this.homey.log('Scheduling next future task processor run')
       const msUntilNextMinute = 60000 - (Date.now() % 60000)
       this.homey.setTimeout(async () => {
         await this.store.processFutureTasks()

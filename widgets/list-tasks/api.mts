@@ -23,7 +23,7 @@ export default {
     const dbQuery: TaskQuery = { _id: query.id }
     const count = await (homey.app as TasksApp).store.completeTasks(dbQuery)
     if (count > 0) {
-      homey.log(`Completed ${count} ${(count == 1) ? 'task' : 'tasks'} with identifier ${query.identifier} and item ${query.item}`)
+      homey.log(`Completed ${count} ${(count == 1) ? 'task' : 'tasks'} from the widget`)
     }
   },
 }
