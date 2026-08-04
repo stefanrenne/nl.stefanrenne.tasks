@@ -80,7 +80,7 @@ export class Store {
             return
         }
 
-        await this.db.updateAsync(updateQuery, { $set: { title: title } })
+        await this.db.updateAsync(updateQuery, { $set: { title: title, date: date } })
         this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: title, identifier: identifier ?? "", item: item ?? "", locked: oldTask.locked, state: 'open' }).catch((error) => this.homey.error(error))
         this.homey.api.realtime('didUpdateTasks', {})
     }
@@ -154,7 +154,7 @@ export class Store {
                 await this.db.updateAsync(maturedQuery, { $set: { state: 'open' } })
                 this.taskOnCreate?.trigger({ title: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "" }).catch((error) => this.homey.error(error))
             } else {
-                await this.db.updateAsync(openTaskQuery, { $set: { title: maturedTask.title } })
+                await this.db.updateAsync(openTaskQuery, { $set: { title: maturedTask.title, date: maturedTask.date } })
                 await this.db.removeAsync(maturedQuery, { multi: true })
                 this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "", locked: oldTask.locked, state: 'open' }).catch((error) => this.homey.error(error))
             }
