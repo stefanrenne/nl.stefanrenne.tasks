@@ -22,6 +22,15 @@ export interface Task {
     state: 'open' | 'completed' | 'future'
 }
 
+/**
+ * A NeDB query. Fields are matched loosely (operators, plain values) and the
+ * optional `$where` predicate runs with `this` bound to the candidate Task.
+ */
+export type TaskQuery = {
+    $where?: (this: Task) => boolean
+    [field: string]: unknown
+}
+
 export class Store {
     
     private homey: Homey
@@ -37,12 +46,14 @@ export class Store {
         this.taskOnComplete = homey.flow.getTriggerCard('on_complete')
     }
 
-    async getTask(query: any): Promise<Task | undefined> {
-        const task: Task | undefined = await this.db.findOneAsync(query)
-        return task
+    async getTask(query: TaskQuery): Promise<Task | undefined> {
+        // findOneAsync resolves to null (not undefined) when nothing matches;
+        // normalise to undefined so callers can rely on a single "not found" value.
+        const task: Task | null = await this.db.findOneAsync(query)
+        return task ?? undefined
     }
 
-    async getTasks(query: any = {}): Promise<Task[]> {
+    async getTasks(query: TaskQuery = {}): Promise<Task[]> {
         const tasks: Task[] = await this.db.findAsync(query).sort({ date: 1 })
         return tasks
     }
@@ -54,41 +65,41 @@ export class Store {
             return
         }
     
-        const updateQuery: any = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
+        const updateQuery: TaskQuery = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
         const oldTask: Task | undefined = (identifier !== undefined) ? await this.db.findOneAsync(updateQuery) : undefined
-    
+
         if (oldTask == undefined) {
             await this.db.insertAsync({ title: title, date: date, identifier: identifier, item: item, tag: tag, locked: false, state: 'open' })
-            this.taskOnCreate?.trigger({ title: title, identifier: identifier ?? "", item: item ?? "" })
+            this.taskOnCreate?.trigger({ title: title, identifier: identifier ?? "", item: item ?? "" }).catch((error) => this.homey.error(error))
             this.homey.api.realtime('didUpdateTasks', {})
             return
         }
-    
+
         if (oldTask.title === title) {
             // Existing task is not mutated
             return
         }
-    
+
         await this.db.updateAsync(updateQuery, { $set: { title: title } })
-        this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: title, identifier: identifier ?? "", item: item ?? "", locked: oldTask.locked, state: 'open' })
+        this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: title, identifier: identifier ?? "", item: item ?? "", locked: oldTask.locked, state: 'open' }).catch((error) => this.homey.error(error))
         this.homey.api.realtime('didUpdateTasks', {})
     }
     
-    async completeTasks(query: any): Promise<number> {
+    async completeTasks(query: TaskQuery): Promise<number> {
         const matches: Task[] = await this.db.findAsync(query)
         if (matches.length === 0) {
             return 0
         }
-        
+
         matches.forEach((oldTask) => {
-            this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier ?? "", item: oldTask.item ?? "", tag: oldTask.tag ?? "" })
+            this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier ?? "", item: oldTask.item ?? "", tag: oldTask.tag ?? "" }).catch((error) => this.homey.error(error))
         })
         await this.db.updateAsync(query, { $set: { state: 'completed' } }, { multi: true })
         this.homey.api.realtime('didUpdateTasks', {})
         return matches.length
     }
 
-    async deleteTasks(query: any): Promise<number> {
+    async deleteTasks(query: TaskQuery): Promise<number> {
         const result = await this.db.removeAsync(query, { multi: true })
         if (result > 0) {
             this.homey.api.realtime('didUpdateTasks', {})
@@ -96,7 +107,7 @@ export class Store {
         return result
     }
     
-    async lockTasks(query: any): Promise<number> {
+    async lockTasks(query: TaskQuery): Promise<number> {
         const result = await this.db.updateAsync(query, { $set: { locked: true } }, { multi: true })
         if (result.numAffected > 0) {
             this.homey.api.realtime('didUpdateTasks', {})
@@ -104,7 +115,7 @@ export class Store {
         return result.numAffected
     }
     
-    async unlockTasks(query: any): Promise<number> {
+    async unlockTasks(query: TaskQuery): Promise<number> {
         const result = await this.db.updateAsync(query, { $set: { locked: false } }, { multi: true })
         if (result.numAffected > 0) {
             this.homey.api.realtime('didUpdateTasks', {})
@@ -113,7 +124,7 @@ export class Store {
     }
     
     async tagTasks(tag: string | undefined = undefined, identifier: string, item: string | undefined = undefined): Promise<number> {
-        const query: any = { state: 'open', identifier: identifier, $where: function () { return !item || this.item === item } }
+        const query: TaskQuery = { state: 'open', identifier: identifier, $where: function () { return !item || this.item === item } }
         const result = await this.db.updateAsync(query, { $set: { tag: tag } }, { multi: true })
         if (result.numAffected > 0) {
             this.homey.api.realtime('didUpdateTasks', {})
@@ -129,23 +140,23 @@ export class Store {
         }
     
         const now = startOfMinute(new Date())
-        const query: any = { state: 'future', $where: function () { return startOfMinute(this.date) <= now }}
+        const query: TaskQuery = { state: 'future', $where: function () { return startOfMinute(this.date) <= now }}
         const matured: Task[] = await this.db.findAsync(query)
         if (matured.length === 0) {
             return
         }
 
         for (const maturedTask of matured) {
-            const maturedQuery: any = { _id: maturedTask._id }
-            const openTaskQuery: any = { state: 'open' , identifier: maturedTask.identifier, $where: function () { return !maturedTask.item || this.item === maturedTask.item }}
+            const maturedQuery: TaskQuery = { _id: maturedTask._id }
+            const openTaskQuery: TaskQuery = { state: 'open' , identifier: maturedTask.identifier, $where: function () { return !maturedTask.item || this.item === maturedTask.item }}
             const oldTask: Task | undefined = (maturedTask.identifier !== undefined) ? await this.db.findOneAsync(openTaskQuery) : undefined
-            if (oldTask === undefined) {
+            if (oldTask == undefined) {
                 await this.db.updateAsync(maturedQuery, { $set: { state: 'open' } })
-                this.taskOnCreate?.trigger({ title: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "" })
+                this.taskOnCreate?.trigger({ title: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "" }).catch((error) => this.homey.error(error))
             } else {
                 await this.db.updateAsync(openTaskQuery, { $set: { title: maturedTask.title } })
                 await this.db.removeAsync(maturedQuery, { multi: true })
-                this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "", locked: oldTask.locked, state: 'open' })
+                this.taskOnUpdate?.trigger({ oldTitle: oldTask.title, newTitle: maturedTask.title, identifier: maturedTask.identifier ?? "", item: maturedTask.item ?? "", locked: oldTask.locked, state: 'open' }).catch((error) => this.homey.error(error))
             }
         }
     }

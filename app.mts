@@ -1,5 +1,5 @@
 import Homey from 'homey'
-import { Task, Store } from './lib/storage.mjs'
+import { Task, Store, TaskQuery } from './lib/storage.mjs'
 
 export default class TasksApp extends Homey.App {
 
@@ -53,7 +53,7 @@ export default class TasksApp extends Homey.App {
       if (Object.hasOwnProperty.call(this.homey.manifest.flow, flowTypeId)) {
 				const flowType = this.homey.manifest.flow[flowTypeId]
 				for (const flowcard of flowType) {
-          if (flowcard.args && flowcard.args.some((flow: any) => flow.name == 'identifier')) {
+          if (flowcard.args && flowcard.args.some((flow: { name: string }) => flow.name == 'identifier')) {
             switch (flowTypeId) {
               case "actions":
                 allCards.push(this.homey.flow.getActionCard(flowcard.id))
@@ -86,7 +86,7 @@ export default class TasksApp extends Homey.App {
         return result
     }, Promise.resolve(new Set<string>()))
 
-    const query: any = { state: 'open', $where: function () { return this.identifier !== undefined }}
+    const query: TaskQuery = { state: 'open', $where: function () { return this.identifier !== undefined }}
     const tasks: Task[] = await this.store.getTasks(query);
     (tasks.map((task) => task.identifier) as string[]).forEach(identifier => {
       uniqueIdentifiers.add(identifier)
@@ -107,7 +107,7 @@ export default class TasksApp extends Homey.App {
         return result
     }, Promise.resolve(new Set<string>()))
 
-    const query: any = { state: 'open', $where: function () { return this.tag !== undefined }}
+    const query: TaskQuery = { state: 'open', $where: function () { return this.tag !== undefined }}
     const tasks: Task[] = await this.store.getTasks(query);
     (tasks.map((task) => task.tag) as string[]).forEach(tag => {
       uniqueTags.add(tag)
@@ -117,7 +117,7 @@ export default class TasksApp extends Homey.App {
 
   /** Helpers */
   registerIdentifierAutocompleteListenerForCard(card: Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition, canRegisterNewIdentifier: boolean) {
-    card.registerArgumentAutocompleteListener('identifier', async (query: string, args: any) => {
+    card.registerArgumentAutocompleteListener('identifier', async (query: string) => {
       const results = Array.from(this.allIdentifiers)
       .filter((result) => {
         return query.length == 0 || result.toLowerCase().includes(query.toLowerCase())
@@ -139,13 +139,13 @@ export default class TasksApp extends Homey.App {
       return results
     })
 
-    card.on('update', async () => {
-      await this.updateAllIdentifiers()
+    card.on('update', () => {
+      this.updateAllIdentifiers().catch((error) => this.error(error))
     })
   }
 
   registerTagAutocompleteListenerForCard(card: Homey.FlowCardAction | Homey.FlowCardTrigger | Homey.FlowCardCondition, canRegisterNewTag: boolean) {
-    card.registerArgumentAutocompleteListener('tag', async (query: string, args: any) => {
+    card.registerArgumentAutocompleteListener('tag', async (query: string) => {
       const results = Array.from(this.allTags)
       .filter((result) => {
         return query.length == 0 || result.toLowerCase().includes(query.toLowerCase())
@@ -167,8 +167,8 @@ export default class TasksApp extends Homey.App {
       return results
     })
 
-    card.on('update', async () => {
-      await this.updateAllTags()
+    card.on('update', () => {
+      this.updateAllTags().catch((error) => this.error(error))
     })
   }
 
@@ -182,8 +182,9 @@ export default class TasksApp extends Homey.App {
       card.registerRunListener(async (args) => {
         const identifier: string = args.identifier.name
         const item: string | undefined = (args.item) ? args.item : undefined
-        const query: any = { state: 'open', identifier: identifier, $where: function () { return !item || this.item === item } }
-        return await this.store.getTasks(query) !== undefined
+        const query: TaskQuery = { state: 'open', identifier: identifier, $where: function () { return !item || this.item === item } }
+        const matches: Task[] = await this.store.getTasks(query)
+        return matches.length > 0
       })
     })
   }
@@ -197,7 +198,7 @@ export default class TasksApp extends Homey.App {
       card.registerRunListener(async (args) => {
         const identifier: string = args.identifier.name
         const item: string | undefined = (args.item) ? args.item : undefined
-        const query: any = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
+        const query: TaskQuery = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
         const matches: Task[] = await this.store.getTasks(query)
         
         if (matches.length === 0) {
@@ -270,7 +271,7 @@ export default class TasksApp extends Homey.App {
       card.registerRunListener(async (args) => {
         const identifier: string = args.identifier.name
         const item: string | undefined = (args.item) ? args.item : undefined
-        const query: any = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
+        const query: TaskQuery = { state: 'open' , identifier: identifier, $where: function () { return !item || this.item === item }}
         const count = await this.store.completeTasks(query)
         if (count > 0) {
           this.homey.log(`Completed ${count} ${(count == 1) ? 'task' : 'tasks'} with identifier ${identifier} and item ${item}`)
@@ -287,7 +288,7 @@ export default class TasksApp extends Homey.App {
       this.registerTagAutocompleteListenerForCard(card, false)
       card.registerRunListener(async (args) => {
         const tag: string = args.tag.name
-        const query: any = { state: 'open', tag: tag }
+        const query: TaskQuery = { state: 'open', tag: tag }
         const count = await this.store.completeTasks(query)
         if (count > 0) {
           this.homey.log(`Completed ${count} ${(count == 1) ? 'task' : 'tasks'} with tag ${tag}`)
@@ -302,7 +303,7 @@ export default class TasksApp extends Homey.App {
       this.homey.flow.getActionCard('complete_all')
     ].forEach(card => {
       card.registerRunListener(async  (args) => {
-        const query: any = { state: 'open' }
+        const query: TaskQuery = { state: 'open' }
         const count = await this.store.completeTasks(query)
         if (count > 0) {
           this.homey.log(`Completed ${count} ${(count == 1) ? 'task' : 'tasks'}`)
@@ -315,7 +316,7 @@ export default class TasksApp extends Homey.App {
   registerGetAllTasksListeners() {
     const card = this.homey.flow.getActionCard('get_all')
     card.registerRunListener(async (args) => {
-      const query: any = { state: 'open' }
+      const query: TaskQuery = { state: 'open' }
       const tasks: Task[] = await this.store.getTasks(query)
       const data = tasks.map((element) => ({ title: element.title, date: element.date, locked: element.locked, tag: element.tag ?? '' }))
       const count = data.length
@@ -335,7 +336,7 @@ export default class TasksApp extends Homey.App {
       this.registerIdentifierAutocompleteListenerForCard(card, false)
       card.registerRunListener(async (args) => {
         const item: string | undefined = (args.item) ? args.item : undefined
-        const query: any = { state: 'open', identifier: args.identifier.name, $where: function () { return !item || this.item === item } }
+        const query: TaskQuery = { state: 'open', identifier: args.identifier.name, $where: function () { return !item || this.item === item } }
         const count = await this.store.lockTasks(query)
         if (count > 0) {
           this.homey.log(`Locked ${count} ${(count == 1) ? 'task' : 'tasks'} with identifier ${args.identifier.name} and item ${item}`)
@@ -353,7 +354,7 @@ export default class TasksApp extends Homey.App {
       this.registerIdentifierAutocompleteListenerForCard(card, false)
       card.registerRunListener(async (args) => {
         const item: string | undefined = (args.item) ? args.item : undefined
-        const query: any = { state: 'open', identifier: args.identifier.name, $where: function () { return !item || this.item === item } }
+        const query: TaskQuery = { state: 'open', identifier: args.identifier.name, $where: function () { return !item || this.item === item } }
         const count = await this.store.unlockTasks(query)
         if (count > 0) {
           this.homey.log(`Unlocked ${count} ${(count == 1) ? 'task' : 'tasks'} with identifier ${args.identifier.name} and item ${item}`)
@@ -401,7 +402,7 @@ export default class TasksApp extends Homey.App {
   registerWidgetListeners() {
     const widget = this.homey.dashboards.getWidget('list-tasks')
     
-    widget.registerSettingAutocompleteListener('tag', async (query: string, settings: any) => {
+    widget.registerSettingAutocompleteListener('tag', async (query: string) => {
       const results = Array.from(this.allTags)
       .filter((result) => {
         return query.length == 0 || result.toLowerCase().includes(query.toLowerCase())

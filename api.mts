@@ -1,5 +1,5 @@
 import type TasksApp from './app.mjs'
-import type { Task } from './lib/storage.mjs'
+import type { Task, TaskQuery } from './lib/storage.mjs'
 
 type RequestWithBody = {
   homey: TasksApp['homey']
@@ -17,7 +17,7 @@ type RequestWithoutBody = {
 
 export default {
   async getTasks({ homey, query }: RequestWithoutBody): Promise<Task[]> {
-    const dbQuery: any = { $where: function () {
+    const dbQuery: TaskQuery = { $where: function () {
       const futureFilter = query.future === undefined || this.state === ((query.future === 'true') ? 'future' : 'open')
       const tagFilter = query.tag === undefined || this.tag === query.tag
       return futureFilter && tagFilter
@@ -27,11 +27,11 @@ export default {
   },
 
   async createTask({ homey, body }: RequestWithBody): Promise<void> {
-    (homey.app as TasksApp).store.createTask(body.title as string, new Date(body.date as string), body.identifier as string, body.item as string, body.tag as string)
+    await (homey.app as TasksApp).store.createTask(body.title as string, new Date(body.date as string), body.identifier as string, body.item as string, body.tag as string)
   },
 
   async completeTask({ homey, query }: RequestWithoutBody): Promise<void> {
-    const dbQuery: any = { _id: query.id }
+    const dbQuery: TaskQuery = { _id: query.id }
     const count = await (homey.app as TasksApp).store.completeTasks(dbQuery)
     if (count > 0) {
       homey.log(`Completed ${count} ${(count == 1) ? 'task' : 'tasks'} with id ${query.id}`)
@@ -39,7 +39,7 @@ export default {
   },
 
   async deleteTask({ homey, query }: RequestWithoutBody): Promise<void> {
-    const dbQuery: any = { _id: query.id }
+    const dbQuery: TaskQuery = { _id: query.id }
     const count = await (homey.app as TasksApp).store.deleteTasks(dbQuery)
     if (count > 0) {
       homey.log(`Deleted ${count} ${(count == 1) ? 'task' : 'tasks'} with id ${query.id}`)
@@ -47,7 +47,7 @@ export default {
   },
 
   async lockTask({ homey, query }: RequestWithoutBody): Promise<void> {
-    const dbQuery: any = { _id: query.id }
+    const dbQuery: TaskQuery = { _id: query.id }
     const count = await (homey.app as TasksApp).store.lockTasks(dbQuery)
     if (count > 0) {
       homey.log(`Locked ${count} ${(count == 1) ? 'task' : 'tasks'} with id ${query.id}`)
@@ -55,7 +55,7 @@ export default {
   },
 
   async unlockTask({ homey, query }: RequestWithoutBody): Promise<void> {
-    const dbQuery: any = { _id: query.id }
+    const dbQuery: TaskQuery = { _id: query.id }
     const count = await (homey.app as TasksApp).store.unlockTasks(dbQuery)
     if (count > 0) {
       homey.log(`Unlocked ${count} ${(count == 1) ? 'task' : 'tasks'} with id ${query.id}`)
