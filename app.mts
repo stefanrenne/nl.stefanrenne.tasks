@@ -87,7 +87,7 @@ export default class TasksApp extends Homey.App {
         return result
     }, Promise.resolve(new Set<string>()))
 
-    const query: TaskQuery = { state: 'open', $where: function () { return this.identifier !== undefined }}
+    const query: TaskQuery = { $where: function () { return this.state !== 'completed' && this.identifier !== undefined }}
     const tasks: Task[] = await this.store.getTasks(query);
     (tasks.map((task) => task.identifier) as string[]).forEach(identifier => {
       uniqueIdentifiers.add(identifier)
