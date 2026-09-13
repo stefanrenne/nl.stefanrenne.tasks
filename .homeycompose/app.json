@@ -87,7 +87,8 @@
   "api": {
     "getTasks": {
       "method": "GET",
-      "path": "/tasks"
+      "path": "/tasks",
+      "public": true
     },
     "createTask": {
       "method": "POST",

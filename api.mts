@@ -18,9 +18,9 @@ type RequestWithoutBody = {
 export default {
   async getTasks({ homey, query }: RequestWithoutBody): Promise<Task[]> {
     const dbQuery: TaskQuery = { $where: function () {
-      const futureFilter = query.future === undefined || this.state === ((query.future === 'true') ? 'future' : 'open')
+      const stateFilter = query.state === undefined || Array.isArray(query.state) ? query.state.includes(this.state) : this.state === query.state;
       const tagFilter = query.tag === undefined || this.tag === query.tag
-      return futureFilter && tagFilter
+      return stateFilter && tagFilter
     }}
 
     return (homey.app as TasksApp).store.getTasks(dbQuery)

@@ -94,12 +94,12 @@
             const tag = Homey.getSettings()['tag'];
 
             const parameters = new URLSearchParams();
-            parameters.set('future', 'false');
+            parameters.set('state', 'open');
             if (tag !== undefined && typeof tag['name'] !== 'undefined' && tag['name'] !== "-") {
               parameters.set('tag', tag['name']);
             }
 
-            const query = parameters.size > 0 ? `?${parameters}` : '';
+            const query = parameters.size > 0 ? `?${parameters.toString()}` : '';
             const tasks = await Homey.api('GET', `/tasks${query}`, {});
             $container.innerHTML = '';
             if (tasks.length === 0) {
