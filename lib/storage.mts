@@ -101,7 +101,7 @@ export class Store {
         }
 
         matches.forEach((oldTask) => {
-            this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier ?? "", item: oldTask.item ?? "", tag: oldTask.tag ?? "" }).catch((error) => this.homey.error(error))
+            this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier ?? "", item: oldTask.item ?? "", tag: oldTask.tag ?? "", future: oldTask.state === 'future' }).catch((error) => this.homey.error(error))
         })
         await this.db.updateAsync(query, { $set: { state: 'completed' } }, { multi: true })
         this.homey.api.realtime('didUpdateTasks', {})
@@ -109,11 +109,17 @@ export class Store {
     }
 
     async deleteTasks(query: TaskQuery): Promise<number> {
-        const result = await this.db.removeAsync(query, { multi: true })
-        if (result > 0) {
-            this.homey.api.realtime('didUpdateTasks', {})
+        const matches: Task[] = await this.db.findAsync(query)
+        if (matches.length === 0) {
+            return 0
         }
-        return result
+
+        matches.forEach((oldTask) => {
+            this.taskOnComplete?.trigger({ title: oldTask.title, identifier: oldTask.identifier ?? "", item: oldTask.item ?? "", tag: oldTask.tag ?? "", future: oldTask.state === 'future' }).catch((error) => this.homey.error(error))
+        })
+        await this.db.removeAsync(query, { multi: true })
+        this.homey.api.realtime('didUpdateTasks', {})
+        return matches.length
     }
     
     async lockTasks(query: TaskQuery): Promise<number> {

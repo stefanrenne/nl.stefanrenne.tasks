@@ -175,6 +175,17 @@
               "de": "Etikett",
               "sv": "Etikett"
             }
+          },
+          {
+            "name": "future",
+            "type": "boolean",
+            "title": {
+              "en": "Is future task",
+              "nl": "Is toekomstige taak",
+              "no": "Er fremtidig oppgave",
+              "de": "Ist zukünftige Aufgabe",
+              "sv": "Är framtida uppgift"
+            }
           }
         ]
       },
