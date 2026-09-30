@@ -37,6 +37,10 @@ jobs:
           version: ${{ inputs.version }}
           changelog: ${{ inputs.changelog }}
 
+      # package.json isn't read by Homey, but test/manifest.test.mts requires it to match the app version.
+      - name: Sync package.json version
+        run: npm version "${{ steps.update_app_version.outputs.version }}" --no-git-tag-version --allow-same-version
+
       - name: Commit & Push
         run: |
           git config --local user.name "github-actions[bot]"
