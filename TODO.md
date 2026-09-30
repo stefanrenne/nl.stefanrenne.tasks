@@ -6,7 +6,6 @@ When an item is done, move it to [COMPLETED.md](COMPLETED.md) with its context (
 
 ## Bugs
 
-- [ ] **`GET /tasks` throws without `state`.** In `getTasks` in both `api.mts` and `widgets/list-tasks/api.mts`, an operator-precedence mistake makes `query.state === undefined || Array.isArray(query.state) ? query.state.includes(…)` call `.includes` on `undefined`. The route is public, so outside callers hit this. The bundled UIs always send `state`. See [docs/web-api.md](docs/web-api.md).
 - [ ] **Task fields are rendered as HTML.** The settings page (`reload()`, identifier/label `<option>`s) and the widget (`task.title`) use `innerHTML` for values set from Flows. Switch to `textContent`. See [docs/settings-page.md](docs/settings-page.md).
 - [ ] **Lock tooltips are swapped** on the settings page: the button that unlocks is titled "Lock task", and vice versa.
 - [ ] **"Create new label" left empty** saves `tag: ""` instead of no tag (settings page).

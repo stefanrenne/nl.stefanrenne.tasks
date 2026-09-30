@@ -15,7 +15,7 @@ Routes are declared in `.homeycompose/app.json` under `api`. They are used by th
 | `getIdentifiers` | `GET /identifiers` | none | Rebuilds and returns `allIdentifiers`. |
 | `getTags` | `GET /tags` | none | Rebuilds and returns `allTags`. |
 
-Known issue: the `getTasks` filter is parsed as `(state === undefined || Array.isArray(state)) ? state.includes(...) : ...`, so calling `/tasks` **without** `state` throws. Both bundled UIs always send `state`.
+`getTasks` filter semantics (both APIs): no `state` matches every state, **including `completed`**; a string matches exactly; an array (`state[0]=…&state[1]=…`) matches any of its values. `tag` is an exact match when given.
 
 ## Widget API (`widgets/list-tasks/api.mts`)
 
