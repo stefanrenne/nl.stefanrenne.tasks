@@ -1,7 +1,7 @@
 {
 	"id":"create_task_item",
 	"title":{
-	   "en":"Create task for iten",
+	   "en":"Create task for item",
 	   "nl":"Taak aanmaken voor item",
 	   "no":"Opprett oppgave for items",
 	   "de":"Aufgabe für Artikel erstellen",
