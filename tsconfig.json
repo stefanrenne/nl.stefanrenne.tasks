@@ -6,5 +6,10 @@
       "homey",
       "node"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    ".homeybuild",
+    "test"
+  ]
 }

@@ -34,13 +34,15 @@ export type TaskQuery = {
 export class Store {
     
     private homey: Homey
-    private db = new Datastore<Task>({ filename: '/userdata/tasks-v1.db', autoload: true })
+    private db: Datastore<Task>
     private taskOnCreate: FlowCardTrigger | undefined
     private taskOnUpdate: FlowCardTrigger | undefined
     private taskOnComplete: FlowCardTrigger | undefined
 
-	constructor(homey: Homey) {
+    // dbOptions is only overridden by the tests (in-memory datastore).
+	constructor(homey: Homey, dbOptions: DatastoreOptions = { filename: '/userdata/tasks-v1.db', autoload: true }) {
         this.homey = homey
+        this.db = new Datastore<Task>(dbOptions)
         this.taskOnCreate = homey.flow.getTriggerCard('on_create')
         this.taskOnUpdate = homey.flow.getTriggerCard('on_update')
         this.taskOnComplete = homey.flow.getTriggerCard('on_complete')

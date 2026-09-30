@@ -10,12 +10,18 @@ Homey (Athom smart-home hub) SDK v3 app `nl.stefanrenne.tasks`: a to-do list dri
 
 ```bash
 npm run build      # tsc → .homeybuild/
-npm run lint       # eslint on **/*.mts
-homey app validate --level verified   # what CI runs (requires Homey CLI)
+npm run lint       # eslint on **/*.mts (including test/)
+npm test           # type-check test/ + vitest run
+npm run test:watch # vitest in watch mode
+npx vitest run test/storage.test.mts            # one file
+npx vitest run -t "merges a due task"           # tests whose name matches
+homey app validate --level verified   # what CI runs, after lint and test (requires Homey CLI)
 homey app run      # run on a Homey for development (requires Homey CLI)
 ```
 
-There is no test suite.
+## Tests are required
+
+**Every feature and every bug fix must come with new unit tests, or extend the existing ones, in the same change.** A change is not done until `npm test` and `npm run lint` pass. For a bug fix, add a test that fails without the fix and name it with the regression commit, for example `(regression e09d305)`, as the existing ones are. Put tests in the file that matches the layer you changed (`storage`, `api`, `app` for flow cards, `manifest` for compose/locale/release files). Only change existing assertions when the behaviour change is intended, and say so in the commit. See [docs/testing.md](docs/testing.md) for how the suite is set up.
 
 ## Outstanding work
 
@@ -32,6 +38,7 @@ Detailed reference lives in `docs/`. Read the relevant file before changing that
 - [docs/web-api.md](docs/web-api.md): app and widget HTTP routes, the realtime event, and the settings and widget frontends.
 - [docs/settings-page.md](docs/settings-page.md): the settings page tabs, list actions per task state, the create form fields and validation, and known issues.
 - [docs/widget.md](docs/widget.md): the dashboard widget's files, settings, rendering and completion behaviour.
+- [docs/testing.md](docs/testing.md): the test setup (vitest, the fake Homey, the in-memory Store), what each test file covers, and how to add tests.
 - [docs/history.md](docs/history.md): how the architecture evolved (the 1.x settings store → the 2.0 NeDB rewrite) and why some things look the way they do.
 
 **Every change must update `docs/`.** In the same change as the code, update the affected `docs/*.md`. If the change introduces an area that no existing file covers, create a new `docs/<topic>.md` and add it to the list above. Docs describe current behaviour, not history (history goes in `.homeychangelog.json`). A change is not done until the docs match the code.
