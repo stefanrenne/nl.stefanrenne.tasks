@@ -1,3 +1,7 @@
 # Development-only files, not part of the app bundle
 /test/
 /vitest.config.mjs
+/docs/
+/CLAUDE.md
+/TODO.md
+/COMPLETED.md

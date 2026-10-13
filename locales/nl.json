@@ -55,6 +55,8 @@
             }
         },
         "list": {
+            "open": "Open taken",
+            "future": "Toekomstige taken",
             "title": "Titel",
             "date": "Datum",
             "identifier": "ID",

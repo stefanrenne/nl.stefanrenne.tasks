@@ -55,6 +55,8 @@
             }
         },
         "list": {
+            "open": "Open tasks",
+            "future": "Future tasks",
             "title": "Title",
             "date": "Date",
             "identifier": "Identifier",

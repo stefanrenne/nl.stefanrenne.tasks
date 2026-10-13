@@ -55,6 +55,8 @@
             }
         },
         "list": {
+            "open": "Åpne oppgaver",
+            "future": "Fremtidige oppgaver",
             "title": "Tittel",
             "date": "Dato",
             "identifier": "Identifikator",

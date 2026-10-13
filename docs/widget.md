@@ -29,6 +29,4 @@ The `tag` setting can be `undefined` (a widget added before labels existed) or `
 - `updateTime()` re-renders the relative dates every second from `data-date` / `data-tag`.
 - Title text has `padding-right: 35px` so long titles don't run under the checkmark (1.1.2 fix).
 
-## Known issues
-
-- `task.title` (and the date/label line) is written with `innerHTML`, so HTML in a title set from a Flow is rendered.
+The title and the date/label line are set with `textContent`, so text from Flows is never interpreted as HTML.

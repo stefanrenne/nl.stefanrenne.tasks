@@ -132,7 +132,7 @@
     <!-- Page List Tasks -->
     <div class="page hidden" id="page-list-tasks">
 
-      <h2>Open tasks</h2>
+      <h2 data-i18n="settings.list.open"></h2>
       <table class="table table-striped homey-form-group" style="margin-top: 0">
         <thead>
         <tr>
@@ -147,7 +147,7 @@
         <tbody id="open-container"></tbody>
       </table>
 
-      <h2>Future tasks</h2>
+      <h2 data-i18n="settings.list.future"></h2>
       <table class="table table-striped homey-form-group" style="margin-top: 0">
         <thead>
         <tr>
@@ -325,7 +325,7 @@
             for (const identifier of identifiers) {
               $option = document.createElement('option');
               $option.value = identifier
-              $option.innerHTML = identifier;
+              $option.textContent = identifier;
               $selectIdentifiers.appendChild($option);
             }
 
@@ -358,7 +358,7 @@
             for (const label of labels) {
               $option = document.createElement('option');
               $option.value = label
-              $option.innerHTML = label;
+              $option.textContent = label;
               $selectTags.appendChild($option);
             }
 
@@ -468,7 +468,7 @@
             }
             const title = $titleInputField.value.trim();
             const identifier = ($selectIdentifiers.value === "") ? $createIdentifier.value.trim() : ($selectIdentifiers.value === "-") ? undefined : $selectIdentifiers.value;
-            const tag = ($selectTags.value === "") ? $createTag.value.trim() : ($selectTags.value === "-") ? undefined : $selectTags.value;
+            const tag = ($selectTags.value === "") ? ($createTag.value.trim() || undefined) : ($selectTags.value === "-") ? undefined : $selectTags.value;
             const itemIdentifier = ($itemIdentifier.value.trim() === "") ? undefined : $itemIdentifier.value.trim();
             const date = ($scheduleDate.value === "1") ? new Date($futureDate.value) : new Date();
             await Homey.api('POST', '/task', {'title': title, 'date': date.getTime(), 'identifier': identifier, 'item': itemIdentifier, 'tag': tag});
@@ -499,7 +499,7 @@
 
               $title = document.createElement('td');
               $title.classList.add('title');
-              $title.innerHTML = task.title;
+              $title.textContent = task.title;
               $task.appendChild($title);
               
               $date = document.createElement('td');
@@ -511,15 +511,15 @@
               $task.appendChild($date);
 
               $identifier = document.createElement('td');
-              $identifier.innerHTML = task.identifier !== undefined ? task.identifier : "-";
+              $identifier.textContent = task.identifier !== undefined ? task.identifier : "-";
               $task.appendChild($identifier);
 
               $item = document.createElement('td');
-              $item.innerHTML = task.item !== undefined ? task.item : "-";
+              $item.textContent = task.item !== undefined ? task.item : "-";
               $task.appendChild($item);
 
               $tag = document.createElement('td');
-              $tag.innerHTML = task.tag !== undefined ? task.tag : "-";
+              $tag.textContent = task.tag !== undefined ? task.tag : "-";
               $task.appendChild($tag);
 
               $action = document.createElement('td');
@@ -529,7 +529,7 @@
               if (task.locked) {
 
                 $lock = document.createElement('a');
-                $lock.title = Homey.__('settings.list.actions.lock');
+                $lock.title = Homey.__('settings.list.actions.unlock');
                 $lock.classList.add('lock');
                 $action.appendChild($lock);
                 $lockMask = document.createElement('span');
@@ -545,7 +545,7 @@
               } else {
                 
                 $unlock = document.createElement('a');
-                $unlock.title = Homey.__('settings.list.actions.unlock');
+                $unlock.title = Homey.__('settings.list.actions.lock');
                 $unlock.classList.add('unlock');
                 $action.appendChild($unlock);
                 $unlockMask = document.createElement('span');

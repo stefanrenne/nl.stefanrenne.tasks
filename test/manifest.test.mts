@@ -62,6 +62,24 @@ describe('flow card compose files', () => {
       expect(generated, `flow.${type}`).toEqual(composed)
     }
   })
+
+  it.each(flowCardFiles)('$type/$file has the same texts in app.json (no hand edits in the generated file)', ({ type, card }) => {
+    const generated = (readJson('app.json').flow[type] as FlowCard[]).find((candidate) => candidate.id === card.id)
+    expect({ title: generated?.title, titleFormatted: generated?.titleFormatted, hint: generated?.hint })
+      .toEqual({ title: card.title, titleFormatted: card.titleFormatted, hint: card.hint })
+  })
+})
+
+describe('widget compose file', () => {
+  const widget = readJson('widgets/list-tasks/widget.compose.json') as { name: Translations, settings: { id: string, title: Translations }[] }
+
+  it('is translated into every language', () => {
+    const missing = [
+      ...LANGUAGES.filter((language) => !widget.name[language]).map((language) => `name.${language}`),
+      ...widget.settings.flatMap((setting) => LANGUAGES.filter((language) => !setting.title[language]).map((language) => `${setting.id}.title.${language}`)),
+    ]
+    expect(missing).toEqual([])
+  })
 })
 
 describe('locales', () => {

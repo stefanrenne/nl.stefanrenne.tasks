@@ -55,6 +55,8 @@
             }
         },
         "list": {
+            "open": "Offene Aufgaben",
+            "future": "Zukünftige Aufgaben",
             "title": "Titel",
             "date": "Datum",
             "identifier": "Kennung",

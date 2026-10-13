@@ -58,7 +58,7 @@ When a future task matures:
 | `lockTasks` / `unlockTasks` / `tagTasks` | none | yes, if any rows changed |
 | `processFutureTasks` | `on_create` / `on_update` per matured task | yes, if anything matured |
 
-`on_update` is triggered with extra `locked` and `state` values that are not declared as tokens in `on_update.json`.
+`on_update` is triggered with extra `locked` and `state` values that are not declared as tokens in `on_update.json`. That is deliberate: Homey only passes declared tokens on to Flows and drops the rest, and the user prefers sending the full state over trimming it per card. Don't "fix" this.
 
 ## Querying
 

@@ -27,7 +27,8 @@
         "en": "Filter by label",
         "nl": "Filter op label",
         "de": "Nach Label filtern",
-        "no": "Filtrer etter etikett"
+        "no": "Filtrer etter etikett",
+        "sv": "Filtrera efter etikett"
       }
     },
     {
@@ -38,7 +39,8 @@
         "en": "Show label",
         "nl": "Label tonen",
         "de": "Etikett anzeigen",
-        "no": "Vis etikett"
+        "no": "Vis etikett",
+        "sv": "Visa etikett"
       }
     }
   ]

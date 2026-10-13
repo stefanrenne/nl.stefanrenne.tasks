@@ -54,7 +54,7 @@
             if (Homey.getSettings()['showTag'] == true && task.dataset.tag !== undefined) {
               text += " | " + task.dataset.tag;
             }
-            task.innerHTML = text;
+            task.textContent = text;
           });
         }
 
@@ -114,7 +114,7 @@
 
               $title = document.createElement('p');
               $title.classList.add('homey-text-medium');
-              $title.innerHTML = task.title;
+              $title.textContent = task.title;
               $task.appendChild($title);
               
               $body = document.createElement('p');
@@ -125,7 +125,7 @@
               if (Homey.getSettings()['showTag'] == true && task.tag !== undefined) {
                 text += " | " + task.tag;
               }
-              $body.innerHTML = text;
+              $body.textContent = text;
 
               const $dateAttribute = document.createAttribute("data-date");
               $dateAttribute.value = task.date
@@ -162,7 +162,7 @@
 
             $title = document.createElement('p');
             $title.classList.add('homey-text-regular');
-            $title.innerHTML = err.message;
+            $title.textContent = err.message;
             $container.appendChild($title);
             Homey.setHeight($container.offsetHeight);
           })

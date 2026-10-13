@@ -21,4 +21,9 @@ Commit `f7a9945` rewrote the app:
 - **Web API became id-based and query-based:** `GET /tasks?state=…&tag=…`, `POST /complete?id=`, and so on. The `future=true|false` query param was replaced by `state` (`498f31f`), and `GET /tasks` was made public at the same time.
 - **Lint:** `eslint-config-athom` was replaced by a flat `eslint.config.mjs` using `typescript-eslint` with type information. It keeps athom's `no-floating-promises` / `no-misused-promises`, which is why every `trigger()` call ends in `.catch(...)`.
 
+## Deliberate decisions
+
+- **`on_update` sends more than it declares** (`locked`, `state`). Homey drops undeclared tokens, and sending the full state keeps the Store simple. Not a bug.
+- **No migration from the 1.x settings store** (see above).
+
 The fixes that landed after the 2.0.0 version bump (`bf9d252` through `2659f48`) have not been released under a new version number yet.

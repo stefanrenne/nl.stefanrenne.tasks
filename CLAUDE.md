@@ -21,7 +21,7 @@ homey app run      # run on a Homey for development (requires Homey CLI)
 
 ## Tests are required
 
-**Every feature and every bug fix must come with new unit tests, or extend the existing ones, in the same change.** A change is not done until `npm test` and `npm run lint` pass. For a bug fix, add a test that fails without the fix and name it with the regression commit, for example `(regression e09d305)`, as the existing ones are. Put tests in the file that matches the layer you changed (`storage`, `api`, `app` for flow cards, `manifest` for compose/locale/release files). Only change existing assertions when the behaviour change is intended, and say so in the commit. See [docs/testing.md](docs/testing.md) for how the suite is set up.
+**Every feature and every bug fix must come with new unit tests, or extend the existing ones, in the same change.** A change is not done until `npm test` and `npm run lint` pass. For a bug fix, add a test that fails without the fix and name it with the regression commit, for example `(regression e09d305)`, as the existing ones are. Put tests in the file that matches the layer you changed (`storage`, `api`, `app` for flow cards, `settings-page` and `widget` for the HTML frontends (jsdom), `manifest` for compose/locale/release files). Only change existing assertions when the behaviour change is intended, and say so in the commit. See [docs/testing.md](docs/testing.md) for how the suite is set up.
 
 ## Outstanding work
 

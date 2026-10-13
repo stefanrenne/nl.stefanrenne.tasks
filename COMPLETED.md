@@ -2,6 +2,18 @@
 
 Archive of finished [TODO.md](TODO.md) items and past fixes, newest first. Keep the context: root cause, gotchas, and how it was verified. Commit hashes refer to this repo. For how the architecture evolved, see [docs/history.md](docs/history.md).
 
+## 2026-10-13
+
+- **Task fields rendered as HTML** (settings page and widget). Titles, identifiers, items and labels come from Flows but were written with `innerHTML`, so a title such as `<img onerror=…>` ran as markup. All user data is now set with `textContent` (the table cells, the identifier/label `<option>`s, the widget title and date/label line, and the widget's error text). Only cleared containers and fixed translated strings still use `innerHTML`. Tests: `settings-page.test.mts` "shows task fields as text…" / "shows identifiers and labels as text", and `widget.test.mts` "shows titles and labels as text…".
+- **Lock tooltips were swapped.** A locked task's button (which calls `/unlock`) was titled "Lock task", and vice versa. Test: `settings-page.test.mts` "titles the lock button after what clicking it does".
+- **An empty "Create new label" saved `tag: ""`.** It now sends no tag when the typed label is empty or blank (`$createTag.value.trim() || undefined`). Test: `settings-page.test.mts` "saves no label when … is left as …".
+- **"for iten" typo.** `create_task_item` had already been fixed in `1c0fc3a`, and `complete_task_item` was only fixed in the generated `app.json` (by hand), so the next `homey app build` would have brought the typo back. Fixed in `.homeycompose/flow/actions/complete_task_item.json`. New guard: `manifest.test.mts` checks that every card's `title` / `titleFormatted` / `hint` in `app.json` equals the compose file, which fails on any hand edit to `app.json`. Verified by putting the typo back temporarily.
+- **Widget settings missing Swedish.** Added `sv` titles for `tag` ("Filtrera efter etikett") and `showTag` ("Visa etikett"), and regenerated `app.json`. `manifest.test.mts` now checks the widget compose file for all languages.
+- **Untranslated settings-page headings.** "Open tasks" / "Future tasks" now use the new `settings.list.open` / `settings.list.future` keys in all five locales.
+- **Developer files in the app bundle.** `.homeyignore` now also excludes `docs/`, `CLAUDE.md`, `TODO.md` and `COMPLETED.md`. Verified with `homey app build` and `ls .homeybuild`.
+- **Frontend tests.** Added `jsdom`, `test/helpers/load-page.mts`, and the `settings-page` / `widget` test files, so the HTML frontends are covered too. All nine new regression tests failed against the previous versions of the files, and pass with the fixes.
+- **Decided, not changed:** `on_update` keeps sending the undeclared `locked` / `state` values, because Homey drops undeclared tokens. Recorded in `docs/data-model.md` and `docs/history.md`.
+
 ## 2026-09-30
 
 - **`GET /tasks` threw without `state`.** `getTasks` in `api.mts` and `widgets/list-tasks/api.mts` had `query.state === undefined || Array.isArray(query.state) ? … : …`. `?:` binds looser than `||`, so it parsed as `(undefined || isArray) ? query.state.includes(…)`, and calling `.includes` on `undefined` threw. It came in with `498f31f` when the `future` param was replaced by `state`. The bundled UIs always send `state`, so only outside callers of the public route hit it. Fix: parenthesize the ternary. Verified with `npm run build` and `npm run lint`, then by running the compiled handlers of both APIs against an in-memory NeDB with `{}`, `state=open`, `state=[open,future]`, `tag` only, and `state+tag`: all returned the expected tasks. Note that no `state` returns completed tasks too.

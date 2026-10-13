@@ -54,7 +54,9 @@
                 "item3": "Från uppgifts-widgeten kan du se alla öppna uppgifter och slutföra dem en efter en genom att trycka på bockikonen. Detta gäller även uppgifter som inte har någon identifierare."
             }
         },
-       "list": {
+        "list": {
+            "open": "Öppna uppgifter",
+            "future": "Framtida uppgifter",
             "title": "Titel",
             "date": "Datum",
             "identifier": "Identifierare",

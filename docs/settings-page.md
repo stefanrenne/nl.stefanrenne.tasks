@@ -45,9 +45,8 @@ The page doesn't reload itself after an action. It subscribes to the `didUpdateT
 
 The Save button is disabled (`.is-disabled`) until the title is non-empty, a new identifier is non-empty when "Create new identifier" is chosen, and the date is not in the past. Validation only runs on input/change events. Save sends `POST /task`, then clears the form and reloads the identifier and label lists. A future date creates a `future` task, and all the identifier/item upsert rules in [data-model.md](data-model.md) apply.
 
+Task fields (title, identifier, item, label) and the identifier/label options are set with `textContent`, so text from Flows is never interpreted as HTML. Keep it that way for anything that isn't a fixed, translated string. The table headings use the `settings.list.open` / `settings.list.future` locale keys. The lock button's tooltip names what clicking it does: "Unlock task" on a locked task, "Lock task" on an unlocked one. "Create new label" with an empty or blank text field saves the task without a label.
+
 ## Known issues
 
-- Task fields (title, identifier, item, label) are written with `innerHTML`, so HTML in a task title set from a Flow is rendered rather than escaped.
-- The lock button's tooltip is reversed: a locked task's button (which unlocks) is titled "Lock task", and an unlocked task's button (which locks) is titled "Unlock task".
-- The "Open tasks" and "Future tasks" headings are hardcoded English, not translated.
-- Choosing "Create new label" and leaving the text input empty sends `tag: ""` instead of no tag.
+- The History tab is an unfinished placeholder (see TODO.md).
