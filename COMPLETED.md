@@ -2,7 +2,7 @@
 
 Archive of finished [TODO.md](TODO.md) items and past fixes, newest first. Keep the context: root cause, gotchas, and how it was verified. Commit hashes refer to this repo. For how the architecture evolved, see [docs/history.md](docs/history.md).
 
-## 2026-10-13
+## 2.1.0 (2026-09-13 – 2026-10-13)
 
 - **Task fields rendered as HTML** (settings page and widget). Titles, identifiers, items and labels come from Flows but were written with `innerHTML`, so a title such as `<img onerror=…>` ran as markup. All user data is now set with `textContent` (the table cells, the identifier/label `<option>`s, the widget title and date/label line, and the widget's error text). Only cleared containers and fixed translated strings still use `innerHTML`. Tests: `settings-page.test.mts` "shows task fields as text…" / "shows identifiers and labels as text", and `widget.test.mts` "shows titles and labels as text…".
 - **Lock tooltips were swapped.** A locked task's button (which calls `/unlock`) was titled "Lock task", and vice versa. Test: `settings-page.test.mts` "titles the lock button after what clicking it does".
@@ -14,23 +14,19 @@ Archive of finished [TODO.md](TODO.md) items and past fixes, newest first. Keep 
 - **Frontend tests.** Added `jsdom`, `test/helpers/load-page.mts`, and the `settings-page` / `widget` test files, so the HTML frontends are covered too. All nine new regression tests failed against the previous versions of the files, and pass with the fixes.
 - **Decided, not changed:** `on_update` keeps sending the undeclared `locked` / `state` values, because Homey drops undeclared tokens. Recorded in `docs/data-model.md` and `docs/history.md`.
 
-## 2026-09-30
-
 - **`GET /tasks` threw without `state`.** `getTasks` in `api.mts` and `widgets/list-tasks/api.mts` had `query.state === undefined || Array.isArray(query.state) ? … : …`. `?:` binds looser than `||`, so it parsed as `(undefined || isArray) ? query.state.includes(…)`, and calling `.includes` on `undefined` threw. It came in with `498f31f` when the `future` param was replaced by `state`. The bundled UIs always send `state`, so only outside callers of the public route hit it. Fix: parenthesize the ternary. Verified with `npm run build` and `npm run lint`, then by running the compiled handlers of both APIs against an in-memory NeDB with `{}`, `state=open`, `state=[open,future]`, `tag` only, and `state+tag`: all returned the expected tasks. Note that no `state` returns completed tasks too.
 - **`package.json` version drift.** `package.json` and the root entries of `package-lock.json` said `1.0.0` while the app was `2.0.0`. Root cause: `homey app publish` and the `Update Homey App Version` workflow only bump `.homeycompose/app.json` / `app.json`. Nothing reads `package.json`'s version, so the drift was cosmetic. Synced by hand to `2.0.0`. The Releasing section in CLAUDE.md now says to bump it on every release, and not to use `npm version` (it creates a commit and a tag).
 
-## 2.0.x follow-ups (after the 2.0.0 bump, not yet re-versioned)
-
 - **Deleting a task didn't fire `on_complete`** (`2659f48`, 2026-09-13). `deleteTasks` called `removeAsync` directly. It now finds the matches first and triggers `on_complete` per task, the same as `completeTasks`. At the same time, `on_complete` gained a `future` boolean token, so Flows can tell a cancelled scheduled task from a completed open one.
 - **Identifier autocomplete missed future tasks** (`013191e`, 2026-09-13). `updateAllIdentifiers` queried only `state: 'open'`, so an identifier used only by a scheduled task didn't show up in autocomplete. It now includes every non-completed task. `updateAllTags` still only looks at open tasks.
-- **`GET /tasks` made public, `future` param replaced by `state`** (`498f31f`, 2026-09-13). Both APIs now take `state` (a string, or an array via `state[0]`, `state[1]`) instead of `future=true|false`. This commit introduced the operator-precedence bug where calling without `state` crashed (fixed 2026-09-30, above).
+- **`GET /tasks` made public, `future` param replaced by `state`** (`498f31f`, 2026-09-13). Both APIs now take `state` (a string, or an array via `state[0]`, `state[1]`) instead of `future=true|false`. This commit introduced the operator-precedence bug where calling without `state` crashed (fixed in this release, above).
+
+## 2.0.0 (2026-07-23 – 2026-08-04)
+
 - **Scheduling the same task twice created duplicates** (`e3dd926`, 2026-08-04). `createTask` always inserted future tasks. Future dates are now truncated to the minute, and an existing future task with the same identifier(/item) **and the same minute** has its title updated instead. Scheduling the same identifier at a different time still creates a second future task, and they merge into one open task when they mature. The same commit made `processFutureTasks` emit `didUpdateTasks` after its loop (the merge rewrite in `111a64b` had lost it, so the UIs didn't refresh when a task matured), and log what it matures or merges.
 - **Updating a task kept its old date** (`84cce89`, 2026-08-04). An upsert (`createTask` on an existing open identifier) and a future task merging into an open one only changed the title, so the widget and settings page kept showing the original age. Both now also set `date`.
 - **NeDB returns `null`, not `undefined`** (`bf9d252`, 2026-08-04). `findOneAsync` resolves to `null` when nothing matches. The code compared with `== undefined` (which happened to work) but was typed as `Task | undefined`. It now compares strictly to `null`, and `getTask` normalises to `undefined`. The same commit replaced the `any` query types with `TaskQuery`, added `.catch` to every `trigger()` call (needed by `no-floating-promises`), awaited `createTask` in the API, and made `card.on('update')` handlers non-async.
 - **Tasks without an identifier overwrote each other** (`111a64b`, 2026-08-04). After the NeDB migration, `createTask` ran `findOneAsync({ identifier: undefined, … })`, which matches any open task without an identifier, so a second anonymous task replaced the first one's title. The fix: only look for an existing task when `identifier !== undefined`. Keep this guard in every upsert path. The same commit made `processFutureTasks` merge into an existing open task instead of blindly flipping state, and made `on_update` pass the real `locked` value instead of `false`.
-
-## 2.0.0 (2026-07-23 – 2026-08-04)
-
 - **Lint config restored to athom's rules** (`ff8eaaa`, titled "fixed security issue"). The first flat eslint config had turned off `no-explicit-any` and dropped `no-floating-promises` / `no-misused-promises`. The rules were restored and linting was limited to `**/*.mts` with type information (`projectService`).
 - The NeDB migration itself is described in [docs/history.md](docs/history.md).
 

@@ -10,7 +10,7 @@ Why the code looks the way it does. Details of individual fixes are in [COMPLETE
 - Features were added one release at a time: labels and the widget filter (1.1.0), item ids (1.2.0), the settings page (1.2.1), locking (1.3.0) and the locked condition (1.3.1).
 - Widget API routes were path-based: `GET /`, `GET /:tag`, `DELETE /:id`, `DELETE /:id/:item`.
 
-## 2.0.0: NeDB and future tasks (July – Sept 2026)
+## 2.0.0: NeDB and future tasks (July – Aug 2026)
 
 Commit `f7a9945` rewrote the app:
 
@@ -26,4 +26,8 @@ Commit `f7a9945` rewrote the app:
 - **`on_update` sends more than it declares** (`locked`, `state`). Homey drops undeclared tokens, and sending the full state keeps the Store simple. Not a bug.
 - **No migration from the 1.x settings store** (see above).
 
-The fixes that landed after the 2.0.0 version bump (`bf9d252` through `2659f48`) have not been released under a new version number yet.
+Tag `2.0.0` is `e3dd926` (2026-08-04), so the post-rewrite fixes up to and including `e3dd926` are part of 2.0.0.
+
+## 2.1.0 (Oct 2026)
+
+Deleting a task fires `on_complete` (with the new `future` token), identifier autocomplete includes scheduled tasks, `GET /tasks` became public and query-based (`state`), plus the settings-page and widget fixes, a unit test suite (including jsdom tests for the HTML frontends), and the `package.json` version sync in the version workflow.
