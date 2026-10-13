@@ -49,5 +49,8 @@
   },
   "2.0.0": {
     "en": "Support for future scheduled tasks and tasks are now stored in a database instead of the settings, this allows for more tasks to be stored and better performance when fetching tasks."
+  },
+  "2.1.0": {
+    "en": "Deleting a task now triggers 'A task is completed', plus various fixes and Swedish translations."
   }
 }
